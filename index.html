@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Calculadora de atributos para PokéHunt.">
+  <title>PKHunt Tools — Calculadora de Atributos</title>
+  <style>
+    :root { --bg:#07111F; --panel:#0D1A2A; --panel-2:#10243A; --line:#234058; --ink:#E7F0F6; --muted:#91A7B7; --cyan:#49D9D1; --gold:#F4C96B; --violet:#A786FF; --warning:#F5AE50; --error:#F06C6C; --green:#8DE4AE; }
+    * { box-sizing:border-box; }
+    html { color-scheme:dark; }
+    body { margin:0; color:var(--ink); font:14px/1.45 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:var(--bg); min-width:320px; }
+    body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.18; background-image:linear-gradient(rgba(73,217,209,.045) 1px, transparent 1px),linear-gradient(90deg,rgba(73,217,209,.045) 1px, transparent 1px); background-size:32px 32px; mask-image:linear-gradient(to bottom,black,transparent 75%); }
+    button, select, input { font:inherit; }
+    button { cursor:pointer; }
+    .shell { width:min(1440px, calc(100% - 40px)); margin:auto; }
+    header { min-height:90px; display:flex; align-items:center; gap:14px; border-bottom:1px solid rgba(73,217,209,.17); position:relative; }
+    .mark { width:48px; height:48px; display:block; object-fit:contain; object-position:center; }
+    .brand { margin-right:auto; min-width:0; }
+    .brand h1 { margin:0; letter-spacing:.15em; font-size:15px; text-transform:uppercase; }
+    .brand p { margin:2px 0 0; color:var(--muted); font-size:11px; letter-spacing:.1em; text-transform:uppercase; }
+    .badge, .unofficial { border:1px solid var(--line); color:var(--muted); padding:5px 8px; font-size:10px; text-transform:uppercase; letter-spacing:.1em; white-space:nowrap; }
+    .badge { color:var(--violet); border-color:rgba(167,134,255,.44); background:rgba(167,134,255,.08); }
+    main { padding:30px 0 24px; }
+    .intro { display:flex; align-items:end; justify-content:space-between; gap:24px; margin-bottom:20px; }
+    .eyebrow { margin:0 0 7px; color:var(--cyan); font-size:10px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+    .intro h2 { margin:0; max-width:700px; font-size:clamp(23px,3vw,36px); line-height:1.05; letter-spacing:-.035em; }
+    .provisional { max-width:318px; margin:0; color:#B5C8D4; font-size:12px; border-left:2px solid var(--warning); padding-left:11px; }
+    .workspace { display:grid; grid-template-columns:minmax(0, .98fr) minmax(0, 1.25fr); gap:18px; align-items:start; }
+    .panel { background:linear-gradient(145deg,rgba(16,36,58,.98),rgba(13,26,42,.98)); border:1px solid rgba(80,133,158,.35); box-shadow:0 18px 60px rgba(0,0,0,.18); }
+    .panel-title { display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:17px 19px 13px; border-bottom:1px solid var(--line); }
+    .panel-title h3 { margin:0; font-size:12px; text-transform:uppercase; letter-spacing:.14em; }
+    .step { color:var(--cyan); font:700 11px ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .config-content { padding:18px; }
+    .fields { display:grid; grid-template-columns:1fr 1fr; gap:13px; }
+    .field { min-width:0; }
+    .field.wide { grid-column:1 / -1; }
+    label, .label { display:block; margin-bottom:6px; color:#AFC1CD; font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    select, input[type=number] { width:100%; min-height:38px; color:var(--ink); border:1px solid #315069; background:#091625; padding:8px 10px; border-radius:2px; outline:none; transition:border-color .18s, box-shadow .18s; }
+    select:focus, input:focus, button:focus-visible { border-color:var(--cyan); outline:none; box-shadow:0 0 0 3px rgba(73,217,209,.15); }
+    .pokemon-meta { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:8px; padding:8px 10px; border-left:2px solid var(--violet); color:var(--muted); background:rgba(167,134,255,.05); font:11px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .bst-badge { display:inline-flex; align-items:center; gap:7px; flex:0 0 auto; color:#E8DEFF; border:1px solid rgba(167,134,255,.55); padding:4px 6px; background:rgba(167,134,255,.11); font-size:9px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; white-space:nowrap; }
+    .bst-badge strong { color:var(--violet); font-size:14px; letter-spacing:0; }
+    .switch { display:flex; gap:0; }
+    .switch button { flex:1; padding:9px 5px; color:var(--muted); border:1px solid #315069; border-right:0; background:#091625; font-size:11px; transition:.18s; }
+    .switch button:last-child { border-right:1px solid #315069; }
+    .switch button:hover { color:var(--ink); background:#10243A; }
+    .switch button.active { color:var(--bg); border-color:var(--cyan); background:var(--cyan); font-weight:800; }
+    .special-toggle { display:flex; gap:8px; min-height:38px; align-items:center; padding:5px 8px; border:1px solid #315069; background:#091625; }
+    .special-toggle input { accent-color:var(--gold); width:16px; height:16px; }
+    .special-toggle span { color:#C5D3DB; font-size:12px; }
+    .divider { border:0; border-top:1px solid var(--line); margin:21px 0 17px; }
+    .editor-head { display:flex; justify-content:space-between; align-items:end; gap:10px; margin-bottom:10px; }
+    .editor-head h4 { margin:0; font-size:12px; letter-spacing:.08em; text-transform:uppercase; }
+    .editor-tools { display:flex; align-items:center; justify-content:flex-end; flex-wrap:wrap; gap:7px; }
+    .total { color:var(--green); font:700 12px ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .total.error { color:var(--error); }
+    .reset-actions { display:flex; gap:4px; }
+    .reset { color:#B5C8D4; border:1px solid rgba(104,147,170,.52); background:transparent; padding:4px 6px; font-size:10px; }
+    .reset:hover { color:var(--gold); border-color:var(--gold); background:rgba(244,201,107,.08); }
+    .stat-editor { display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:5px; }
+    .stat-editor > * { min-width:0; }
+    .editor-label { color:#8DA4B5; font-size:9px; font-weight:800; letter-spacing:.09em; text-transform:uppercase; padding:2px 2px 5px; }
+    .stat-name { display:flex; align-items:center; min-height:35px; padding:0 8px; color:#D5E2EA; font-size:11px; border-bottom:1px solid rgba(49,80,105,.65); }
+    .stat-editor input { min-height:35px; padding:5px 7px; font-size:12px; }
+    .quick-row { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:13px; }
+    .quick-row .label { margin:0; }
+    .quick-actions { display:flex; gap:5px; }
+    .quick { color:var(--cyan); background:transparent; border:1px solid rgba(73,217,209,.43); padding:5px 8px; font-size:11px; }
+    .quick:hover { background:rgba(73,217,209,.13); }
+    .results-content { padding:18px; }
+    .multiplier { display:grid; grid-template-columns:auto 1fr; gap:15px; align-items:center; padding:16px; border:1px solid rgba(73,217,209,.35); background:linear-gradient(110deg,rgba(73,217,209,.12),rgba(73,217,209,.025)); position:relative; overflow:hidden; }
+    .multiplier::after { content:""; position:absolute; width:90px; height:90px; border:1px solid rgba(73,217,209,.3); right:-32px; top:-35px; transform:rotate(45deg); }
+    .multi-value { color:var(--cyan); font:700 clamp(29px,4vw,42px)/1 ui-monospace, SFMono-Regular, Consolas, monospace; letter-spacing:-.08em; }
+    .multi-copy strong { display:block; font-size:12px; text-transform:uppercase; letter-spacing:.12em; }
+    .multi-copy small { display:block; margin-top:4px; color:var(--muted); font-size:11px; }
+    .formula-line { margin:6px 0 0; color:#9CB2C0; font-size:10px; letter-spacing:.06em; }
+    .components { display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; }
+    .component { color:#C5D8E4; border:1px solid rgba(104,147,170,.35); padding:4px 6px; font:10px ui-monospace, SFMono-Regular, Consolas, monospace; background:rgba(7,17,31,.32); }
+    .helper { grid-column:1 / -1; margin:-5px 0 1px; color:#91A7B7; font-size:10px; line-height:1.45; }
+    .section-bar { display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin:22px 0 10px; }
+    .section-bar h4 { margin:0; font-size:12px; letter-spacing:.1em; text-transform:uppercase; }
+    .estimate { color:var(--muted); font-size:10px; text-transform:uppercase; letter-spacing:.1em; }
+    .stat-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .stat-card { min-height:87px; padding:11px; border:1px solid #26465F; background:#0B1929; transition:transform .18s,border-color .18s; }
+    .stat-card:hover { transform:translateY(-2px); border-color:var(--cyan); }
+    .stat-card .name { color:var(--muted); font-size:10px; text-transform:uppercase; letter-spacing:.09em; }
+    .stat-card .num { display:block; margin-top:9px; font:700 25px/1 ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .rounding { display:flex; gap:8px; margin-top:14px; color:#F8D091; font-size:11px; }
+    .rounding b { color:var(--warning); }
+    .compare { margin-top:19px; border-top:1px solid var(--line); padding-top:17px; }
+    .compare-title { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:9px; }
+    .compare-title h4 { margin:0; font-size:12px; letter-spacing:.1em; text-transform:uppercase; }
+    .compare-title span { color:var(--gold); font:10px ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .table-wrap { overflow:auto; border:1px solid #29475F; }
+    table { width:100%; min-width:520px; border-collapse:collapse; font-size:11px; }
+    th { color:#9CB2C0; background:#091625; font-size:9px; letter-spacing:.11em; text-transform:uppercase; }
+    th,td { padding:8px 9px; text-align:right; border-bottom:1px solid rgba(49,80,105,.52); white-space:nowrap; }
+    th:first-child,td:first-child { text-align:left; }
+    tr:last-child td { border-bottom:0; }
+    tr.star-five { background:rgba(244,201,107,.055); }
+    tr.star-five td:first-child { color:var(--gold); }
+    tr.active-star { background:rgba(244,201,107,.13); }
+    tr.active-star td { color:#FFF0C5; }
+    tr.active-star td:first-child { color:var(--gold); font-weight:800; }
+    .unavailable { display:none; margin:15px 0 0; padding:11px; color:#FFD1D1; border:1px solid rgba(240,108,108,.6); background:rgba(240,108,108,.1); font-size:12px; }
+    .unavailable.show { display:block; }
+    footer { display:flex; align-items:center; justify-content:space-between; gap:16px; border-top:1px solid rgba(73,217,209,.17); padding:17px 0 31px; color:#7E98AA; font-size:11px; }
+    .footer-note { max-width:760px; }
+    .credit { margin-left:auto; color:#91A7B7; white-space:nowrap; }
+    .forms-info { margin-top:6px; color:#91A7B7; font-size:10px; }
+    .forms-info b { color:#B8CAD5; letter-spacing:.07em; text-transform:uppercase; font-size:9px; }
+    .combo-wrap { position:relative; }
+    .combo-wrap input { padding-right:34px; }
+    .combo-wrap::after { content:'⌄'; position:absolute; right:11px; top:8px; color:var(--cyan); pointer-events:none; font-size:18px; }
+    .combo-list { position:absolute; z-index:10; top:calc(100% + 4px); left:0; right:0; display:none; max-height:224px; overflow:auto; border:1px solid var(--cyan); background:#07111F; box-shadow:0 16px 30px rgba(0,0,0,.48); }
+    .combo-list.open { display:block; }
+    .combo-option { display:flex; align-items:center; justify-content:space-between; width:100%; color:#D9E7EE; border:0; border-bottom:1px solid rgba(49,80,105,.52); background:transparent; padding:9px 10px; text-align:left; font-size:12px; }
+    .combo-option:last-child { border-bottom:0; }
+    .combo-option small { color:#8FA5B4; font-size:10px; }
+    .combo-option:hover, .combo-option.active, .combo-option[aria-selected=true] { color:#07111F; background:var(--cyan); }
+    .combo-option:hover small, .combo-option.active small, .combo-option[aria-selected=true] small { color:#16313A; }
+    .combo-empty { padding:11px; color:#F8D091; font-size:11px; line-height:1.4; }
+    .combo-status { min-height:0; margin:0; color:#91A7B7; font-size:10px; }
+    .bond-control { grid-column:1 / -1; padding:10px; border:1px solid #315069; background:#091625; }
+    .bond-top { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .bond-value { color:var(--cyan); font:700 14px ui-monospace, SFMono-Regular, Consolas, monospace; }
+    input[type=range] { width:100%; accent-color:var(--cyan); margin:8px 0 3px; }
+    .milestones { display:flex; justify-content:space-between; color:#8098A9; font-size:9px; }
+    .milestones b { color:#AFC1CD; }
+    .bond-note { margin:5px 0 0; color:#8FA5B4; font-size:9px; }
+    .info-card { grid-column:1 / -1; padding:11px; border:1px solid rgba(244,201,107,.3); background:rgba(244,201,107,.05); }
+    .info-card h4 { margin:0 0 5px; color:var(--gold); font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+    .info-status { display:block; margin-top:3px; color:#9FB7C2; font-size:9px; font-weight:400; letter-spacing:0; text-transform:none; }
+    .slots-value { font:700 22px/1 ui-monospace, SFMono-Regular, Consolas, monospace; color:#FFF0C5; }
+    .info-card p { margin:6px 0 0; color:#AFC1CD; font-size:10px; }
+    .final-bst { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:9px; padding:12px 14px; border:1px solid rgba(167,134,255,.56); background:rgba(167,134,255,.09); }
+    .final-bst span { color:#DCD0FF; font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    .final-bst strong { color:var(--violet); font:700 27px/1 ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .stat-card { position:relative; cursor:help; }
+    .stat-card .num { display:flex; align-items:center; gap:6px; }
+    .nature-up { color:var(--green); font-size:16px; }
+    .nature-down { color:var(--error); opacity:.85; font-size:16px; }
+    .breakdown { position:absolute; z-index:4; left:-1px; right:-1px; top:calc(100% + 7px); display:grid; gap:3px; padding:11px; color:#C9D9E2; border:1px solid var(--cyan); background:#07111F; box-shadow:0 14px 32px rgba(0,0,0,.48); font-size:10px; line-height:1.35; opacity:0; pointer-events:none; transform:translateY(-4px); transition:opacity .16s,transform .16s; }
+    .breakdown strong { color:var(--cyan); font-size:10px; letter-spacing:.06em; text-transform:uppercase; }
+    .breakdown .muted { color:#91A7B7; }
+    .stat-card:hover .breakdown, .stat-card:focus .breakdown, .stat-card:focus-within .breakdown { opacity:1; pointer-events:auto; transform:translateY(0); }
+    .lower-grid { display:grid; grid-template-columns:1.15fr .85fr; gap:18px; margin-top:18px; }
+    .lower-grid .panel { min-width:0; }
+    .compact-content { padding:16px 18px; }
+    .comparison-inputs { display:grid; grid-template-columns:1fr 1fr; gap:11px; }
+    .comparison-inputs .wide { grid-column:1 / -1; }
+    .compare-kicker { margin:0 0 12px; color:#91A7B7; font-size:11px; }
+    .compare-builds { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:14px 0 9px; }
+    .build-summary { padding:10px; border:1px solid #29475F; background:#091625; }
+    .build-summary.b { border-color:rgba(167,134,255,.45); }
+    .build-summary span { display:block; color:#91A7B7; font-size:9px; letter-spacing:.1em; text-transform:uppercase; }
+    .build-summary strong { display:block; margin-top:4px; color:var(--cyan); font:700 19px/1 ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .comparison-table { min-width:400px; }
+    .diff-plus { color:var(--green); } .diff-minus { color:var(--error); }
+    details.radar { overflow:hidden; border:1px solid rgba(73,217,209,.28); background:#091625; }
+    details.radar summary { padding:13px; color:#CFE0E8; cursor:pointer; font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    details.radar summary span { color:#8AA2B3; font-weight:400; letter-spacing:0; text-transform:none; }
+    .radar-wrap { padding:0 12px 12px; }
+    #radarCanvas { display:block; width:100%; height:auto; background:radial-gradient(circle at center,rgba(73,217,209,.07),transparent 65%); }
+    .pokedex { margin-top:18px; }
+    .dex-head { display:flex; align-items:start; justify-content:space-between; gap:16px; padding:17px 19px 13px; border-bottom:1px solid var(--line); }
+    .dex-head h3 { margin:0; font-size:12px; text-transform:uppercase; letter-spacing:.14em; }
+    .sample-label { color:#F8D091; border:1px solid rgba(245,174,80,.42); padding:4px 6px; font-size:9px; letter-spacing:.07em; }
+    .dex-content { padding:16px 18px; }
+    .dex-controls { display:grid; grid-template-columns:1.3fr .8fr 1fr; gap:9px; }
+    .dex-table td:nth-child(n+4), .dex-table th:nth-child(n+4) { text-align:center; }
+    .type-tag { color:#AEEAE5; border:1px solid rgba(73,217,209,.29); padding:2px 4px; font-size:9px; }
+    @media (max-width:900px) { .workspace, .lower-grid { grid-template-columns:1fr; } }
+    @media (max-width:620px) { .comparison-inputs, .dex-controls { grid-template-columns:1fr; } .comparison-inputs .wide { grid-column:auto; } .breakdown { position:relative; top:auto; margin-top:8px; } .stat-card:focus .breakdown { display:grid; } }
+    @media (max-width:900px) { .workspace { grid-template-columns:1fr; } .intro { align-items:start; flex-direction:column; } .provisional { max-width:none; } }
+    @media (max-width:560px) { .shell { width:min(100% - 24px, 1440px); } header { display:grid; grid-template-columns:31px minmax(0,1fr) auto; grid-template-rows:auto auto; min-height:81px; column-gap:9px; row-gap:3px; padding:10px 0; } .mark { grid-row:1 / span 2; width:31px; height:31px; font-size:12px; } .brand { grid-column:2; margin:0; } .brand h1 { font-size:13px; } .brand p { font-size:9px; } .badge { grid-column:3; grid-row:1; font-size:9px; padding:4px 5px; } .unofficial { display:block; grid-column:2 / span 2; grid-row:2; justify-self:start; padding:2px 5px; font-size:8px; } .pokemon-meta { align-items:flex-start; flex-direction:column; } footer { align-items:flex-start; flex-direction:column; } .credit { margin-left:0; } main { padding-top:20px; } .fields { grid-template-columns:1fr; } .stat-cards { grid-template-columns:repeat(2,1fr); } .panel-title, .config-content, .results-content { padding-left:13px; padding-right:13px; } .multiplier { padding:13px; gap:10px; } .multi-value { font-size:32px; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <img class="mark" src="assets/pkhunt-tools-logo.png" alt="PKHunt Tools">
+      <div class="brand"><h1>PKHunt Tools</h1><p>Calculadora de Atributos</p></div>
+      <span class="badge">Wiki v5.1.0</span><span class="unofficial">Não oficial</span>
+    </header>
+    <main>
+      <div class="workspace">
+        <section class="panel" aria-labelledby="config-title">
+          <div class="panel-title"><h3 id="config-title">Configuração do espécime</h3><span class="step">01 / INPUT</span></div>
+          <div class="config-content">
+            <div class="fields">
+              <div class="field wide"><label for="pokemon">Pokémon</label><div class="combo-wrap"><input id="pokemon" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pokemonList" aria-activedescendant="" autocomplete="off" value="Shuckle"><div id="pokemonList" class="combo-list" role="listbox" aria-label="Resultados de Pokémon"></div></div><p id="pokemonSearchStatus" class="combo-status" aria-live="polite"></p><div id="pokemonMeta" class="pokemon-meta"><span id="baseStats"></span><span class="bst-badge"><span>BST · Base Stat Total</span><strong id="bstValue">—</strong></span></div></div>
+              <div class="field"><label for="level">Nível</label><input id="level" type="number" min="1" max="100" value="100"></div>
+              <div class="field"><label for="rarity">Raridade</label><select id="rarity"><option value="1">Comum ×1,00</option><option value="1.03">Incomum ×1,03</option><option value="1.06" selected>Raro ×1,06</option><option value="1.10">Épico ×1,10</option><option value="1.15">Prismático ×1,15</option><option value="1.21">Mítico ×1,21</option><option value="1.28">Astral ×1,28</option><option value="1.36">Divino ×1,36</option></select></div>
+              <div class="field"><label for="special">Condição especial</label><select id="special"><option value="1" selected>Normal (sem selo) ×1,00</option><option value="1.45">Shiny ×1,45</option><option value="1.50">Founder ×1,50</option><option value="1.42">Genesis ×1,42</option></select></div>
+              <p class="helper">Shiny, Founder e Genesis multiplicam a raridade rolada: um Incomum Shiny é ×1,03 × ×1,45 = ×1,49.</p>
+              <div class="bond-control"><div class="bond-top"><span class="label" style="margin:0;">Laço</span><output id="bondOutput" class="bond-value" for="bondRange">100% · ×1,06</output></div><input id="bondRange" type="range" min="0" max="100" value="100" step="1" aria-label="Laço, de zero a cem por cento"><div class="milestones"><span>0%</span><span><b>25%</b> +1 item</span><span><b>50%</b> encaixe de selo</span><span><b>75%</b> ×1,03</span><span><b>100%</b> ×1,06</span></div><p class="bond-note">Atributos só mudam em 75% e 100%; os demais marcos são resultados informativos da Wiki v5.1.0.</p></div>
+              <div class="field"><span class="label">Estrelas</span><div class="switch" id="starSwitch" role="group" aria-label="Estrelas"><button type="button" data-stars="0">0</button><button type="button" data-stars="1">1</button><button type="button" data-stars="2">2</button><button type="button" data-stars="3">3</button><button type="button" data-stars="4">4</button><button type="button" data-stars="5" class="active">5</button></div></div>
+              <div class="field wide"><label for="nature">Nature</label><select id="nature"></select></div>
+              <aside id="itemInfo" class="info-card" aria-live="polite"></aside>
+            </div>
+            <hr class="divider">
+            <div class="editor-head"><h4>Treino do espécime</h4><div class="editor-tools"><span id="evTotal" class="total">EV total: 0 / 510</span><div class="reset-actions"><button class="reset" type="button" data-reset="iv">Zerar IVs</button><button class="reset" type="button" data-reset="ev">Zerar EVs</button></div></div></div>
+            <div class="stat-editor" id="editor"><span class="editor-label">Atributo</span><span class="editor-label">IV</span><span class="editor-label">EV</span></div>
+          </div>
+        </section>
+        <section class="panel" aria-labelledby="results-title">
+          <div class="panel-title"><h3 id="results-title">Resultados calculados</h3><span class="step">02 / OUTPUT</span></div>
+          <div class="results-content">
+            <div class="multiplier"><div id="multiValue" class="multi-value">×1,00</div><div class="multi-copy"><strong>Multiplicador total</strong><small>Aplicado à estatística base antes da fórmula clássica.</small><p class="formula-line">Base × raridade × condição especial × Laço × estrelas</p><div id="components" class="components"></div></div></div>
+            <div id="unavailable" class="unavailable" role="alert"><strong>Resultados em espera.</strong> Os EV ultrapassam o limite de 510. Ajuste o treino para retomar os cálculos.</div>
+            <div id="resultsArea"><div class="section-bar"><h4>Leitura do nível atual</h4></div><div id="statCards" class="stat-cards"></div><div class="final-bst"><span>BST final · soma dos seis atributos calculados</span><strong id="finalBst">—</strong></div><div class="compare"><div class="compare-title"><h4>Mesmo espécime, outras estrelas</h4><span>0★ → 5★</span></div><div class="table-wrap"><table><thead><tr><th>Estrelas</th><th>HP</th><th>ATQ</th><th>DEF</th><th>ATQ.E</th><th>DEF.E</th><th>VEL</th></tr></thead><tbody id="starRows"></tbody></table></div></div></div>
+          </div>
+        </section>
+      </div>
+      <div class="lower-grid">
+        <section class="panel" aria-labelledby="compare-config-title">
+          <div class="panel-title"><h3 id="compare-config-title">Comparar configurações</h3><span class="step">A / B</span></div>
+          <div class="compact-content">
+            <p class="compare-kicker">A usa a configuração ativa. B mantém o mesmo Pokémon, nível, IVs, EVs e Nature; escolha apenas os multiplicadores para comparar.</p>
+            <div class="comparison-inputs">
+              <div class="field"><label for="bRarity">Build B · Raridade</label><select id="bRarity"><option value="1" selected>Comum ×1,00</option><option value="1.03">Incomum ×1,03</option><option value="1.06">Raro ×1,06</option><option value="1.10">Épico ×1,10</option><option value="1.15">Prismático ×1,15</option><option value="1.21">Mítico ×1,21</option><option value="1.28">Astral ×1,28</option><option value="1.36">Divino ×1,36</option></select></div>
+              <div class="field"><label for="bSpecial">Build B · Condição</label><select id="bSpecial"><option value="1" selected>Normal (sem selo) ×1,00</option><option value="1.45">Shiny ×1,45</option><option value="1.50">Founder ×1,50</option><option value="1.42">Genesis ×1,42</option></select></div>
+              <div class="field"><label for="bStars">Build B · Estrelas</label><select id="bStars"><option value="0">0★ ×1,00</option><option value="1">1★ ×1,04</option><option value="2">2★ ×1,08</option><option value="3">3★ ×1,12</option><option value="4">4★ ×1,16</option><option value="5" selected>5★ ×1,20</option></select></div>
+              <div class="field"><label for="bBond">Build B · Laço</label><input id="bBond" type="range" min="0" max="100" value="100" step="1"><span id="bBondValue" class="helper" style="margin:2px 0 0;">100% · ×1,06</span></div>
+            </div>
+            <div class="compare-builds"><div class="build-summary"><span>Build A · multiplicador</span><strong id="aCompareMulti">×—</strong><span style="margin-top:8px;">BST final</span><strong id="aCompareBst">—</strong></div><div class="build-summary b"><span>Build B · multiplicador</span><strong id="bCompareMulti">×—</strong><span style="margin-top:8px;">BST final</span><strong id="bCompareBst">—</strong></div></div>
+            <div class="table-wrap"><table class="comparison-table"><thead><tr><th>Atributo</th><th>Build A</th><th>Build B</th><th>Dif. A−B</th></tr></thead><tbody id="comparisonRows"></tbody></table></div>
+          </div>
+        </section>
+        <section class="panel" aria-labelledby="radar-title">
+          <div class="panel-title"><h3 id="radar-title">Gráfico de atributos</h3><span class="step">CANVAS</span></div>
+          <div class="compact-content"><details class="radar" id="radarDetails"><summary>Ver distribuição atual <span>· atributos calculados da Build A</span></summary><div class="radar-wrap"><canvas id="radarCanvas" width="560" height="300" aria-label="Gráfico radar dos atributos calculados"></canvas></div></details></div>
+        </section>
+      </div>
+      <section class="panel pokedex" aria-labelledby="pokedex-title">
+        <div class="dex-head"><div><h3 id="pokedex-title">Pokédex</h3></div><span id="dexCount" class="sample-label">747 espécies · Wiki v5.1.0</span></div>
+        <div class="dex-content"><div class="dex-controls"><div class="field"><label for="dexSearch">Pesquisar</label><input id="dexSearch" type="search" placeholder="Nome ou tipo"></div><div class="field"><label for="dexType">Tipo</label><select id="dexType"><option value="">Todos os tipos</option></select></div><div class="field"><label for="dexSort">Ordenar por</label><select id="dexSort"><option value="bst">BST</option><option value="0">HP</option><option value="1">Ataque</option><option value="2">Defesa</option><option value="3">Atq. Esp.</option><option value="4">Def. Esp.</option><option value="5">Velocidade</option></select></div></div><div class="table-wrap" style="margin-top:13px;"><table class="dex-table"><thead><tr><th>Espécie</th><th>Tipo(s)</th><th>BST</th><th>HP</th><th>ATQ</th><th>DEF</th><th>ATQ.E</th><th>DEF.E</th><th>VEL</th></tr></thead><tbody id="dexRows"></tbody></table></div></div>
+      </section>
+    </main>
+    <footer><span class="footer-note">Os resultados incluem raridade, selo, Laço, estrelas, IV, EV e Nature. Talentos e itens ficam fora desta versão.</span><span class="credit">Feito por Maou (@imaou)</span></footer>
+  </div>
+  <script src="data/pokemon-v5.1.0.js"></script>
+  <script>
+    const pokemonData=Object.fromEntries(window.PKHuntPokemonData.map((entry,index)=>[`pk-${index}`,{name:entry.name,type:entry.types.join(' / '),base:[entry.hp,entry.atk,entry.def,entry.spa,entry.spd,entry.spe]}]));
+    const statNames=['HP','Ataque','Defesa','Atq. Esp.','Def. Esp.','Velocidade'];
+    const shortNames=['HP','ATQ','DEF','ATQ.E','DEF.E','VEL'];
+    const natures={
+      hardy:{label:'Hardy — neutra',mods:[1,1,1,1,1,1]},lonely:{label:'Lonely — Ataque ↑ / Defesa ↓',mods:[1,1.1,.9,1,1,1]},brave:{label:'Brave — Ataque ↑ / Velocidade ↓',mods:[1,1.1,1,1,1,.9]},adamant:{label:'Adamant — Ataque ↑ / Atq. Esp. ↓',mods:[1,1.1,1,.9,1,1]},naughty:{label:'Naughty — Ataque ↑ / Def. Esp. ↓',mods:[1,1.1,1,1,.9,1]},
+      bold:{label:'Bold — Defesa ↑ / Ataque ↓',mods:[1,.9,1.1,1,1,1]},docile:{label:'Docile — neutra',mods:[1,1,1,1,1,1]},relaxed:{label:'Relaxed — Defesa ↑ / Velocidade ↓',mods:[1,1,1.1,1,1,.9]},impish:{label:'Impish — Defesa ↑ / Atq. Esp. ↓',mods:[1,1,1.1,.9,1,1]},lax:{label:'Lax — Defesa ↑ / Def. Esp. ↓',mods:[1,1,1.1,1,.9,1]},
+      timid:{label:'Timid — Velocidade ↑ / Ataque ↓',mods:[1,.9,1,1,1,1.1]},hasty:{label:'Hasty — Velocidade ↑ / Defesa ↓',mods:[1,1,.9,1,1,1.1]},serious:{label:'Serious — neutra',mods:[1,1,1,1,1,1]},jolly:{label:'Jolly — Velocidade ↑ / Atq. Esp. ↓',mods:[1,1,1,.9,1,1.1]},naive:{label:'Naive — Velocidade ↑ / Def. Esp. ↓',mods:[1,1,1,1,.9,1.1]},
+      modest:{label:'Modest — Atq. Esp. ↑ / Ataque ↓',mods:[1,.9,1,1.1,1,1]},mild:{label:'Mild — Atq. Esp. ↑ / Defesa ↓',mods:[1,1,.9,1.1,1,1]},quiet:{label:'Quiet — Atq. Esp. ↑ / Velocidade ↓',mods:[1,1,1,1.1,1,.9]},bashful:{label:'Bashful — neutra',mods:[1,1,1,1,1,1]},rash:{label:'Rash — Atq. Esp. ↑ / Def. Esp. ↓',mods:[1,1,1,1.1,.9,1]},
+      calm:{label:'Calm — Def. Esp. ↑ / Ataque ↓',mods:[1,.9,1,1,1.1,1]},gentle:{label:'Gentle — Def. Esp. ↑ / Defesa ↓',mods:[1,1,.9,1,1.1,1]},sassy:{label:'Sassy — Def. Esp. ↑ / Velocidade ↓',mods:[1,1,1,1,1.1,.9]},careful:{label:'Careful — Def. Esp. ↑ / Atq. Esp. ↓',mods:[1,1,1,.9,1.1,1]},quirky:{label:'Quirky — neutra',mods:[1,1,1,1,1,1]}
+    };
+    const starMultiplier=[1,1.04,1.08,1.12,1.16,1.20];
+    const rarityDetails={
+      'Comum':{slots:0,essence:'Teimosia',damage:1.015},'Incomum':{slots:0,essence:'Vigor',damage:1.025},'Raro':{slots:1,essence:'Instinto',damage:1.04},'Épico':{slots:2,essence:'Ímpeto',damage:1.06},'Prismático':{slots:2,essence:'Prisma',damage:1.09},'Mítico':{slots:3,essence:'Presságio',damage:1.125},'Astral':{slots:3,essence:'Constelação',damage:1.175},'Divino':{slots:4,essence:'Sopro Divino',damage:1.25}
+    };
+    let bond=100, stars=5;
+    const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+    const pokemon=$('#pokemon'), pokemonList=$('#pokemonList'), pokemonStatus=$('#pokemonSearchStatus');
+    let selectedPokemon=Object.keys(pokemonData).find(key=>pokemonData[key].name==='Shuckle'), comboMatches=[], comboIndex=-1;
+    function renderPokemonOptions(query=pokemon.value){ const normalized=query.trim().toLowerCase(); comboMatches=Object.entries(pokemonData).filter(([,p])=>!normalized||p.name.toLowerCase().includes(normalized)||p.type.toLowerCase().includes(normalized)); comboIndex=-1; if(!comboMatches.length){ pokemonList.innerHTML='<div class="combo-empty">Nenhum Pokémon encontrado.</div>'; pokemonStatus.textContent='Nenhum Pokémon encontrado.'; } else { pokemonList.innerHTML=comboMatches.map(([key,p],i)=>`<button id="pokemon-option-${key}" class="combo-option" type="button" role="option" aria-selected="${key===selectedPokemon}" data-key="${key}"><span>${p.name}</span><small>${p.type}</small></button>`).join(''); pokemonStatus.textContent=`${comboMatches.length} resultado${comboMatches.length===1?'':'s'}.`; } pokemonList.classList.add('open'); pokemon.setAttribute('aria-expanded','true'); }
+    function closePokemonOptions(){ pokemonList.classList.remove('open'); pokemon.setAttribute('aria-expanded','false'); pokemon.removeAttribute('aria-activedescendant'); comboIndex=-1; }
+    function setComboActive(index){ if(!comboMatches.length) return; comboIndex=(index+comboMatches.length)%comboMatches.length; $$('.combo-option').forEach((option,i)=>option.classList.toggle('active',i===comboIndex)); const active=comboMatches[comboIndex][0]; pokemon.setAttribute('aria-activedescendant',`pokemon-option-${active}`); document.getElementById(`pokemon-option-${active}`)?.scrollIntoView({block:'nearest'}); }
+    function selectPokemon(key){ selectedPokemon=key; pokemon.value=pokemonData[key].name; pokemonStatus.textContent=`Selecionado: ${pokemonData[key].name}.`; closePokemonOptions(); update(); }
+    pokemon.addEventListener('focus',()=>renderPokemonOptions(''));
+    pokemon.addEventListener('input',()=>renderPokemonOptions());
+    pokemon.addEventListener('keydown',event=>{ if(event.key==='ArrowDown'){ event.preventDefault(); if(!pokemonList.classList.contains('open')) renderPokemonOptions(); setComboActive(comboIndex+1); } else if(event.key==='ArrowUp'){ event.preventDefault(); if(!pokemonList.classList.contains('open')) renderPokemonOptions(); setComboActive(comboIndex-1); } else if(event.key==='Enter'){ const exact=comboMatches.find(([,p])=>p.name.toLowerCase()===pokemon.value.trim().toLowerCase()); if(comboIndex>=0||exact){ event.preventDefault(); selectPokemon(comboIndex>=0?comboMatches[comboIndex][0]:exact[0]); } } else if(event.key==='Escape'){ closePokemonOptions(); } });
+    pokemon.addEventListener('blur',()=>setTimeout(closePokemonOptions,140));
+    pokemonList.addEventListener('mousedown',event=>{ const option=event.target.closest('[data-key]'); if(option){ event.preventDefault(); selectPokemon(option.dataset.key); } });
+    Object.entries(natures).forEach(([key,n])=>$('#nature').add(new Option(n.label,key)));
+    $('#nature').value='bold';
+    [...new Set(Object.values(pokemonData).flatMap(p=>p.type.split(' / ')))].sort().forEach(type=>$('#dexType').add(new Option(type,type)));
+    $('#dexCount').textContent=`${window.PKHuntDataMeta.count} espécies · Wiki v${window.PKHuntDataMeta.wikiVersion}`;
+    const editor=$('#editor');
+    statNames.forEach((name,i)=>{ const row=document.createElement('template'); row.innerHTML=`<span class="stat-name">${name}</span><input aria-label="IV ${name}" class="iv" data-i="${i}" type="number" min="0" max="31" value="31"><input aria-label="EV ${name}" class="ev" data-i="${i}" type="number" min="0" max="252" value="${i===2||i===4?'252':'0'}">`; editor.append(...row.content.children); });
+    function num(el,min,max){ let v=Number(el.value); if(!Number.isFinite(v)) v=0; return Math.max(min,Math.min(max,Math.floor(v))); }
+    const fmt=v=>Number(v).toFixed(2).replace('.',',');
+    const currentRarityName=()=>$('#rarity').selectedOptions[0].textContent.split(' ×')[0];
+    const currentSpecialName=()=>$('#special').selectedOptions[0].textContent.split(' ×')[0];
+    const bondMultiplier=value=>value<75?1:value<100?1.03:1.06;
+    const bondLabel=value=>value<75?'Laço 0–74%':value<100?'Laço 75–99%':'Laço 100%';
+    function getInputs(){ return {level:num($('#level'),1,100), rarity:Number($('#rarity').value), special:Number($('#special').value), iv:$$('.iv').map(e=>num(e,0,31)), ev:$$('.ev').map(e=>num(e,0,252)), nature:natures[$('#nature').value].mods}; }
+    function baseStat(base,iv,ev,level,index,nature,multi){ const scaledBase=base*multi; return index===0 ? Math.floor(((2*scaledBase+iv+Math.floor(ev/4))*level)/100)+level+10 : Math.floor((Math.floor(((2*scaledBase+iv+Math.floor(ev/4))*level)/100)+5)*nature[index]); }
+    function calc(forStars=stars, overrides={}){ const input=getInputs(), p=pokemonData[selectedPokemon]; const bondValue=overrides.bond ?? bond, rarity=overrides.rarity ?? input.rarity, special=overrides.special ?? input.special, activeStars=overrides.stars ?? forStars, bondMulti=bondMultiplier(bondValue), multi=rarity*special*bondMulti*starMultiplier[activeStars]; return {stats:p.base.map((base,i)=>baseStat(base,input.iv[i],input.ev[i],input.level,i,input.nature,multi)),multi,input,bondValue,bondMulti,rarity,special,stars:activeStars}; }
+    function itemSlotInfo(rarityName,special,bondValue){ const rarity=rarityDetails[rarityName]; const floor=special>1?4:rarity.slots; const slots=Math.min(6,floor+(bondValue>=25?1:0)+(bondValue>=100?1:0)); const outcomes=[]; if(bondValue>=50) outcomes.push('50%: encaixe de selo no golpe principal'); if(bondValue>=100) outcomes.push(`100%: Essência ${rarity.essence} · dano pelo Laço ×${fmt(rarity.damage)}`); if(!outcomes.length) outcomes.push('Próximo marco: 25% para +1 espaço de item'); return {slots,floor,outcomes}; }
+    function natureEffect(index, mods){ if(index===0||mods[index]===1) return ''; return mods[index]>1?'<span class="nature-up" title="Nature +10%">↑</span>':'<span class="nature-down" title="Nature −10%">↓</span>'; }
+    function breakdownCard(value,index,calculation,p){ const nature=calculation.input.nature[index]; const effect=index===0?'Nature: não afeta HP':nature>1?'Nature: +10% neste atributo':nature<1?'Nature: −10% neste atributo':'Nature: neutra neste atributo'; return `<div class="breakdown" role="tooltip"><strong>Como este atributo foi calculado</strong><span>Base ${statNames[index]}: ${p.base[index]} × ${fmt(calculation.rarity)} raridade × ${fmt(calculation.special)} condição × ${fmt(calculation.bondMulti)} Laço × ${fmt(starMultiplier[calculation.stars])} estrelas</span><span>IV ${calculation.input.iv[index]} · EV +${Math.floor(calculation.input.ev[index]/4)} · nível ${calculation.input.level}</span><span>${effect}</span><span class="muted">O multiplicador combinado entra na base antes da fórmula.</span><strong>Resultado: ${value}</strong></div>`; }
+    function drawRadar(stats){ const canvas=$('#radarCanvas'); if(!canvas||!$('#radarDetails').open) return; const ctx=canvas.getContext('2d'), w=canvas.width,h=canvas.height,cx=w/2,cy=h/2+5,r=92,max=Math.max(100,...stats); ctx.clearRect(0,0,w,h); const point=(i,scale)=>{const a=-Math.PI/2+i*Math.PI*2/6;return [cx+Math.cos(a)*r*scale,cy+Math.sin(a)*r*scale];}; ctx.lineWidth=1; for(let ring=1;ring<=4;ring++){ctx.beginPath();for(let i=0;i<6;i++){const [x,y]=point(i,ring/4);i?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.closePath();ctx.strokeStyle='rgba(73,217,209,.16)';ctx.stroke();} for(let i=0;i<6;i++){const [x,y]=point(i,1);ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(x,y);ctx.strokeStyle='rgba(73,217,209,.18)';ctx.stroke();ctx.fillStyle='#9CB2C0';ctx.font='11px system-ui';ctx.textAlign=x<cx-8?'right':x>cx+8?'left':'center';ctx.fillText(shortNames[i],x+(x<cx?-8:x>cx?8:0),y+(y<cy?-4:14));} ctx.beginPath();stats.forEach((v,i)=>{const [x,y]=point(i,Math.min(1,v/max));i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.closePath();ctx.fillStyle='rgba(73,217,209,.18)';ctx.fill();ctx.strokeStyle='#49D9D1';ctx.lineWidth=2;ctx.stroke(); }
+    function renderComparison(active){ const bStars=Number($('#bStars').value), bBond=Number($('#bBond').value), b=calc(bStars,{rarity:Number($('#bRarity').value),special:Number($('#bSpecial').value),bond:bBond,stars:bStars}), bstA=active.stats.reduce((sum,v)=>sum+v,0),bstB=b.stats.reduce((sum,v)=>sum+v,0); $('#aCompareMulti').textContent=`×${fmt(active.multi)}`;$('#bCompareMulti').textContent=`×${fmt(b.multi)}`;$('#aCompareBst').textContent=bstA;$('#bCompareBst').textContent=bstB;$('#bBondValue').textContent=`${bBond}% · ×${fmt(bondMultiplier(bBond))}`; $('#comparisonRows').innerHTML=active.stats.map((value,i)=>{const diff=value-b.stats[i], sign=diff>0?'+':''; return `<tr><td>${statNames[i]}</td><td>${value}</td><td>${b.stats[i]}</td><td class="${diff>0?'diff-plus':diff<0?'diff-minus':''}">${sign}${diff}</td></tr>`;}).join('')+`<tr><td><strong>BST final</strong></td><td><strong>${bstA}</strong></td><td><strong>${bstB}</strong></td><td class="${bstA-bstB>0?'diff-plus':bstA-bstB<0?'diff-minus':''}"><strong>${bstA-bstB>0?'+':''}${bstA-bstB}</strong></td></tr>`; }
+    function renderDex(){ const query=$('#dexSearch').value.toLowerCase().trim(), type=$('#dexType').value, sort=$('#dexSort').value; const rows=Object.entries(pokemonData).map(([id,p])=>({id,...p,bst:p.base.reduce((s,v)=>s+v,0)})).filter(p=>!query||`${p.name} ${p.type}`.toLowerCase().includes(query)).filter(p=>!type||p.type.split(' / ').includes(type)).sort((a,b)=>sort==='bst'?b.bst-a.bst:b.base[Number(sort)]-a.base[Number(sort)]); $('#dexRows').innerHTML=rows.map(p=>`<tr><td>${p.name}</td><td>${p.type.split(' / ').map(t=>`<span class="type-tag">${t}</span>`).join(' ')}</td><td>${p.bst}</td>${p.base.map(value=>`<td>${value}</td>`).join('')}</tr>`).join('')||'<tr><td colspan="9">Nenhum Pokémon encontrado.</td></tr>'; }
+    function update(){ const p=pokemonData[selectedPokemon], c=calc(), total=c.input.ev.reduce((a,b)=>a+b,0), invalid=total>510, rarityName=currentRarityName(), specialName=currentSpecialName(), info=itemSlotInfo(rarityName,c.input.special,bond), finalBst=c.stats.reduce((sum,v)=>sum+v,0); $('#baseStats').textContent=`BASE — HP ${p.base[0]} · ATQ ${p.base[1]} · DEF ${p.base[2]} · ATQ.E ${p.base[3]} · DEF.E ${p.base[4]} · VEL ${p.base[5]}  /  ${p.type.toUpperCase()}`; $('#bstValue').textContent=p.base.reduce((total,value)=>total+value,0); $('#bondOutput').textContent=`${bond}% · ×${fmt(c.bondMulti)}`; $('#itemInfo').innerHTML=`<h4>Espaços de item <span class="info-status">Informativo confirmado · Wiki v5.1.0 · não altera a estimativa de atributos</span></h4><span class="slots-value">${info.slots} / 6</span><p>Piso ${c.input.special>1?'condição especial':rarityName}: ${info.floor} · Laço: +${bond>=25?1:0}${bond>=100?' +1':''}</p><p>${info.outcomes.join(' · ')}</p>`; $('#evTotal').textContent=`EV total: ${total} / 510`; $('#evTotal').classList.toggle('error',invalid); $('#unavailable').classList.toggle('show',invalid); $('#resultsArea').style.opacity=invalid?.28:1; $('#resultsArea').style.pointerEvents=invalid?'none':'auto'; const part=[`Raridade ${rarityName} ×${fmt(c.input.rarity)}`,`${specialName} ×${fmt(c.input.special)}`,`${bondLabel(bond)} ×${fmt(c.bondMulti)}`,`${stars}★ ×${fmt(starMultiplier[stars])}`]; $('#multiValue').textContent=`×${fmt(c.multi)}`; $('#components').innerHTML=part.map(x=>`<span class="component">${x}</span>`).join(''); $('#statCards').innerHTML=c.stats.map((value,i)=>`<article class="stat-card" tabindex="0"><span class="name">${statNames[i]}</span><span class="num">${invalid?'—':value}${natureEffect(i,c.input.nature)}</span>${breakdownCard(value,i,c,p)}</article>`).join(''); $('#finalBst').textContent=invalid?'—':finalBst; $('#starRows').innerHTML=starMultiplier.map((_,s)=>{const r=calc(s).stats;return `<tr class="${s===stars?'active-star':''} ${s===5?'star-five':''}"><td>${s}★ ${s===stars?'selecionado':''}</td>${r.map(v=>`<td>${invalid?'—':v}</td>`).join('')}</tr>`}).join(''); renderComparison(c); drawRadar(c.stats); }
+    function normalizeNumberField(field, onBlur=false){
+      let min=0, max=252;
+      if(field.id==='level'){ min=1; max=100; }
+      else if(field.classList.contains('iv')){ max=31; }
+      if(field.value==='') { field.value=min; field.removeAttribute('aria-invalid'); return; }
+      const normalized=num(field,min,max);
+      field.value=normalized;
+      field.removeAttribute('aria-invalid');
+    }
+    $('#bondRange').addEventListener('input',()=>{bond=Number($('#bondRange').value); update();});
+    $$('#starSwitch button').forEach(b=>b.addEventListener('click',()=>{stars=Number(b.dataset.stars); $$('#starSwitch button').forEach(x=>x.classList.toggle('active',x===b)); update();}));
+    $$('select,input').forEach(x=>x.addEventListener('input',()=>{ if(x.matches('input[type=number]')) normalizeNumberField(x); update(); }));
+    $$('input[type=number]').forEach(x=>x.addEventListener('blur',()=>{ normalizeNumberField(x,true); update(); }));
+    $$('.reset').forEach(button=>button.addEventListener('click',()=>{ $$(`.${button.dataset.reset}`).forEach(input=>input.value=0); update(); }));
+    ['bRarity','bSpecial','bStars','bBond'].forEach(id=>['input','change'].forEach(event=>$('#'+id).addEventListener(event,update)));
+    ['dexSearch','dexType','dexSort'].forEach(id=>['input','change'].forEach(event=>$('#'+id).addEventListener(event,renderDex)));
+    $('#radarDetails').addEventListener('toggle',()=>drawRadar(calc().stats));
+    renderDex();
+    update();
+  </script>
+</body>
+</html>
