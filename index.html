@@ -64,6 +64,10 @@
     .calc-stat-line b { color:#DCEAF1; font:800 9px ui-monospace,SFMono-Regular,Consolas,monospace; text-align:right; }
     .stat-meter { display:block; height:4px; overflow:hidden; background:#07111F; box-shadow:inset 0 0 0 1px rgba(80,133,158,.25); }
     .stat-meter i { display:block; width:var(--stat-width); height:100%; background:var(--stat-color,var(--cyan)); box-shadow:0 0 7px color-mix(in srgb,var(--stat-color,var(--cyan)) 60%,transparent); }
+    .pokemon-meta .calc-stat-bars { gap:7px 10px; }
+    .pokemon-meta .calc-stat-line { grid-template-columns:34px minmax(0,1fr) 27px; font-size:9px; }
+    .pokemon-meta .calc-stat-line b { font-size:10px; }
+    .pokemon-meta .stat-meter { height:6px; }
     .bst-badge { display:inline-flex; align-items:center; gap:7px; flex:0 0 auto; color:#E8DEFF; border:1px solid rgba(167,134,255,.55); padding:4px 6px; background:rgba(167,134,255,.11); font-size:9px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; white-space:nowrap; }
     .bst-badge strong { color:var(--violet); font-size:14px; letter-spacing:0; }
     .sprite-frame { position:relative; display:grid; place-items:center; overflow:hidden; flex:0 0 auto; color:#80B8BE; background:radial-gradient(circle,rgba(73,217,209,.15),rgba(73,217,209,.025) 64%,transparent 65%); }
@@ -191,6 +195,21 @@
     .compare-builds { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:14px 0 9px; }
     .build-summary { padding:10px; border:1px solid #29475F; background:#091625; }
     .build-summary.b { border-color:rgba(167,134,255,.45); }
+    .build-summary.b strong { color:#FF8A8A; }
+    .build-b-profile { display:grid; grid-template-columns:minmax(0,1fr) 102px auto; align-items:center; gap:10px; min-height:118px; margin:0 0 14px; padding:10px; border-left:3px solid #E45F63; background:linear-gradient(90deg,rgba(228,95,99,.08),rgba(13,26,42,.15)); }
+    .build-b-profile .calc-stat-bars { gap:7px 10px; }
+    .build-b-profile .calc-stat-line { color:#F0C2C4; }
+    .build-b-profile .stat-meter { background:rgba(228,95,99,.16); box-shadow:inset 0 0 0 1px rgba(228,95,99,.10); }
+    .build-b-profile .stat-meter i { background:#E45F63!important; box-shadow:0 0 9px rgba(228,95,99,.42); }
+    .build-b-profile .bst-badge { border-color:rgba(228,95,99,.55); background:rgba(228,95,99,.1); }
+    .build-b-profile .bst-badge strong { color:#FF999C; }
+    .build-b-sprite { width:102px; height:102px; }
+    .build-b-sprite .sprite-image { width:102px; height:102px; max-width:none; max-height:none; }
+    .build-b-sprite::after { content:'BUILD B'; }
+    .build-b-sprite::before { border-color:rgba(228,95,99,.35); }
+    .radar-panel { margin-top:18px; }
+    .radar-panel .compact-content { padding:13px 18px 16px; }
+    .radar-legend span:last-child { border-color:#E45F63; }
     .build-summary span { display:block; color:#91A7B7; font-size:9px; letter-spacing:.1em; text-transform:uppercase; }
     .build-summary strong { display:block; margin-top:4px; color:var(--cyan); font:700 19px/1 ui-monospace, SFMono-Regular, Consolas, monospace; }
     .comparison-table { min-width:400px; }
@@ -308,6 +327,29 @@
     .tm-chip span { display:block; margin-top:4px; color:#9FB7C2; font-size:9px; line-height:1.25; }
     .tm-chip .type-tag { display:inline-flex; margin-top:0; color:#D6EEF0; }
     .tm-chip .reason { display:block; margin-top:1px; color:#B8A4FF; font-weight:700; }
+    .move-detail-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:8px; }
+    .move-detail-card { --move-color:var(--cyan); min-width:0; padding:11px; border:1px solid rgba(49,80,105,.8); border-left:3px solid var(--move-color); background:#091625; }
+    .move-detail-top { display:flex; align-items:flex-start; justify-content:space-between; gap:9px; }
+    .move-detail-title { display:flex; align-items:center; gap:5px; min-width:0; }
+    .move-detail-title strong { overflow:hidden; color:#EDF9FC; text-overflow:ellipsis; white-space:nowrap; font-size:11px; }
+    .move-detail-title small { color:#99B5C1; font:800 8px ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.09em; }
+    .move-detail-values { display:flex; gap:7px; flex:0 0 auto; }
+    .move-detail-values span { display:grid; gap:1px; color:#8EAAB8; font-size:8px; text-align:right; text-transform:uppercase; }
+    .move-detail-values b { color:#F3FBFF; font:800 12px ui-monospace,SFMono-Regular,Consolas,monospace; }
+    .move-detail-foot { display:flex; align-items:center; flex-wrap:wrap; gap:6px; margin-top:9px; padding-top:8px; border-top:1px solid rgba(49,80,105,.52); color:#9AB3BF; font-size:9px; }
+    .move-detail-foot .type-tag { margin:0; }
+    .move-group { margin-top:14px; }
+    .move-group:first-child { margin-top:0; }
+    .move-group h6 { display:flex; align-items:baseline; gap:6px; margin:0 0 7px; color:#BFD5DF; font-size:9px; letter-spacing:.1em; text-transform:uppercase; }
+    .move-group h6 span { color:#819CAB; font-weight:400; }
+    .primary-move-lists { display:grid; gap:18px; padding:16px 15px 19px; border-top:1px solid rgba(49,80,105,.58); }
+    .primary-move-section { min-width:0; }
+    .primary-move-heading { display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin:0 0 10px; padding-bottom:8px; border-bottom:1px solid rgba(73,217,209,.18); }
+    .primary-move-heading h5 { margin:0; color:#BDF4EF; font-size:10px; letter-spacing:.12em; text-transform:uppercase; }
+    .primary-move-heading span { color:#91A7B7; font:700 9px ui-monospace,SFMono-Regular,Consolas,monospace; }
+    .primary-tm-toolbar { display:flex; align-items:end; justify-content:space-between; gap:12px; margin-bottom:12px; }
+    .primary-tm-toolbar .tm-search { width:min(100%,310px); }
+    .tm-rich-list { display:block; }
     .tm-more { display:block; margin:12px auto 0; color:#CFF6F2; border:1px solid rgba(73,217,209,.46); background:rgba(73,217,209,.04); padding:8px 12px; font-size:10px; font-weight:800; transition:color .16s,border-color .16s,background .16s; }
     .tm-more:hover,.tm-more:focus-visible { color:#07111F; border-color:var(--cyan); background:var(--cyan); outline:0; }
     .tm-status { margin:0; padding:10px; color:#B5C7D0; border:1px solid rgba(244,201,107,.25); background:rgba(244,201,107,.045); font-size:10px; line-height:1.45; }
@@ -333,11 +375,12 @@
     .move-note { color:#9CB2C0; font-size:10px; }
     @media (max-width:900px) { .workspace, .lower-grid { grid-template-columns:1fr; } }
     @media (max-width:720px) { .tool-layout { grid-template-columns:1fr; gap:14px; } .side-tabs { position:static; grid-template-columns:repeat(3,minmax(0,1fr)); overflow:hidden; padding:5px; gap:5px; } .side-tabs::before { display:none; } .side-tab { justify-content:center; min-height:42px; min-width:0; padding:8px 5px; font-size:9px; line-height:1.18; white-space:normal; } }
-    @media (max-width:760px) { .moves-overview { grid-template-columns:1fr; } .tm-toolbar { grid-template-columns:1fr; } .tm-filter-set { justify-content:flex-start; } }
-    @media (max-width:620px) { .comparison-inputs, .dex-controls, .moves-controls { grid-template-columns:1fr; } .comparison-inputs .wide { grid-column:auto; } .pokemon-meta { grid-template-columns:minmax(0,1fr) 92px; min-height:104px; gap:6px; } .pokemon-meta .bst-badge { grid-column:1 / -1; justify-self:start; } .calculator-sprite { width:88px; height:82px; grid-column:2; grid-row:1; } .calculator-sprite .sprite-image { max-width:94px; max-height:82px; } .breakdown { position:relative; top:auto; margin-top:8px; } .stat-card:focus .breakdown { display:grid; } .moves-head { align-items:flex-start; flex-direction:column; gap:8px; } .moves .table-wrap { overflow:visible; border:0; } .move-table,.move-table tbody { display:block; min-width:0; width:100%; } .move-table thead { display:none; } .move-table tbody { display:grid; gap:8px; } .move-table .move-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); overflow:hidden; border:1px solid rgba(49,80,105,.78); border-left:3px solid var(--move-color,var(--cyan)); background:#091625; } .move-table .move-row td { display:flex; align-items:center; justify-content:space-between; gap:7px; min-width:0; padding:7px 8px; color:#D7E7ED; border:0; border-bottom:1px solid rgba(49,80,105,.4); text-align:left!important; white-space:normal; } .move-table .move-row td::before { content:attr(data-label); flex:0 0 auto; color:#7F9DAC; font-size:8px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; } .move-table .move-row td:first-child { grid-column:1 / -1; min-height:35px; padding:8px; border-left:0; } .move-table .move-row td:first-child::before { display:none; } .move-table .move-row td:last-child { grid-column:1 / -1; border-bottom:0; } .move-table .move-row .move-name { justify-content:flex-start; } .move-table .move-row .move-category-icon { margin-left:auto; } .move-table .move-row .type-tag { margin-left:auto; } .move-table .move-row .move-note { color:#AFC5D0; } .dex-detail-head { padding:12px; } .dex-detail-counts { margin-top:8px; } .matrix-note summary { padding:9px 12px; } .matrix-note p { padding:0 12px 11px; } .dex-view-tabs { padding:8px 12px 0; } .dex-view-panel { padding:13px 12px 15px; } .tm-origin-summary { grid-template-columns:1fr; } .origin-card { display:grid; grid-template-columns:32px 1fr; align-items:center; column-gap:7px; } .origin-card b { grid-row:1 / span 2; } .origin-card span { min-height:0; margin-top:0; } .tm-grid { grid-template-columns:1fr; } .tm-chip { min-height:53px; } .learnset-row { grid-template-columns:43px minmax(0,1fr); gap:8px; } .learnset-meta { grid-column:2; text-align:left; } }
+    @media (max-width:760px) { .moves-overview { grid-template-columns:1fr; } .tm-toolbar { grid-template-columns:1fr; } .tm-filter-set { justify-content:flex-start; } .primary-tm-toolbar { align-items:stretch; flex-direction:column; } .primary-tm-toolbar .tm-search { width:100%; } }
+    @media (max-width:620px) { .comparison-inputs, .dex-controls, .moves-controls { grid-template-columns:1fr; } .comparison-inputs .wide { grid-column:auto; } .pokemon-meta { grid-template-columns:minmax(0,1fr) 92px; min-height:104px; gap:6px; } .pokemon-meta .bst-badge { grid-column:1 / -1; justify-self:start; } .calculator-sprite { width:88px; height:82px; grid-column:2; grid-row:1; } .calculator-sprite .sprite-image { max-width:94px; max-height:82px; } .breakdown { position:relative; top:auto; margin-top:8px; } .stat-card:focus .breakdown { display:grid; } .moves-head { align-items:flex-start; flex-direction:column; gap:8px; } .moves .table-wrap { overflow:visible; border:0; } .move-table,.move-table tbody { display:block; min-width:0; width:100%; } .move-table thead { display:none; } .move-table tbody { display:grid; gap:8px; } .move-table .move-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); overflow:hidden; border:1px solid rgba(49,80,105,.78); border-left:3px solid var(--move-color,var(--cyan)); background:#091625; } .move-table .move-row td { display:flex; align-items:center; justify-content:space-between; gap:7px; min-width:0; padding:7px 8px; color:#D7E7ED; border:0; border-bottom:1px solid rgba(49,80,105,.4); text-align:left!important; white-space:normal; } .move-table .move-row td::before { content:attr(data-label); flex:0 0 auto; color:#7F9DAC; font-size:8px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; } .move-table .move-row td:first-child { grid-column:1 / -1; min-height:35px; padding:8px; border-left:0; } .move-table .move-row td:first-child::before { display:none; } .move-table .move-row td:last-child { grid-column:1 / -1; border-bottom:0; } .move-table .move-row .move-name { justify-content:flex-start; } .move-table .move-row .move-category-icon { margin-left:auto; } .move-table .move-row .type-tag { margin-left:auto; } .move-table .move-row .move-note { color:#AFC5D0; } .dex-detail-head { padding:12px; } .dex-detail-counts { margin-top:8px; } .tm-grid { grid-template-columns:1fr; } .tm-chip { min-height:53px; } .learnset-row { grid-template-columns:43px minmax(0,1fr); gap:8px; } .learnset-meta { grid-column:2; text-align:left; } .primary-move-lists { padding:13px 12px 15px; } .move-detail-grid { grid-template-columns:1fr; } }
     @media (prefers-reduced-motion:reduce) { .dex-view-panel,.calculator-sprite .sprite-image { animation:none; } .tm-chip,.learnset-row,.dex-view-tab,.tm-filter,.overview-action,.tm-more { transition:none; } }
     @media (max-width:900px) { .workspace { grid-template-columns:1fr; } }
     @media (max-width:620px) { .dex-content { padding:13px; } #dexListWrap { overflow:visible; border:0; } .dex-table,.dex-table tbody { display:block; width:100%; min-width:0; } .dex-table thead { display:none; } .dex-table tbody { display:grid; gap:7px; } .dex-profile-row { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; column-gap:7px; padding:7px 8px; border:1px solid rgba(49,80,105,.75); background:#091625; } .dex-profile-row td { min-width:0; padding:0; border:0; text-align:left!important; white-space:normal; } .dex-profile-row td:nth-child(1) { grid-column:1 / -1; } .dex-profile-row td:nth-child(2) { grid-column:1; } .dex-profile-row td:nth-child(3),.dex-profile-row td:nth-child(4) { grid-column:2; } .dex-profile-row td:nth-child(4) { display:none; } .dex-profile-row .dex-species { min-width:0; } .dex-profile-row td:nth-child(3)::before { content:'BST '; color:#91A7B7; font-size:8px; letter-spacing:.08em; } .dex-detail-row { display:block; } .dex-detail-row td { display:block; padding:0; border:0; white-space:normal; } .dex-detail { margin:0 0 7px; } .dex-detail-head { gap:8px; } .dex-detail-sprite { width:80px; height:80px; } .dex-detail-sprite .sprite-image { width:80px; height:80px; } .dex-stat-bars { grid-template-columns:1fr; gap:6px; } .dex-stat-line { grid-template-columns:48px minmax(0,1fr) 28px; } .radar-static-head { align-items:flex-start; flex-direction:column; gap:3px; } }
+    @media (max-width:620px) { .dex-profile-row { grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; } .dex-profile-row td:nth-child(2) { grid-column:1 / -1; } .dex-profile-row td:nth-child(3),.dex-profile-row td:nth-child(n+4) { display:flex; align-items:baseline; justify-content:space-between; gap:4px; grid-column:auto; } .dex-profile-row td:nth-child(n+4) { display:flex; } .dex-profile-row td[data-stat]::before { content:attr(data-stat); color:#8EA8B7; font-size:8px; font-weight:800; letter-spacing:.06em; } .build-b-profile { grid-template-columns:minmax(0,1fr) 82px; min-height:110px; } .build-b-profile .bst-badge { grid-column:1 / -1; justify-self:start; } .build-b-sprite,.build-b-sprite .sprite-image { width:82px; height:82px; } }
     @media (max-width:560px) { .shell { width:min(100% - 24px, 1440px); } header { display:grid; grid-template-columns:31px minmax(0,1fr) auto; grid-template-rows:auto auto; min-height:81px; column-gap:9px; row-gap:3px; padding:10px 0; } .mark { grid-row:1 / span 2; width:31px; height:31px; font-size:12px; } .brand { grid-column:2; margin:0; } .brand h1 { font-size:13px; } .brand p { font-size:9px; } .badge { grid-column:3; grid-row:1; font-size:9px; padding:4px 5px; } .unofficial { display:block; grid-column:2; grid-row:2; justify-self:start; padding:2px 5px; font-size:8px; } .creator-credit { grid-column:3; grid-row:1 / span 2; min-width:0; padding-right:5px; } .creator-credit em { display:none; } .creator-credit strong { display:none; } .pokemon-meta { align-items:flex-start; flex-direction:column; } footer { align-items:flex-start; flex-direction:column; } main { padding-top:20px; } .fields { grid-template-columns:1fr; } .stat-cards { grid-template-columns:repeat(2,1fr); } .panel-title, .config-content, .results-content { padding-left:13px; padding-right:13px; } .multiplier { padding:13px; gap:10px; } .multi-value { font-size:32px; } }
   </style>
 </head>
@@ -386,13 +429,17 @@
           </div>
         </section>
       </div>
+      <section class="panel radar-panel" aria-labelledby="radar-title">
+        <div class="panel-title"><h3 id="radar-title">Gráfico de atributos</h3><span class="step">A / B</span></div>
+        <div class="compact-content"><section class="radar" id="radarDetails" aria-label="Distribuição atual dos atributos calculados"><div class="radar-static-head"><strong>Distribuição atual</strong><span>Build A em cyan · Build B em vermelho</span></div><div class="radar-wrap"><canvas id="radarCanvas" width="900" height="285" aria-label="Gráfico radar dos atributos calculados"></canvas><div class="radar-legend" aria-hidden="true"><span>A · CYAN</span><span>B · VERMELHO</span></div></div></section></div>
+      </section>
       <div class="lower-grid">
         <section class="panel" aria-labelledby="compare-config-title">
           <div class="panel-title"><h3 id="compare-config-title">Comparar configurações</h3><span class="step">A / B</span></div>
           <div class="compact-content">
             <p class="compare-kicker">Configure duas builds completas para comparar atributos, multiplicador e BST final.</p>
-            <details id="buildBDetails"><summary style="cursor:pointer; color:#49D9D1; font-size:11px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;">Configurar Build B</summary><div class="comparison-inputs" style="margin-top:12px;">
-              <div class="field wide"><label for="bPokemon">Build B · Pokémon</label><div class="combo-wrap"><input id="bPokemon" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="bPokemonList" autocomplete="off" placeholder="Escolha um Pokémon"><div id="bPokemonList" class="combo-list" role="listbox"></div></div><p id="bPokemonStatus" class="combo-status" aria-live="polite"></p></div>
+            <section id="buildBDetails"><div class="comparison-inputs" style="margin-top:12px;">
+              <div class="field wide"><label for="bPokemon">Build B · Pokémon</label><div class="combo-wrap"><input id="bPokemon" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="bPokemonList" autocomplete="off" placeholder="Escolha um Pokémon"><div id="bPokemonList" class="combo-list" role="listbox"></div></div><p id="bPokemonStatus" class="combo-status" aria-live="polite"></p><div id="buildBProfile" class="build-b-profile"><div id="bBaseStats">Escolha um Pokémon para ver os atributos base.</div><span id="bSpriteFrame" class="sprite-frame build-b-sprite" role="img" aria-label="Sprite da Build B" data-sprite-fallback="BUILD B"><img id="bSprite" class="sprite-image" alt="Sprite da Build B"><span class="sprite-caption">BUILD B</span></span><span class="bst-badge"><span>BST BASE</span><strong id="bBstValue">—</strong></span></div></div>
               <div class="field"><label for="bLevel">Build B · Nível 1–500</label><input id="bLevel" type="number" min="1" max="500" placeholder="1–500"></div>
               <div class="field"><label for="bRarity">Build B · Raridade</label><select id="bRarity"><option value="" selected>Selecione…</option><option value="1">Comum ×1,00</option><option value="1.03">Incomum ×1,03</option><option value="1.06">Raro ×1,06</option><option value="1.10">Épico ×1,10</option><option value="1.15">Prismático ×1,15</option><option value="1.21">Mítico ×1,21</option><option value="1.28">Astral ×1,28</option><option value="1.36">Divino ×1,36</option></select></div>
               <div class="field"><label for="bSpecial">Build B · Condição</label><select id="bSpecial"><option value="" selected>Selecione…</option><option value="1">Normal ×1,00</option><option value="1.45">Shiny ×1,45</option><option value="1.50">Founder ×1,50</option><option value="1.42">Genesis ×1,42</option></select></div>
@@ -400,14 +447,10 @@
               <div class="field"><label for="bBond">Build B · Laço</label><input id="bBond" type="range" min="0" max="100" value="0" step="1"><span id="bBondValue" class="helper" style="margin:2px 0 0;">0% · ×1,00</span></div>
               <div class="field wide"><label for="bNature">Build B · Nature</label><select id="bNature"><option value="" selected>Selecione…</option></select></div>
               <div class="field wide"><div class="editor-head"><h4>IV / EV da Build B</h4><span id="bEvTotal" class="total">EV total: —</span></div><div class="stat-editor" id="bEditor"><span class="editor-label">Atributo</span><span class="editor-label">IV</span><span class="editor-label">EV</span></div></div>
-            </div></details>
+            </div></section>
             <div class="compare-builds"><div class="build-summary"><span>Build A · multiplicador</span><strong id="aCompareMulti">×—</strong><span style="margin-top:8px;">BST final</span><strong id="aCompareBst">—</strong></div><div class="build-summary b"><span>Build B · multiplicador</span><strong id="bCompareMulti">×—</strong><span style="margin-top:8px;">BST final</span><strong id="bCompareBst">—</strong></div></div>
             <div class="table-wrap"><table class="comparison-table"><thead><tr><th>Atributo</th><th>Build A</th><th>Build B</th><th>Dif. A−B</th></tr></thead><tbody id="comparisonRows"></tbody></table></div>
           </div>
-        </section>
-        <section class="panel" aria-labelledby="radar-title">
-          <div class="panel-title"><h3 id="radar-title">Gráfico de atributos</h3><span class="step">CANVAS</span></div>
-          <div class="compact-content"><section class="radar" id="radarDetails" aria-label="Distribuição atual dos atributos calculados"><div class="radar-static-head"><strong>Distribuição atual</strong><span>atributos calculados da Build A</span></div><div class="radar-wrap"><canvas id="radarCanvas" width="560" height="300" aria-label="Gráfico radar dos atributos calculados"></canvas><div class="radar-legend" aria-hidden="true"><span>HP</span><span>ATQ</span><span>DEF</span><span>ATQ.E</span><span>DEF.E</span><span>VEL</span></div></div></section></div>
         </section>
       </div>
           </section>
@@ -416,7 +459,7 @@
         <div class="dex-head"><div><h3 id="pokedex-title">Pokédex</h3></div><span id="dexCount" class="sample-label">747 espécies · Wiki v5.1.0</span></div>
         <div class="dex-content"><div class="dex-controls"><div class="field"><label for="dexSearch">Pesquisar</label><input id="dexSearch" type="search" placeholder="Nome ou tipo"></div><div class="field"><label for="dexType">Tipo</label><select id="dexType"><option value="">Todos os tipos</option></select></div><div class="field"><label for="dexSort">Ordenar por</label><select id="dexSort"><option value="bst">BST</option><option value="0">HP</option><option value="1">Ataque</option><option value="2">Defesa</option><option value="3">Atq. Esp.</option><option value="4">Def. Esp.</option><option value="5">Velocidade</option></select></div></div>
           <section id="dexDetail" class="dex-detail" aria-labelledby="dexDetailTitle" hidden></section>
-          <div id="dexListWrap" class="table-wrap" style="margin-top:13px;"><table class="dex-table"><thead><tr><th>Espécie</th><th>Tipo(s)</th><th>BST</th><th>Destaque</th></tr></thead><tbody id="dexRows"></tbody></table></div></div>
+          <div id="dexListWrap" class="table-wrap" style="margin-top:13px;"><table class="dex-table"><thead><tr><th>Espécie</th><th>Tipo(s)</th><th>BST</th><th>HP</th><th>ATQ</th><th>DEF</th><th>ATQ.E</th><th>DEF.E</th><th>VEL</th></tr></thead><tbody id="dexRows"></tbody></table></div></div>
       </section>
           </section>
           <section id="panel-moves" role="tabpanel" aria-labelledby="tab-moves" hidden>
@@ -495,7 +538,7 @@
       return `<span class="sprite-frame ${variant}"${label} data-sprite-fallback="?"><img class="sprite-image" src="${spriteUrl(name)}" alt=""${lazy} decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')"></span>`;
     }
     const typeVisuals={
-      Normal:{color:'#A8A77A'}, Fighting:{color:'#C22E28'}, Flying:{color:'#A98FF3',icon:'flying(4).png'}, Poison:{color:'#A33EA1',icon:'poison(4).png'},
+      Normal:{color:'#A8A77A',icon:'normal.png'}, Fighting:{color:'#C22E28',icon:'fighting.png'}, Flying:{color:'#A98FF3',icon:'flying(4).png'}, Poison:{color:'#A33EA1',icon:'poison(4).png'},
       Ground:{color:'#E2BF65',icon:'ground(4).png'}, Rock:{color:'#B6A136',icon:'rock(4).png'}, Bug:{color:'#A6B91A',icon:'bug(4).png'}, Ghost:{color:'#735797',icon:'ghost(4).png'},
       Steel:{color:'#B7B7CE',icon:'steel(4).png'}, Fire:{color:'#EE8130',icon:'fire(4).png'}, Water:{color:'#6390F0',icon:'water(4).png'}, Grass:{color:'#7AC74C',icon:'grass(4).png'},
       Electric:{color:'#F7D02C',icon:'electric(4).png'}, Psychic:{color:'#F95587',icon:'psychic(4).png'}, Ice:{color:'#96D9D6',icon:'ice(4).png'}, Dragon:{color:'#6F35FC',icon:'dragon(4).png'},
@@ -510,8 +553,34 @@
       const visual=typeVisual(type), modifier=variant?` ${variant}`:'';
       return `<span class="type-tag${modifier}" style="--type-color:${visual.color}">${typeIconMarkup(type)}<span>${escapeAttr(type)}</span></span>`;
     }
+    // O catálogo do jogo distingue dano apenas de status. Esta pequena tabela usa a
+    // categoria canónica dos ataques especiais; todo o restante dano é físico.
+    const specialMoveIds=new Set(['absorb','acid','aeroblast','aircutter','airslash','ancientpower','aurasphere','aurorabeam','belch','blizzard','boomburst','bubble','bubblebeam','bugbuzz','chargebeam','confusion','darkpulse','dazzlinggleam','discharge','dragonbreath','dragonpulse','dragonrage','drainingkiss','dreameater','earthpower','echovoice','electroball','ember','energyball','eruption','extrasensory','fairywind','fireblast','firespin','flameburst','flamethrower','flashcannon','focusblast','frostbreath','futuresight','gigadrain','grassknot','gust','hex','hiddenpower','hurricane','hydropump','hyperbeam','hypervoice','icebeam','icywind','incinerate','inferno','infestation','lavaplume','leafstorm','magicalleaf','magmastorm','megadrain','mirrorcoat','moonblast','mudbomb','muddywater','mudshot','mudslap','nightdaze','nightshade','octazooka','ominouswind','overheat','petaldance','powdersnow','powergem','psybeam','psychic','psyshock','psywave','razorwind','scald','shadowball','sheercold','signalbeam','silverwind','sludge','sludgebomb','sludgewave','smog','solarbeam','sonicboom','spitup','storedpower','strugglebug','surf','swift','thunder','thunderbolt','thundershock','triattack','twister','uproar','venoshock','watergun','waterpulse','waterspout','whirlpool','zapcannon']);
+    const moveId=name=>String(name||'').toLowerCase().replace(/[^a-z0-9]+/g,'');
+    function moveCombatCategory(move){
+      if(move?.category==='Utilitário/Status'||move?.power===null||move?.power==='— (status)') return 'Status';
+      return specialMoveIds.has(moveId(move?.name))?'Special':'Physical';
+    }
     function moveCategoryIcon(move){
-      return move?.category==='Utilitário/Status'?'<img class="move-category-icon" src="assets/types/move-status(2).png" alt="Status" title="Utilitário / Status" decoding="async" onerror="this.remove()">':'';
+      const category=moveCombatCategory(move), file={Physical:'move-physical(2).png',Special:'move-special(2).png',Status:'move-status(2).png'}[category];
+      const label={Physical:'Físico',Special:'Especial',Status:'Status'}[category];
+      return `<img class="move-category-icon" src="assets/types/${file}" alt="${label}" title="${label}" decoding="async" onerror="this.remove()">`;
+    }
+    function richMoveCard(move){
+      const visual=typeVisual(move.type), category={Physical:'FÍSICO',Special:'ESPECIAL',Status:'STATUS'}[moveCombatCategory(move)];
+      const power=move.power!==undefined&&move.power!==null&&move.power!=='— (status)'?`<span><small>Dano</small><b>${move.power}</b></span>`:'';
+      const cooldown=move.cooldown?`<span><small>CD</small><b>${escapeAttr(move.cooldown)}</b></span>`:'';
+      const range=move.range?`<span>Alcance: ${escapeAttr(move.range)}</span>`:'';
+      return `<article class="move-detail-card" style="--move-color:${visual.color}"><div class="move-detail-top"><div class="move-detail-title">${typeIconMarkup(move.type)}${moveCategoryIcon(move)}<div><strong>${escapeAttr(move.name)}</strong><small>${category}</small></div></div><div class="move-detail-values">${power}${cooldown}</div></div><div class="move-detail-foot">${typeBadge(move.type,'type-tag--mini')}${range}</div></article>`;
+    }
+    function compatibilityMovesFor(p){
+      const types=p.type.split(' / '), levelMoves=(learnsetsData[p.name]||[]).slice(), compatible=new Map();
+      movesData.filter(move=>types.includes(move.type)).forEach(move=>compatible.set(move.name.toLocaleLowerCase(),move));
+      (compatibilityData[p.name]||[]).forEach(name=>{const move=movesByName.get(name.toLocaleLowerCase());if(move)compatible.set(move.name.toLocaleLowerCase(),move);});
+      levelMoves.forEach(entry=>{const move=movesByName.get(entry.name.toLocaleLowerCase());if(move)compatible.set(move.name.toLocaleLowerCase(),move);});
+      const correction=compatibilityOverrides[p.name];
+      if(correction?.exact){ const selected=new Map(); correction.exact.forEach(name=>{const move=movesByName.get(name.toLocaleLowerCase())||compatibilityExtraMoves[name];if(move)selected.set(name.toLocaleLowerCase(),move);}); return {levelMoves,tmMoves:[...selected.values()]}; }
+      return {levelMoves,tmMoves:[...compatible.values()]};
     }
     const natures={
       hardy:{label:'Hardy — neutra',mods:[1,1,1,1,1,1]},lonely:{label:'Lonely — Ataque ↑ / Defesa ↓',mods:[1,1.1,.9,1,1,1]},brave:{label:'Brave — Ataque ↑ / Velocidade ↓',mods:[1,1.1,1,1,1,.9]},adamant:{label:'Adamant — Ataque ↑ / Atq. Esp. ↓',mods:[1,1.1,1,.9,1,1]},naughty:{label:'Naughty — Ataque ↑ / Def. Esp. ↓',mods:[1,1.1,1,1,.9,1]},
@@ -529,6 +598,7 @@
     const pokemon=$('#pokemon'), pokemonList=$('#pokemonList'), pokemonStatus=$('#pokemonSearchStatus');
     let selectedPokemon=null, selectedPokemonB=null, comboMatches=[], comboIndex=-1, bComboMatches=[], bComboIndex=-1;
     const calculatorSprite=$('#calculatorSprite'), calculatorSpriteFrame=$('#calculatorSpriteFrame');
+    const bSprite=$('#bSprite'), bSpriteFrame=$('#bSpriteFrame');
     function updateCalculatorSprite(){
       const selected=selectedPokemon&&pokemonData[selectedPokemon];
       calculatorSpriteFrame.classList.remove('is-missing');
@@ -544,6 +614,19 @@
       calculatorSprite.src=spriteUrl(selected.name);
     }
     calculatorSprite.addEventListener('error',()=>{ calculatorSprite.hidden=true; calculatorSpriteFrame.classList.add('is-missing'); });
+    function renderBuildBProfile(){
+      const selected=selectedPokemonB&&pokemonData[selectedPokemonB], holder=$('#bBaseStats');
+      bSpriteFrame.classList.remove('is-missing');
+      if(!selected){
+        holder.textContent='Escolha um Pokémon para ver os atributos base.';
+        $('#bBstValue').textContent='—'; bSprite.hidden=true; bSprite.removeAttribute('src');
+        return;
+      }
+      holder.innerHTML=`<div class="calc-base-profile"><div class="calc-type-line">${selected.type.split(' / ').map(type=>typeBadge(type,'type-tag--mini')).join('')}</div><div class="calc-stat-bars">${baseStatBars(selected.base,'calc')}</div></div>`;
+      $('#bBstValue').textContent=selected.base.reduce((sum,value)=>sum+value,0);
+      bSprite.hidden=false; bSprite.alt=''; bSpriteFrame.setAttribute('aria-label',`Sprite de ${selected.name}, Build B`); bSprite.src=spriteUrl(selected.name);
+    }
+    bSprite.addEventListener('error',()=>{ bSprite.hidden=true; bSpriteFrame.classList.add('is-missing'); });
     function renderPokemonOptions(query=pokemon.value){ const normalized=query.trim().toLowerCase(); comboMatches=Object.entries(pokemonData).filter(([,p])=>!normalized||p.name.toLowerCase().includes(normalized)||p.type.toLowerCase().includes(normalized)); comboIndex=-1; if(!comboMatches.length){ pokemonList.innerHTML='<div class="combo-empty">Nenhum Pokémon encontrado.</div>'; pokemonStatus.textContent='Nenhum Pokémon encontrado.'; } else { pokemonList.innerHTML=comboMatches.map(([key,p],i)=>`<button id="pokemon-option-${key}" class="combo-option" type="button" role="option" aria-selected="${key===selectedPokemon}" data-key="${key}"><span>${p.name}</span><small>${p.type}</small></button>`).join(''); pokemonStatus.textContent=`${comboMatches.length} resultado${comboMatches.length===1?'':'s'}.`; } pokemonList.classList.add('open'); pokemon.setAttribute('aria-expanded','true'); }
     function closePokemonOptions(){ pokemonList.classList.remove('open'); pokemon.setAttribute('aria-expanded','false'); pokemon.removeAttribute('aria-activedescendant'); comboIndex=-1; }
     function setComboActive(index){ if(!comboMatches.length) return; comboIndex=(index+comboMatches.length)%comboMatches.length; $$('.combo-option').forEach((option,i)=>option.classList.toggle('active',i===comboIndex)); const active=comboMatches[comboIndex][0]; pokemon.setAttribute('aria-activedescendant',`pokemon-option-${active}`); document.getElementById(`pokemon-option-${active}`)?.scrollIntoView({block:'nearest'}); }
@@ -596,6 +679,18 @@
     function natureEffect(index, mods){ if(index===0||mods[index]===1) return ''; return mods[index]>1?'<span class="nature-up" title="Nature +10%">↑</span>':'<span class="nature-down" title="Nature −10%">↓</span>'; }
     function breakdownCard(value,index,calculation,p){ const nature=calculation.input.nature[index]; const effect=index===0?'Nature: não afeta HP':nature>1?'Nature: +10% neste atributo':nature<1?'Nature: −10% neste atributo':'Nature: neutra neste atributo'; return `<div class="breakdown" role="tooltip"><strong>Como este atributo foi calculado</strong><span>Base ${statNames[index]}: ${p.base[index]} × ${fmt(calculation.rarity)} raridade × ${fmt(calculation.special)} condição × ${fmt(calculation.bondMulti)} Laço × ${fmt(starMultiplier[calculation.stars])} estrelas</span><span>IV ${calculation.input.iv[index]} · EV +${Math.floor(calculation.input.ev[index]/4)} · nível ${calculation.input.level}</span><span>${effect}</span><span class="muted">O multiplicador combinado entra na base antes da fórmula.</span><strong>Resultado: ${value}</strong></div>`; }
     function drawRadar(stats){ const canvas=$('#radarCanvas'); if(!canvas) return; const ctx=canvas.getContext('2d'), w=canvas.width,h=canvas.height,cx=w/2,cy=h/2+5,r=92,max=Math.max(100,...stats); ctx.clearRect(0,0,w,h); const point=(i,scale)=>{const a=-Math.PI/2+i*Math.PI*2/6;return [cx+Math.cos(a)*r*scale,cy+Math.sin(a)*r*scale];}; ctx.lineWidth=1; for(let ring=1;ring<=4;ring++){ctx.beginPath();for(let i=0;i<6;i++){const [x,y]=point(i,ring/4);i?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.closePath();ctx.strokeStyle='rgba(73,217,209,.16)';ctx.stroke();} for(let i=0;i<6;i++){const [x,y]=point(i,1);ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(x,y);ctx.strokeStyle='rgba(73,217,209,.18)';ctx.stroke();ctx.fillStyle='#9CB2C0';ctx.font='11px system-ui';ctx.textAlign=x<cx-8?'right':x>cx+8?'left':'center';ctx.fillText(shortNames[i],x+(x<cx?-8:x>cx?8:0),y+(y<cy?-4:14));} ctx.beginPath();stats.forEach((v,i)=>{const [x,y]=point(i,Math.min(1,v/max));i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.closePath();ctx.fillStyle='rgba(73,217,209,.18)';ctx.fill();ctx.strokeStyle='#49D9D1';ctx.lineWidth=2;ctx.stroke(); }
+    const drawRadarSingle=drawRadar;
+    drawRadar=function(stats,comparisonStats=null){
+      if(!comparisonStats) return drawRadarSingle(stats);
+      const canvas=$('#radarCanvas'); if(!canvas) return;
+      const ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height,cx=w/2,cy=h/2+2,r=Math.min(118,w*.22),max=Math.max(100,...stats,...comparisonStats);
+      const point=(index,scale)=>{const angle=-Math.PI/2+index*Math.PI*2/6;return [cx+Math.cos(angle)*r*scale,cy+Math.sin(angle)*r*scale];};
+      ctx.clearRect(0,0,w,h); ctx.lineWidth=1;
+      for(let ring=1;ring<=4;ring++){ctx.beginPath();for(let i=0;i<6;i++){const [x,y]=point(i,ring/4);i?ctx.lineTo(x,y):ctx.moveTo(x,y);}ctx.closePath();ctx.strokeStyle='rgba(73,217,209,.16)';ctx.stroke();}
+      for(let i=0;i<6;i++){const [x,y]=point(i,1);ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(x,y);ctx.strokeStyle='rgba(73,217,209,.18)';ctx.stroke();ctx.fillStyle='#A9C1CD';ctx.font='11px system-ui';ctx.textAlign=x<cx-8?'right':x>cx+8?'left':'center';ctx.fillText(shortNames[i],x+(x<cx?-8:x>cx?8:0),y+(y<cy?-5:15));}
+      const plot=(values,stroke,fill)=>{ctx.beginPath();values.forEach((value,index)=>{const [x,y]=point(index,Math.min(1,value/max));index?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.closePath();ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=stroke;ctx.lineWidth=2;ctx.stroke();};
+      plot(stats,'#49D9D1','rgba(73,217,209,.16)'); plot(comparisonStats,'#E45F63','rgba(228,95,99,.14)');
+    };
     function renderComparison(active){ const bBond=Number($('#bBond').value); $('#bBondValue').textContent=`${bBond}% · ×${fmt(bondMultiplier(bBond))}`; if(!bReady()){ $('#bCompareMulti').textContent='×—'; $('#bCompareBst').textContent='—'; $('#comparisonRows').innerHTML='<tr><td colspan="4">Preencha a Build B para comparar.</td></tr>'; return; } const b=calcB(), bstA=active.stats.reduce((sum,v)=>sum+v,0),bstB=b.stats.reduce((sum,v)=>sum+v,0); $('#aCompareMulti').textContent=`×${fmt(active.multi)}`;$('#bCompareMulti').textContent=`×${fmt(b.multi)}`;$('#aCompareBst').textContent=bstA;$('#bCompareBst').textContent=bstB; $('#comparisonRows').innerHTML=active.stats.map((value,i)=>{const diff=value-b.stats[i], sign=diff>0?'+':''; return `<tr><td>${statNames[i]}</td><td>${value}</td><td>${b.stats[i]}</td><td class="${diff>0?'diff-plus':diff<0?'diff-minus':''}">${sign}${diff}</td></tr>`;}).join('')+`<tr><td><strong>BST final</strong></td><td><strong>${bstA}</strong></td><td><strong>${bstB}</strong></td><td><strong>${bstA-bstB>0?'+':''}${bstA-bstB}</strong></td></tr>`; }
     const movesByName=new Map(movesData.map(move=>[move.name.toLocaleLowerCase(),move]));
     let dexSelectedId=null;
@@ -612,38 +707,9 @@
       const detail=$('#dexDetail');
       if(!dexSelectedId||!pokemonData[dexSelectedId]) { detail.hidden=true; detail.innerHTML=''; return; }
       const p=pokemonData[dexSelectedId], types=p.type.split(' / '), baseBst=p.base.reduce((sum,value)=>sum+value,0);
-      const levelMoves=(learnsetsData[p.name]||[]).slice().sort((a,b)=>a.level-b.level||a.name.localeCompare(b.name));
-      const compatible=new Map();
-      movesData.filter(move=>types.includes(move.type)).forEach(move=>compatible.set(move.name.toLocaleLowerCase(),{...move,reason:'Do tipo'}));
-      (compatibilityData[p.name]||[]).forEach(name=>{ const official=movesByName.get(name.toLocaleLowerCase()); if(official) compatible.set(official.name.toLocaleLowerCase(),{...official,reason:'Da espécie'}); });
-      levelMoves.forEach(levelMove=>{ const official=movesByName.get(levelMove.name.toLocaleLowerCase()); if(official) compatible.set(official.name.toLocaleLowerCase(),{...official,reason:'Também aprende por nível'}); });
-      const correction=compatibilityOverrides[p.name];
-      if(correction?.exact){
-        const selected=new Map();
-        correction.exact.forEach(name=>{
-          const official=movesByName.get(name.toLocaleLowerCase())||compatibilityExtraMoves[name];
-          if(!official) return;
-          const levelMove=levelMoves.some(move=>move.name.toLocaleLowerCase()===name.toLocaleLowerCase());
-          const fromSpecies=(compatibilityData[p.name]||[]).some(move=>move.toLocaleLowerCase()===name.toLocaleLowerCase());
-          const reason=correction.levelOnly?.includes(name)||levelMove?'Também aprende por nível':correction.speciesOnly?.includes(name)||fromSpecies?'Da espécie':'Do tipo';
-          selected.set(name.toLocaleLowerCase(),{...official,reason});
-        });
-        compatible.clear();
-        selected.forEach((move,key)=>compatible.set(key,move));
-      }
-      const tmMoves=[...compatible.values()].sort((a,b)=>a.name.localeCompare(b.name));
-      const originOrder=['Da espécie','Do tipo','Também aprende por nível'];
-      const originCounts=Object.fromEntries(originOrder.map(reason=>[reason,tmMoves.filter(move=>move.reason===reason).length]));
-      const levelRows=levelMoves.length?levelMoves.map(move=>`<div class="learnset-row"><span class="level">Nv ${move.level}</span><span><strong>${move.name}</strong><small>${moveExtra(move)}</small></span><span class="learnset-meta">${move.type}</span></div>`).join(''):'<p class="tm-status">Ainda não há golpes por nível publicados para esta espécie.</p>';
-      const levelPreview=levelMoves.slice(0,4).map(move=>`<div class="overview-row"><span class="level">Nv ${move.level}</span><strong>${move.name}</strong><small>${move.type}</small></div>`).join('')||'<p class="tm-status">Ainda não há golpes por nível publicados para esta espécie.</p>';
-      const searchedTmMoves=tmMoves.filter(move=>!dexTmSearch||move.name.toLocaleLowerCase().includes(dexTmSearch.toLocaleLowerCase())).filter(move=>dexTmReason==='all'||move.reason===dexTmReason);
-      const shownTmMoves=searchedTmMoves.slice(0,dexTmLimit);
-      const tmGrid=shownTmMoves.map(move=>`<article class="tm-chip"><strong title="${move.name}">${move.name}</strong><span>${move.type}<b class="reason">${move.reason}</b></span></article>`).join('')||'<p class="tm-status">Nenhum golpe encontrado com estes filtros.</p>';
-      const tab=(id,label)=>`<button id="dexView-${id}" class="dex-view-tab" type="button" role="tab" aria-selected="${dexDetailView===id}" aria-controls="dexViewPanel-${id}" data-dex-view="${id}">${label}</button>`;
-      const panel=(id,content)=>`<section id="dexViewPanel-${id}" class="dex-view-panel" role="tabpanel" aria-labelledby="dexView-${id}"${dexDetailView===id?'':' hidden'}>${content}</section>`;
-      const originCard=(reason)=>`<div class="origin-card"><b>${originCounts[reason]}</b><span>${reason}</span></div>`;
       detail.hidden=false;
-      detail.innerHTML=`<div class="dex-detail-head"><div><p class="dex-detail-kicker">FICHA DE GOLPES</p><h4 id="dexDetailTitle">Golpes de ${p.name}</h4><div class="dex-detail-meta">${types.map(type=>`<span class="type-tag">${type}</span>`).join('')}<span class="dex-bst">BST BASE ${baseBst}</span></div><div class="dex-detail-counts"><span><b>${levelMoves.length}</b> por nível</span><span><b>${tmMoves.length}</b> TMs compatíveis</span></div></div><button id="dexClose" class="dex-close" type="button" aria-label="Fechar detalhes de ${p.name}">Fechar ×</button></div><details class="matrix-note"><summary>Como esta lista é montada?</summary><p>Junta os golpes próprios da espécie, os golpes dos seus tipos e os golpes aprendidos por nível no PokéHunt. A lista mostra todas as compatibilidades possíveis, mesmo que um golpe já esteja ensinado.</p></details><div class="dex-view-tabs" role="tablist" aria-label="Vistas dos golpes de ${p.name}">${tab('summary','Resumo')}${tab('level',`Por nível (${levelMoves.length})`)}${tab('tm',`TMs (${tmMoves.length})`)}</div>${panel('summary',`<div class="moves-overview"><section class="overview-block"><h5>Golpes por nível <span>${levelMoves.length} no total</span></h5><div class="overview-list">${levelPreview}</div><button class="overview-action" type="button" data-dex-view="level">Ver todos os golpes por nível →</button></section><section class="overview-block"><h5>TMs compatíveis <span>${tmMoves.length} no total</span></h5><div class="tm-origin-summary">${originOrder.map(originCard).join('')}</div><div class="tm-preview-list">${tmMoves.slice(0,8).map(move=>`<span class="tm-preview">${move.name}</span>`).join('')}</div><button class="overview-action" type="button" data-dex-view="tm">Pesquisar todas as TMs →</button></section></div>`)}${panel('level',`<div class="level-view-head"><h5>Aprende por nível <span>${levelMoves.length} golpes</span></h5><span class="sample-label">Lista completa</span></div><div class="learnset-list">${levelRows}</div>`)}${panel('tm',`<div class="tm-toolbar"><div class="tm-search"><label for="dexTmSearch">Pesquisar TM</label><input id="dexTmSearch" type="search" value="${dexTmSearch}" placeholder="Nome do golpe"></div><div class="tm-filter-set" aria-label="Filtrar TMs por origem">${['all',...originOrder].map(reason=>`<button class="tm-filter${dexTmReason===reason?' active':''}" type="button" aria-pressed="${dexTmReason===reason}" data-tm-reason="${reason}">${reason==='all'?'Todas':reason}</button>`).join('')}</div></div><div class="tm-results-head"><h5>TMs compatíveis <span>${searchedTmMoves.length===tmMoves.length?`${tmMoves.length} disponíveis`:`${searchedTmMoves.length} encontradas`}</span></h5></div><div class="tm-grid">${tmGrid}</div>${searchedTmMoves.length>shownTmMoves.length?`<button id="dexTmMore" class="tm-more" type="button">Mostrar mais (${Math.min(18,searchedTmMoves.length-shownTmMoves.length)})</button>`:''}`)}`;
+      const available=compatibilityMovesFor(p), levelCount=available.levelMoves.length, tmCount=available.tmMoves.length;
+      detail.innerHTML=`<div class="dex-detail-head"><div><p class="dex-detail-kicker">FICHA DE GOLPES</p><h4 id="dexDetailTitle">Golpes de ${p.name}</h4><div class="dex-detail-meta">${types.map(type=>typeBadge(type)).join('')}<span class="dex-bst">BST BASE ${baseBst}</span></div><div class="dex-detail-counts"><span><b>${levelCount}</b> por nível</span><span><b>${tmCount}</b> TMs compatíveis</span></div></div><button id="dexClose" class="dex-close" type="button" aria-label="Fechar detalhes de ${p.name}">Fechar ×</button></div>`;
       $('#dexClose').addEventListener('click',closeDexDetail);
       $$('.dex-view-tab,[data-dex-view]',detail).forEach(button=>button.addEventListener('click',()=>{ dexDetailView=button.dataset.dexView; renderDexDetail(); $('#dexView-'+dexDetailView)?.focus(); }));
       $$('.dex-view-tab',detail).forEach((button,index,tabs)=>button.addEventListener('keydown',event=>{
@@ -683,8 +749,8 @@
         .sort((a,b)=>sort==='bst'?b.bst-a.bst:b.base[Number(sort)]-a.base[Number(sort)]);
       $('#dexRows').innerHTML=rows.map(p=>{
         const active=p.id===dexSelectedId;
-        return `<tr class="dex-profile-row"${active?' aria-selected="true"':''}><td class="dex-species"><button type="button" class="dex-profile-trigger" data-dex-id="${p.id}" aria-expanded="${active}" aria-controls="dexDetail"><span>${spriteMarkup(p.name,'dex-sprite')}</span><strong>${escapeAttr(p.name)}</strong></button></td><td>${p.type.split(' / ').map(type=>typeBadge(type)).join(' ')}</td><td>${p.bst}</td><td><span class="dex-highlight">${highlightedBaseStat(p.base)}</span></td></tr>${active?'<tr class="dex-detail-row"><td colspan="4"><div class="dex-detail-slot"></div></td></tr>':''}`;
-      }).join('')||'<tr><td colspan="4">Nenhum Pokémon encontrado.</td></tr>';
+        return `<tr class="dex-profile-row"${active?' aria-selected="true"':''}><td class="dex-species"><button type="button" class="dex-profile-trigger" data-dex-id="${p.id}" aria-expanded="${active}" aria-controls="dexDetail"><span>${spriteMarkup(p.name,'dex-sprite')}</span><strong>${escapeAttr(p.name)}</strong></button></td><td>${p.type.split(' / ').map(type=>typeBadge(type)).join(' ')}</td><td data-stat="BST">${p.bst}</td>${p.base.map((value,index)=>`<td class="dex-base-value" data-stat="${shortNames[index]}">${value}</td>`).join('')}</tr>${active?'<tr class="dex-detail-row"><td colspan="9"><div class="dex-detail-slot"></div></td></tr>':''}`;
+      }).join('')||'<tr><td colspan="9">Nenhum Pokémon encontrado.</td></tr>';
       if(dexSelectedId&&pokemonData[dexSelectedId]&&rows.some(row=>row.id===dexSelectedId)){
         renderDexDetail();
         $('.dex-detail-slot')?.append(detail);
@@ -722,19 +788,38 @@
         const bst=selected.base.reduce((sum,value)=>sum+value,0);
         detailMeta.innerHTML=`${selected.type.split(' / ').map(type=>typeBadge(type)).join('')}<span class="dex-bst">BST BASE ${bst}</span>`;
       }
-      $$('.tm-chip',detail).forEach(chip=>{
-        const title=chip.querySelector('strong'), originalMeta=chip.querySelector('span');
-        if(!title||!originalMeta) return;
-        const type=originalMeta.childNodes[0]?.textContent.trim()||'';
-        const move=movesByName.get(title.textContent.trim().toLocaleLowerCase());
-        chip.style.setProperty('--move-color',typeVisual(type).color);
-        const head=document.createElement('div');
-        head.className='tm-chip-head';
-        head.innerHTML=`${typeIconMarkup(type)}${moveCategoryIcon(move)}`;
-        title.before(head);
-        head.append(title);
-        const reason=originalMeta.querySelector('.reason')?.textContent||'';
-        originalMeta.innerHTML=`${typeBadge(type,'type-tag--mini')}${reason?`<b class="reason">${escapeAttr(reason)}</b>`:''}`;
+      const available=compatibilityMovesFor(selected);
+      const orderMoves=list=>list.slice().sort((a,b)=>{
+        const group=value=>({Special:0,Physical:1,Status:2})[moveCombatCategory(value)];
+        return group(a)-group(b)||a.type.localeCompare(b.type)||a.name.localeCompare(b.name);
+      });
+      const groupedCards=list=>{
+        const sorted=orderMoves(list), groups=[['Especial',sorted.filter(move=>moveCombatCategory(move)==='Special')],['Físico',sorted.filter(move=>moveCombatCategory(move)==='Physical')],['Status',sorted.filter(move=>moveCombatCategory(move)==='Status')]];
+        return groups.filter(([,moves])=>moves.length).map(([label,moves])=>`<section class="move-group"><h6>${label} <span>${moves.length}</span></h6><div class="move-detail-grid">${moves.map(richMoveCard).join('')}</div></section>`).join('');
+      };
+      const levelMoveCards=available.levelMoves.map(entry=>movesByName.get(entry.name.toLocaleLowerCase())).filter(Boolean);
+      // As listas completas são a ficha: sem abas, resumos, origem administrativa ou paginação.
+      detail.querySelector('.matrix-note')?.remove();
+      detail.querySelector('.dex-view-tabs')?.remove();
+      $$('.dex-view-panel',detail).forEach(panel=>panel.remove());
+      const filteredTms=available.tmMoves.filter(move=>!dexTmSearch||move.name.toLocaleLowerCase().includes(dexTmSearch.toLocaleLowerCase()));
+      const movesPanel=document.createElement('section');
+      movesPanel.className='primary-move-lists';
+      movesPanel.innerHTML=`
+        <section class="primary-move-section">
+          <div class="primary-move-heading"><h5>Aprende por nível</h5><span>${levelMoveCards.length} golpes</span></div>
+          ${groupedCards(levelMoveCards)||'<p class="tm-status">Ainda não há golpes por nível publicados para esta espécie.</p>'}
+        </section>
+        <section class="primary-move-section">
+          <div class="primary-tm-toolbar"><div class="primary-move-heading"><h5>TMs compatíveis</h5><span>${filteredTms.length} de ${available.tmMoves.length}</span></div><div class="tm-search"><label for="primaryTmSearch">Pesquisar TM</label><input id="primaryTmSearch" type="search" value="${escapeAttr(dexTmSearch)}" placeholder="Nome do golpe"></div></div>
+          ${groupedCards(filteredTms)||'<p class="tm-status">Nenhum golpe encontrado.</p>'}
+        </section>`;
+      const baseProfile=detail.querySelector('.dex-base-stats');
+      if(baseProfile) baseProfile.after(movesPanel); else detail.append(movesPanel);
+      $('#primaryTmSearch',detail)?.addEventListener('input',event=>{
+        dexTmSearch=event.target.value;
+        renderDexDetail();
+        $('#primaryTmSearch',detail)?.focus();
       });
       const info=$('#dexDetail .dex-detail-head > div');
       if(!info||info.dataset.spriteReady) return;
@@ -788,7 +873,7 @@
       if(!selected){ holder.textContent='Escolha um Pokémon para ver os atributos base.'; return; }
       holder.innerHTML=`<div class="calc-base-profile"><div class="calc-type-line">${selected.type.split(' / ').map(type=>typeBadge(type,'type-tag--mini')).join('')}</div><div class="calc-stat-bars">${baseStatBars(selected.base,'calc')}</div></div>`;
     }
-    update=function(){ updateCalculatorSprite(); const result=renderCalculator(); renderCalculatorBaseProfile(); return result; };
+    update=function(){ updateCalculatorSprite(); const result=renderCalculator(); renderCalculatorBaseProfile(); renderBuildBProfile(); if(activeReady()) drawRadar(calc().stats,bReady()?calcB().stats:null); return result; };
     function normalizeNumberField(field, onBlur=false){
       let min=0, max=252;
       if(field.id==='level'||field.id==='bLevel'){ min=1; max=500; }
