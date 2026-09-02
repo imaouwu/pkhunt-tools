@@ -42,7 +42,8 @@
     .intro { display:flex; align-items:end; justify-content:space-between; gap:24px; margin-bottom:20px; }
     .eyebrow { margin:0 0 7px; color:var(--cyan); font-size:10px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
     .intro h2 { margin:0; max-width:700px; font-size:clamp(23px,3vw,36px); line-height:1.05; letter-spacing:-.035em; }
-    .workspace { display:grid; grid-template-columns:minmax(0, .98fr) minmax(0, 1.25fr); gap:18px; align-items:start; }
+    .workspace { display:grid; grid-template-columns:minmax(0, .98fr) minmax(0, 1.25fr); gap:18px; align-items:start; min-width:0; }
+    .workspace > .panel { min-width:0; }
     .panel { background:linear-gradient(145deg,rgba(16,36,58,.98),rgba(13,26,42,.98)); border:1px solid rgba(80,133,158,.35); box-shadow:0 18px 60px rgba(0,0,0,.18); }
     .panel-title { display:flex; justify-content:space-between; align-items:baseline; gap:12px; padding:17px 19px 13px; border-bottom:1px solid var(--line); }
     .panel-title h3 { margin:0; font-size:12px; text-transform:uppercase; letter-spacing:.14em; }
@@ -54,9 +55,21 @@
     label, .label { display:block; margin-bottom:6px; color:#AFC1CD; font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
     select, input[type=number] { width:100%; min-height:38px; color:var(--ink); border:1px solid #315069; background:#091625; padding:8px 10px; border-radius:2px; outline:none; transition:border-color .18s, box-shadow .18s; }
     select:focus, input:focus, button:focus-visible { border-color:var(--cyan); outline:none; box-shadow:0 0 0 3px rgba(73,217,209,.15); }
-    .pokemon-meta { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:8px; padding:8px 10px; border-left:2px solid var(--violet); color:var(--muted); background:rgba(167,134,255,.05); font:11px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; }
+    .pokemon-meta { display:grid; grid-template-columns:minmax(0,1fr) 132px auto; align-items:center; gap:10px; min-height:122px; margin-top:8px; padding:8px 10px; border-left:2px solid var(--violet); color:var(--muted); background:linear-gradient(90deg,rgba(167,134,255,.06),rgba(73,217,209,.025)); font:11px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; min-width:0; }
+    #baseStats { min-width:0; overflow-wrap:anywhere; }
     .bst-badge { display:inline-flex; align-items:center; gap:7px; flex:0 0 auto; color:#E8DEFF; border:1px solid rgba(167,134,255,.55); padding:4px 6px; background:rgba(167,134,255,.11); font-size:9px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; white-space:nowrap; }
     .bst-badge strong { color:var(--violet); font-size:14px; letter-spacing:0; }
+    .sprite-frame { position:relative; display:grid; place-items:center; overflow:hidden; flex:0 0 auto; color:#80B8BE; background:radial-gradient(circle,rgba(73,217,209,.15),rgba(73,217,209,.025) 64%,transparent 65%); }
+    .sprite-frame::before { content:''; position:absolute; inset:9%; border:1px solid rgba(73,217,209,.24); transform:rotate(45deg); pointer-events:none; }
+    .sprite-frame::after { content:attr(data-sprite-fallback); display:none; position:relative; color:#6F98A5; font:800 10px ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.08em; }
+    .sprite-frame.is-missing::after { display:block; }
+    .sprite-image { position:relative; z-index:1; display:block; width:100%; height:100%; object-fit:contain; image-rendering:auto; filter:drop-shadow(0 7px 10px rgba(0,0,0,.48)); }
+    .calculator-sprite { width:122px; height:104px; isolation:isolate; }
+    .calculator-sprite::before { inset:15px 26px; border-color:rgba(73,217,209,.34); }
+    .calculator-sprite::after { content:'SEM SPRITE'; }
+    .calculator-sprite .sprite-image { max-width:122px; max-height:104px; animation:sprite-arrive .25s ease-out; }
+    .sprite-caption { position:absolute; z-index:2; right:1px; bottom:0; color:#88DBD5; font:800 8px ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.12em; text-shadow:0 1px 0 #07111F; }
+    @keyframes sprite-arrive { from { opacity:.35; transform:translateY(4px) scale(.94); } to { opacity:1; transform:none; } }
     .switch { display:flex; gap:0; }
     .switch button { flex:1; padding:9px 5px; color:var(--muted); border:1px solid #315069; border-right:0; background:#091625; font-size:11px; transition:.18s; }
     .switch button:last-child { border-right:1px solid #315069; }
@@ -187,6 +200,17 @@
     .dex-content { padding:16px 18px; }
     .dex-controls { display:grid; grid-template-columns:1.3fr .8fr 1fr; gap:9px; }
     .dex-table td:nth-child(n+4), .dex-table th:nth-child(n+4) { text-align:center; }
+    .dex-species { display:flex; align-items:center; gap:9px; min-width:130px; padding-top:3px!important; padding-bottom:3px!important; }
+    .dex-sprite { width:30px; height:30px; }
+    .dex-sprite::before { inset:8px; }
+    .dex-sprite::after { content:'?'; font-size:11px; }
+    .dex-sprite .sprite-image { width:36px; height:36px; max-width:none; max-height:none; }
+    .dex-detail-identity { display:flex; align-items:center; gap:11px; min-width:0; }
+    .dex-detail-copy { min-width:0; }
+    .dex-detail-sprite { width:62px; height:62px; }
+    .dex-detail-sprite::before { inset:13px; }
+    .dex-detail-sprite::after { content:'?'; }
+    .dex-detail-sprite .sprite-image { width:70px; height:70px; max-width:none; max-height:none; }
     .type-tag { color:#AEEAE5; border:1px solid rgba(73,217,209,.29); padding:2px 4px; font-size:9px; }
     .dex-detail { position:relative; margin-top:15px; border:1px solid var(--cyan); background:#07111F; box-shadow:inset 4px 0 0 rgba(73,217,209,.21),0 12px 30px rgba(0,0,0,.3); }
     .dex-detail[hidden] { display:none; }
@@ -273,10 +297,10 @@
     .move-category.utility { color:#F7D99B; border-color:rgba(244,201,107,.42); }
     .move-note { color:#9CB2C0; font-size:10px; }
     @media (max-width:900px) { .workspace, .lower-grid { grid-template-columns:1fr; } }
-    @media (max-width:720px) { .tool-layout { grid-template-columns:1fr; gap:14px; } .side-tabs { position:static; grid-template-columns:repeat(3,minmax(112px,1fr)); overflow-x:auto; padding:5px; gap:5px; } .side-tabs::before { display:none; } .side-tab { justify-content:center; min-height:42px; padding:8px 7px; font-size:10px; white-space:nowrap; } }
+    @media (max-width:720px) { .tool-layout { grid-template-columns:1fr; gap:14px; } .side-tabs { position:static; grid-template-columns:repeat(3,minmax(0,1fr)); overflow:hidden; padding:5px; gap:5px; } .side-tabs::before { display:none; } .side-tab { justify-content:center; min-height:42px; min-width:0; padding:8px 5px; font-size:9px; line-height:1.18; white-space:normal; } }
     @media (max-width:760px) { .moves-overview { grid-template-columns:1fr; } .tm-toolbar { grid-template-columns:1fr; } .tm-filter-set { justify-content:flex-start; } }
-    @media (max-width:620px) { .comparison-inputs, .dex-controls, .moves-controls { grid-template-columns:1fr; } .comparison-inputs .wide { grid-column:auto; } .breakdown { position:relative; top:auto; margin-top:8px; } .stat-card:focus .breakdown { display:grid; } .moves-head { align-items:flex-start; flex-direction:column; gap:8px; } .dex-detail-head { padding:12px; } .dex-detail-counts { margin-top:8px; } .matrix-note summary { padding:9px 12px; } .matrix-note p { padding:0 12px 11px; } .dex-view-tabs { padding:8px 12px 0; } .dex-view-panel { padding:13px 12px 15px; } .tm-origin-summary { grid-template-columns:1fr; } .origin-card { display:grid; grid-template-columns:32px 1fr; align-items:center; column-gap:7px; } .origin-card b { grid-row:1 / span 2; } .origin-card span { min-height:0; margin-top:0; } .tm-grid { grid-template-columns:1fr; } .tm-chip { min-height:53px; } .learnset-row { grid-template-columns:43px minmax(0,1fr); gap:8px; } .learnset-meta { grid-column:2; text-align:left; } }
-    @media (prefers-reduced-motion:reduce) { .dex-view-panel { animation:none; } .tm-chip,.learnset-row,.dex-view-tab,.tm-filter,.overview-action,.tm-more { transition:none; } }
+    @media (max-width:620px) { .comparison-inputs, .dex-controls, .moves-controls { grid-template-columns:1fr; } .comparison-inputs .wide { grid-column:auto; } .pokemon-meta { grid-template-columns:minmax(0,1fr) 92px; min-height:104px; gap:6px; } .pokemon-meta .bst-badge { grid-column:1 / -1; justify-self:start; } .calculator-sprite { width:88px; height:82px; grid-column:2; grid-row:1; } .calculator-sprite .sprite-image { max-width:94px; max-height:82px; } .breakdown { position:relative; top:auto; margin-top:8px; } .stat-card:focus .breakdown { display:grid; } .moves-head { align-items:flex-start; flex-direction:column; gap:8px; } .dex-detail-head { padding:12px; } .dex-detail-counts { margin-top:8px; } .matrix-note summary { padding:9px 12px; } .matrix-note p { padding:0 12px 11px; } .dex-view-tabs { padding:8px 12px 0; } .dex-view-panel { padding:13px 12px 15px; } .tm-origin-summary { grid-template-columns:1fr; } .origin-card { display:grid; grid-template-columns:32px 1fr; align-items:center; column-gap:7px; } .origin-card b { grid-row:1 / span 2; } .origin-card span { min-height:0; margin-top:0; } .tm-grid { grid-template-columns:1fr; } .tm-chip { min-height:53px; } .learnset-row { grid-template-columns:43px minmax(0,1fr); gap:8px; } .learnset-meta { grid-column:2; text-align:left; } }
+    @media (prefers-reduced-motion:reduce) { .dex-view-panel,.calculator-sprite .sprite-image { animation:none; } .tm-chip,.learnset-row,.dex-view-tab,.tm-filter,.overview-action,.tm-more { transition:none; } }
     @media (max-width:900px) { .workspace { grid-template-columns:1fr; } }
     @media (max-width:560px) { .shell { width:min(100% - 24px, 1440px); } header { display:grid; grid-template-columns:31px minmax(0,1fr) auto; grid-template-rows:auto auto; min-height:81px; column-gap:9px; row-gap:3px; padding:10px 0; } .mark { grid-row:1 / span 2; width:31px; height:31px; font-size:12px; } .brand { grid-column:2; margin:0; } .brand h1 { font-size:13px; } .brand p { font-size:9px; } .badge { grid-column:3; grid-row:1; font-size:9px; padding:4px 5px; } .unofficial { display:block; grid-column:2; grid-row:2; justify-self:start; padding:2px 5px; font-size:8px; } .creator-credit { grid-column:3; grid-row:1 / span 2; min-width:0; padding-right:5px; } .creator-credit em { display:none; } .creator-credit strong { display:none; } .pokemon-meta { align-items:flex-start; flex-direction:column; } footer { align-items:flex-start; flex-direction:column; } main { padding-top:20px; } .fields { grid-template-columns:1fr; } .stat-cards { grid-template-columns:repeat(2,1fr); } .panel-title, .config-content, .results-content { padding-left:13px; padding-right:13px; } .multiplier { padding:13px; gap:10px; } .multi-value { font-size:32px; } }
   </style>
@@ -302,7 +326,7 @@
           <div class="panel-title"><h3 id="config-title">Configuração do espécime</h3><span class="step">01 / INPUT</span></div>
           <div class="config-content">
             <div class="fields">
-              <div class="field wide"><label for="pokemon">Pokémon</label><div class="combo-wrap"><input id="pokemon" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pokemonList" aria-activedescendant="" autocomplete="off" placeholder="Escolha um Pokémon"><div id="pokemonList" class="combo-list" role="listbox" aria-label="Resultados de Pokémon"></div></div><p id="pokemonSearchStatus" class="combo-status" aria-live="polite"></p><div id="pokemonMeta" class="pokemon-meta"><span id="baseStats">Escolha um Pokémon para ver os atributos base.</span><span class="bst-badge"><span>BST · Base Stat Total</span><strong id="bstValue">—</strong></span></div></div>
+              <div class="field wide"><label for="pokemon">Pokémon</label><div class="combo-wrap"><input id="pokemon" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pokemonList" aria-activedescendant="" autocomplete="off" placeholder="Escolha um Pokémon"><div id="pokemonList" class="combo-list" role="listbox" aria-label="Resultados de Pokémon"></div></div><p id="pokemonSearchStatus" class="combo-status" aria-live="polite"></p><div id="pokemonMeta" class="pokemon-meta"><span id="baseStats">Escolha um Pokémon para ver os atributos base.</span><span id="calculatorSpriteFrame" class="sprite-frame calculator-sprite" role="img" aria-label="Sprite do Pokémon selecionado" data-sprite-fallback="SEM SPRITE"><img id="calculatorSprite" class="sprite-image" alt="Sprite do Pokémon selecionado"><span class="sprite-caption">ESPÉCIME</span></span><span class="bst-badge"><span>BST · Base Stat Total</span><strong id="bstValue">—</strong></span></div></div>
               <div class="field"><label for="level">Nível <span style="color:#91A7B7;">1–500</span></label><input id="level" type="number" min="1" max="500" placeholder="1–500"></div>
               <div class="field"><label for="rarity">Raridade</label><select id="rarity"><option value="" selected>Selecione…</option><option value="1">Comum ×1,00</option><option value="1.03">Incomum ×1,03</option><option value="1.06">Raro ×1,06</option><option value="1.10">Épico ×1,10</option><option value="1.15">Prismático ×1,15</option><option value="1.21">Mítico ×1,21</option><option value="1.28">Astral ×1,28</option><option value="1.36">Divino ×1,36</option></select></div>
               <div class="field"><label for="special">Condição especial</label><select id="special"><option value="" selected>Selecione…</option><option value="1">Normal (sem selo) ×1,00</option><option value="1.45">Shiny ×1,45</option><option value="1.50">Founder ×1,50</option><option value="1.42">Genesis ×1,42</option></select></div>
@@ -381,6 +405,7 @@
     <footer><span class="footer-note">Os resultados incluem raridade, selo, Laço, estrelas, IV, EV e Nature. Talentos e itens ficam fora desta versão.</span></footer>
   </div>
   <script src="data/pokemon-v5.1.0.js"></script>
+  <script src="data/pokemon-sprites-v5.1.0.js"></script>
   <script src="data/moves-v5.1.0.js"></script>
   <script src="data/learnsets-v5.1.0.js"></script>
   <script src="data/tm-compatibility-v5.1.0.js"></script>
@@ -393,6 +418,40 @@
     const compatibilityExtraMoves=window.PKHuntCompatibilityExtraMoves||{};
     const statNames=['HP','Ataque','Defesa','Atq. Esp.','Def. Esp.','Velocidade'];
     const shortNames=['HP','ATQ','DEF','ATQ.E','DEF.E','VEL'];
+    const spriteNameOverrides={
+      'mr. mime':'mrmime','mime jr.':'mimejr','farfetch\'d':'farfetchd','sirfetch\'d':'sirfetchd','ho-oh':'hooh','porygon-z':'porygonz',
+      'nidoran female':'nidoranf','nidoran male':'nidoranm','type: null':'typenull','jangmo-o':'jangmoo','hakamo-o':'hakamoo','kommo-o':'kommoo',
+      'tapu koko':'tapukoko','tapu lele':'tapulele','tapu bulu':'tapubulu','tapu fini':'tapufini','great tusk':'greattusk','iron treads':'irontreads'
+    };
+    function spriteId(name){
+      const original=String(name||'').trim().toLowerCase();
+      if(spriteNameOverrides[original]) return spriteNameOverrides[original];
+      let match=original.match(/^mega (.+) ([xy])$/);
+      if(match) return `${spriteId(match[1])}-mega${match[2]}`;
+      match=original.match(/^mega (.+)$/);
+      if(match) return `${spriteId(match[1])}-mega`;
+      match=original.match(/^primal (.+)$/);
+      if(match) return `${spriteId(match[1])}-primal`;
+      match=original.match(/^alolan (.+)$/);
+      if(match) return `${spriteId(match[1])}-alola`;
+      match=original.match(/^galarian (.+)$/);
+      if(match) return `${spriteId(match[1])}-galar`;
+      match=original.match(/^hisuian (.+)$/);
+      if(match) return `${spriteId(match[1])}-hisui`;
+      return original.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'');
+    }
+    const spriteUrl=name=>{
+      const file=window.PKHuntSpriteIds?.[name];
+      return file
+        ? `https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${file}.png`
+        : `https://play.pokemonshowdown.com/sprites/gen5/${spriteId(name)}.png`;
+    };
+    const escapeAttr=value=>String(value).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    function spriteMarkup(name,variant,alt=''){
+      const label=alt?` role="img" aria-label="${escapeAttr(alt)}"`:' aria-hidden="true"';
+      const lazy=variant==='dex-sprite'?' loading="lazy"':'';
+      return `<span class="sprite-frame ${variant}"${label} data-sprite-fallback="?"><img class="sprite-image" src="${spriteUrl(name)}" alt=""${lazy} decoding="async" onerror="this.hidden=true;this.parentElement.classList.add('is-missing')"></span>`;
+    }
     const natures={
       hardy:{label:'Hardy — neutra',mods:[1,1,1,1,1,1]},lonely:{label:'Lonely — Ataque ↑ / Defesa ↓',mods:[1,1.1,.9,1,1,1]},brave:{label:'Brave — Ataque ↑ / Velocidade ↓',mods:[1,1.1,1,1,1,.9]},adamant:{label:'Adamant — Ataque ↑ / Atq. Esp. ↓',mods:[1,1.1,1,.9,1,1]},naughty:{label:'Naughty — Ataque ↑ / Def. Esp. ↓',mods:[1,1.1,1,1,.9,1]},
       bold:{label:'Bold — Defesa ↑ / Ataque ↓',mods:[1,.9,1.1,1,1,1]},docile:{label:'Docile — neutra',mods:[1,1,1,1,1,1]},relaxed:{label:'Relaxed — Defesa ↑ / Velocidade ↓',mods:[1,1,1.1,1,1,.9]},impish:{label:'Impish — Defesa ↑ / Atq. Esp. ↓',mods:[1,1,1.1,.9,1,1]},lax:{label:'Lax — Defesa ↑ / Def. Esp. ↓',mods:[1,1,1.1,1,.9,1]},
@@ -408,6 +467,22 @@
     const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
     const pokemon=$('#pokemon'), pokemonList=$('#pokemonList'), pokemonStatus=$('#pokemonSearchStatus');
     let selectedPokemon=null, selectedPokemonB=null, comboMatches=[], comboIndex=-1, bComboMatches=[], bComboIndex=-1;
+    const calculatorSprite=$('#calculatorSprite'), calculatorSpriteFrame=$('#calculatorSpriteFrame');
+    function updateCalculatorSprite(){
+      const selected=selectedPokemon&&pokemonData[selectedPokemon];
+      calculatorSpriteFrame.classList.remove('is-missing');
+      if(!selected){
+        calculatorSprite.hidden=true;
+        calculatorSprite.removeAttribute('src');
+        calculatorSpriteFrame.setAttribute('aria-label','Sprite do Pokémon selecionado');
+        return;
+      }
+      calculatorSprite.hidden=false;
+      calculatorSprite.alt='';
+      calculatorSpriteFrame.setAttribute('aria-label',`Sprite de ${selected.name}`);
+      calculatorSprite.src=spriteUrl(selected.name);
+    }
+    calculatorSprite.addEventListener('error',()=>{ calculatorSprite.hidden=true; calculatorSpriteFrame.classList.add('is-missing'); });
     function renderPokemonOptions(query=pokemon.value){ const normalized=query.trim().toLowerCase(); comboMatches=Object.entries(pokemonData).filter(([,p])=>!normalized||p.name.toLowerCase().includes(normalized)||p.type.toLowerCase().includes(normalized)); comboIndex=-1; if(!comboMatches.length){ pokemonList.innerHTML='<div class="combo-empty">Nenhum Pokémon encontrado.</div>'; pokemonStatus.textContent='Nenhum Pokémon encontrado.'; } else { pokemonList.innerHTML=comboMatches.map(([key,p],i)=>`<button id="pokemon-option-${key}" class="combo-option" type="button" role="option" aria-selected="${key===selectedPokemon}" data-key="${key}"><span>${p.name}</span><small>${p.type}</small></button>`).join(''); pokemonStatus.textContent=`${comboMatches.length} resultado${comboMatches.length===1?'':'s'}.`; } pokemonList.classList.add('open'); pokemon.setAttribute('aria-expanded','true'); }
     function closePokemonOptions(){ pokemonList.classList.remove('open'); pokemon.setAttribute('aria-expanded','false'); pokemon.removeAttribute('aria-activedescendant'); comboIndex=-1; }
     function setComboActive(index){ if(!comboMatches.length) return; comboIndex=(index+comboMatches.length)%comboMatches.length; $$('.combo-option').forEach((option,i)=>option.classList.toggle('active',i===comboIndex)); const active=comboMatches[comboIndex][0]; pokemon.setAttribute('aria-activedescendant',`pokemon-option-${active}`); document.getElementById(`pokemon-option-${active}`)?.scrollIntoView({block:'nearest'}); }
@@ -524,6 +599,30 @@
     function selectDexPokemon(id){ dexSelectedId=id; dexDetailView='summary'; dexTmSearch=''; dexTmReason='all'; dexTmLimit=18; renderDexDetail(); $('#dexDetail').scrollIntoView({block:'nearest',behavior:'smooth'}); }
     function closeDexDetail(){ dexSelectedId=null; renderDexDetail(); const active=$('.dex-select[data-dex-id]'); active?.focus(); }
     function renderDex(){ const query=$('#dexSearch').value.toLowerCase().trim(), type=$('#dexType').value, sort=$('#dexSort').value; const rows=Object.entries(pokemonData).map(([id,p])=>({id,...p,bst:p.base.reduce((s,v)=>s+v,0)})).filter(p=>!query||`${p.name} ${p.type}`.toLowerCase().includes(query)).filter(p=>!type||p.type.split(' / ').includes(type)).sort((a,b)=>sort==='bst'?b.bst-a.bst:b.base[Number(sort)]-a.base[Number(sort)]); $('#dexRows').innerHTML=rows.map(p=>`<tr${p.id===dexSelectedId?' aria-selected="true"':''}><td><strong>${p.name}</strong></td><td>${p.type.split(' / ').map(t=>`<span class="type-tag">${t}</span>`).join(' ')}</td><td>${p.bst}</td>${p.base.map(value=>`<td>${value}</td>`).join('')}<td><button type="button" class="dex-select" data-dex-id="${p.id}" aria-label="Ver golpes de ${p.name}">Ver golpes</button></td></tr>`).join('')||'<tr><td colspan="10">Nenhum Pokémon encontrado.</td></tr>'; }
+    const renderDexRows=renderDex;
+    renderDex=function(){
+      renderDexRows();
+      $$('#dexRows .dex-select[data-dex-id]').forEach(button=>{
+        const p=pokemonData[button.dataset.dexId], cell=button.closest('tr')?.querySelector('td:first-child');
+        if(!p||!cell) return;
+        cell.classList.add('dex-species');
+        cell.innerHTML=`${spriteMarkup(p.name,'dex-sprite')}<strong>${escapeAttr(p.name)}</strong>`;
+      });
+    };
+    const renderDexDetailPanel=renderDexDetail;
+    renderDexDetail=function(){
+      renderDexDetailPanel();
+      if(!dexSelectedId||!pokemonData[dexSelectedId]) return;
+      const info=$('#dexDetail .dex-detail-head > div');
+      if(!info||info.dataset.spriteReady) return;
+      const copy=document.createElement('div');
+      copy.className='dex-detail-copy';
+      while(info.firstChild) copy.append(info.firstChild);
+      info.classList.add('dex-detail-identity');
+      info.dataset.spriteReady='true';
+      info.insertAdjacentHTML('afterbegin',spriteMarkup(pokemonData[dexSelectedId].name,'dex-detail-sprite',`Sprite de ${pokemonData[dexSelectedId].name}`));
+      info.append(copy);
+    };
     function cooldownSeconds(move){ return Number.parseFloat(String(move.cooldown).replace(',', '.'))||0; }
     function renderMoves(){
       const query=$('#moveSearch').value.trim().toLocaleLowerCase(), type=$('#moveType').value, category=$('#moveCategory').value, range=$('#moveRange').value, sort=$('#moveSort').value;
@@ -539,6 +638,8 @@
       }).join('')||'<tr><td colspan="7">Nenhum golpe encontrado.</td></tr>';
     }
     function update(){ $('#bondOutput').textContent=`${bond}% · ×${fmt(bondMultiplier(bond))}`; if(!activeReady()){ $('#emptyState').classList.add('show'); $('#resultsArea').style.display='none'; $('#multiplierCard').style.display='none'; $('#unavailable').classList.remove('show'); $('#baseStats').textContent=selectedPokemon?`BASE — ${pokemonData[selectedPokemon].base.join(' · ')}`:'Escolha um Pokémon para ver os atributos base.'; $('#bstValue').textContent=selectedPokemon?pokemonData[selectedPokemon].base.reduce((a,b)=>a+b,0):'—'; $('#evTotal').textContent=$$('.ev').some(input=>input.value==='')?'EV total: —':`EV total: ${$$('.ev').reduce((s,input)=>s+num(input,0,252),0)} / 510`; $('#comparisonRows').innerHTML='<tr><td colspan="4">Preencha a Build A para comparar.</td></tr>'; return; } $('#emptyState').classList.remove('show'); $('#resultsArea').style.display='block'; $('#multiplierCard').style.display='grid'; const p=pokemonData[selectedPokemon], c=calc(), total=c.input.ev.reduce((a,b)=>a+b,0), invalid=total>510, rarityName=currentRarityName(), specialName=currentSpecialName(), info=itemSlotInfo(rarityName,c.input.special,bond), finalBst=c.stats.reduce((sum,v)=>sum+v,0); $('#baseStats').textContent=`BASE — HP ${p.base[0]} · ATQ ${p.base[1]} · DEF ${p.base[2]} · ATQ.E ${p.base[3]} · DEF.E ${p.base[4]} · VEL ${p.base[5]}  /  ${p.type.toUpperCase()}`; $('#bstValue').textContent=p.base.reduce((a,b)=>a+b,0); $('#itemInfo').innerHTML=`<h4>Espaços de item</h4><span class="slots-value">${info.slots} / 6</span><p>Piso ${c.input.special>1?'condição especial':rarityName}: ${info.floor}</p><p>${info.outcomes.join(' · ')}</p>`; $('#evTotal').textContent=`EV total: ${total} / 510`; $('#unavailable').classList.toggle('show',invalid); const part=[`Raridade ${rarityName} ×${fmt(c.input.rarity)}`,`${specialName} ×${fmt(c.input.special)}`,`${bondLabel(bond)} ×${fmt(c.bondMulti)}`,`${stars}★ ×${fmt(starMultiplier[stars])}`]; $('#multiValue').textContent=`×${fmt(c.multi)}`; $('#components').innerHTML=part.map(x=>`<span class="component">${x}</span>`).join(''); $('#statCards').innerHTML=c.stats.map((value,i)=>`<article class="stat-card" tabindex="0"><span class="name">${statNames[i]}</span><span class="num">${invalid?'—':value}${natureEffect(i,c.input.nature)}</span>${breakdownCard(value,i,c,p)}</article>`).join(''); $('#finalBst').textContent=invalid?'—':finalBst; $('#starRows').innerHTML=starMultiplier.map((_,s)=>{const r=calc(s).stats;return `<tr class="${s===stars?'active-star':''} ${s===5?'star-five':''}"><td>${s}★</td>${r.map(v=>`<td>${invalid?'—':v}</td>`).join('')}</tr>`}).join(''); renderComparison(c); drawRadar(c.stats); }
+    const renderCalculator=update;
+    update=function(){ updateCalculatorSprite(); return renderCalculator(); };
     function normalizeNumberField(field, onBlur=false){
       let min=0, max=252;
       if(field.id==='level'||field.id==='bLevel'){ min=1; max=500; }
