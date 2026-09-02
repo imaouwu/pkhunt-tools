@@ -27,7 +27,17 @@
     .creator-credit span { display:grid; line-height:1.1; }
     .creator-credit strong { font-size:10px; } .creator-credit small { color:#91A7B7; margin-top:2px; font-size:9px; }
     .creator-credit em { margin-left:auto; color:#8FBDBA; font-size:9px; font-style:normal; }
-    main { padding:30px 0 24px; }
+    main { padding:24px 0 24px; }
+    .tool-layout { display:grid; grid-template-columns:164px minmax(0,1fr); gap:18px; align-items:start; }
+    .side-tabs { position:sticky; top:16px; display:grid; gap:7px; padding:9px; border:1px solid rgba(80,133,158,.35); background:linear-gradient(145deg,rgba(16,36,58,.98),rgba(13,26,42,.98)); box-shadow:0 18px 60px rgba(0,0,0,.18); }
+    .side-tabs::before { content:'NAVEGAÇÃO'; margin:2px 4px 7px; color:#8098A9; font-size:9px; font-weight:800; letter-spacing:.14em; }
+    .side-tab { width:100%; display:flex; align-items:center; gap:8px; padding:11px 9px; color:#AFC1CD; border:1px solid transparent; background:transparent; text-align:left; font-size:11px; font-weight:800; letter-spacing:.04em; transition:background .18s,border-color .18s,color .18s,transform .18s; }
+    .side-tab::before { content:''; width:6px; height:6px; border:1px solid currentColor; transform:rotate(45deg); }
+    .side-tab:hover, .side-tab:focus-visible { color:#E7F0F6; border-color:rgba(73,217,209,.38); background:rgba(73,217,209,.07); outline:none; }
+    .side-tab[aria-selected=true] { color:#07111F; border-color:var(--cyan); background:var(--cyan); box-shadow:0 0 18px rgba(73,217,209,.18); }
+    .side-tab[aria-selected=true]::before { background:#07111F; }
+    .tab-stage { min-width:0; }
+    [role=tabpanel][hidden] { display:none; }
     .intro { display:flex; align-items:end; justify-content:space-between; gap:24px; margin-bottom:20px; }
     .eyebrow { margin:0 0 7px; color:var(--cyan); font-size:10px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
     .intro h2 { margin:0; max-width:700px; font-size:clamp(23px,3vw,36px); line-height:1.05; letter-spacing:-.035em; }
@@ -172,12 +182,13 @@
     .pokedex { margin-top:18px; }
     .dex-head { display:flex; align-items:start; justify-content:space-between; gap:16px; padding:17px 19px 13px; border-bottom:1px solid var(--line); }
     .dex-head h3 { margin:0; font-size:12px; text-transform:uppercase; letter-spacing:.14em; }
-    .sample-label { color:#F8D091; border:1px solid rgba(245,174,80,.42); padding:4px 6px; font-size:9px; letter-spacing:.07em; }
+    .sample-label { color:#C7E8E5; border:1px solid rgba(73,217,209,.34); padding:4px 6px; font-size:9px; letter-spacing:.07em; }
     .dex-content { padding:16px 18px; }
     .dex-controls { display:grid; grid-template-columns:1.3fr .8fr 1fr; gap:9px; }
     .dex-table td:nth-child(n+4), .dex-table th:nth-child(n+4) { text-align:center; }
     .type-tag { color:#AEEAE5; border:1px solid rgba(73,217,209,.29); padding:2px 4px; font-size:9px; }
     @media (max-width:900px) { .workspace, .lower-grid { grid-template-columns:1fr; } }
+    @media (max-width:720px) { .tool-layout { grid-template-columns:1fr; gap:14px; } .side-tabs { position:static; grid-template-columns:1fr 1fr; padding:5px; gap:5px; } .side-tabs::before { display:none; } .side-tab { justify-content:center; min-height:42px; padding:8px 7px; font-size:10px; } }
     @media (max-width:620px) { .comparison-inputs, .dex-controls { grid-template-columns:1fr; } .comparison-inputs .wide { grid-column:auto; } .breakdown { position:relative; top:auto; margin-top:8px; } .stat-card:focus .breakdown { display:grid; } }
     @media (max-width:900px) { .workspace { grid-template-columns:1fr; } }
     @media (max-width:560px) { .shell { width:min(100% - 24px, 1440px); } header { display:grid; grid-template-columns:31px minmax(0,1fr) auto; grid-template-rows:auto auto; min-height:81px; column-gap:9px; row-gap:3px; padding:10px 0; } .mark { grid-row:1 / span 2; width:31px; height:31px; font-size:12px; } .brand { grid-column:2; margin:0; } .brand h1 { font-size:13px; } .brand p { font-size:9px; } .badge { grid-column:3; grid-row:1; font-size:9px; padding:4px 5px; } .unofficial { display:block; grid-column:2; grid-row:2; justify-self:start; padding:2px 5px; font-size:8px; } .creator-credit { grid-column:3; grid-row:1 / span 2; min-width:0; padding-right:5px; } .creator-credit em { display:none; } .creator-credit strong { display:none; } .pokemon-meta { align-items:flex-start; flex-direction:column; } footer { align-items:flex-start; flex-direction:column; } main { padding-top:20px; } .fields { grid-template-columns:1fr; } .stat-cards { grid-template-columns:repeat(2,1fr); } .panel-title, .config-content, .results-content { padding-left:13px; padding-right:13px; } .multiplier { padding:13px; gap:10px; } .multi-value { font-size:32px; } }
@@ -191,6 +202,13 @@
       <span class="badge">Wiki v5.1.0</span><span class="unofficial">Não oficial</span><a class="creator-credit" href="https://discord.com/users/352279110841663492" target="_blank" rel="noopener noreferrer"><img src="assets/maou-credit.gif" alt="Maou"><span><strong>Maou</strong><small>@imaou</small></span><em>Discord ↗</em></a>
     </header>
     <main>
+      <div class="tool-layout">
+        <nav class="side-tabs" aria-label="Secções das ferramentas" role="tablist" aria-orientation="vertical">
+          <button class="side-tab" id="tab-calculator" type="button" role="tab" aria-selected="true" aria-controls="panel-calculator" data-tab-target="panel-calculator">Calculador de stats</button>
+          <button class="side-tab" id="tab-pokedex" type="button" role="tab" aria-selected="false" aria-controls="panel-pokedex" data-tab-target="panel-pokedex" tabindex="-1">Pokédex</button>
+        </nav>
+        <div class="tab-stage">
+          <section id="panel-calculator" role="tabpanel" aria-labelledby="tab-calculator">
       <div class="workspace">
         <section class="panel" aria-labelledby="config-title">
           <div class="panel-title"><h3 id="config-title">Configuração do espécime</h3><span class="step">01 / INPUT</span></div>
@@ -230,7 +248,7 @@
               <div class="field"><label for="bLevel">Build B · Nível 1–500</label><input id="bLevel" type="number" min="1" max="500" placeholder="1–500"></div>
               <div class="field"><label for="bRarity">Build B · Raridade</label><select id="bRarity"><option value="" selected>Selecione…</option><option value="1">Comum ×1,00</option><option value="1.03">Incomum ×1,03</option><option value="1.06">Raro ×1,06</option><option value="1.10">Épico ×1,10</option><option value="1.15">Prismático ×1,15</option><option value="1.21">Mítico ×1,21</option><option value="1.28">Astral ×1,28</option><option value="1.36">Divino ×1,36</option></select></div>
               <div class="field"><label for="bSpecial">Build B · Condição</label><select id="bSpecial"><option value="" selected>Selecione…</option><option value="1">Normal ×1,00</option><option value="1.45">Shiny ×1,45</option><option value="1.50">Founder ×1,50</option><option value="1.42">Genesis ×1,42</option></select></div>
-              <div class="field"><label for="bStars">Build B · Estrelas</label><select id="bStars"><option value="0" selected>0★ ×1,00</option><option value="1">1★ ×1,04</option><option value="2">2★ ×1,08</option><option value="3">3★ ×1,12</option><option value="4">4★ ×1,16</option><option value="5">5★ ×1,20</option></select></div>
+              <div class="field"><label for="bStars">Build B · Estrelas</label><select id="bStars"><option value="" selected>Selecione…</option><option value="0">0★ ×1,00</option><option value="1">1★ ×1,04</option><option value="2">2★ ×1,08</option><option value="3">3★ ×1,12</option><option value="4">4★ ×1,16</option><option value="5">5★ ×1,20</option></select></div>
               <div class="field"><label for="bBond">Build B · Laço</label><input id="bBond" type="range" min="0" max="100" value="0" step="1"><span id="bBondValue" class="helper" style="margin:2px 0 0;">0% · ×1,00</span></div>
               <div class="field wide"><label for="bNature">Build B · Nature</label><select id="bNature"><option value="" selected>Selecione…</option></select></div>
               <div class="field wide"><div class="editor-head"><h4>IV / EV da Build B</h4><span id="bEvTotal" class="total">EV total: —</span></div><div class="stat-editor" id="bEditor"><span class="editor-label">Atributo</span><span class="editor-label">IV</span><span class="editor-label">EV</span></div></div>
@@ -244,10 +262,15 @@
           <div class="compact-content"><details class="radar" id="radarDetails"><summary>Ver distribuição atual <span>· atributos calculados da Build A</span></summary><div class="radar-wrap"><canvas id="radarCanvas" width="560" height="300" aria-label="Gráfico radar dos atributos calculados"></canvas></div></details></div>
         </section>
       </div>
+          </section>
+          <section id="panel-pokedex" role="tabpanel" aria-labelledby="tab-pokedex" hidden>
       <section class="panel pokedex" aria-labelledby="pokedex-title">
         <div class="dex-head"><div><h3 id="pokedex-title">Pokédex</h3></div><span id="dexCount" class="sample-label">747 espécies · Wiki v5.1.0</span></div>
         <div class="dex-content"><div class="dex-controls"><div class="field"><label for="dexSearch">Pesquisar</label><input id="dexSearch" type="search" placeholder="Nome ou tipo"></div><div class="field"><label for="dexType">Tipo</label><select id="dexType"><option value="">Todos os tipos</option></select></div><div class="field"><label for="dexSort">Ordenar por</label><select id="dexSort"><option value="bst">BST</option><option value="0">HP</option><option value="1">Ataque</option><option value="2">Defesa</option><option value="3">Atq. Esp.</option><option value="4">Def. Esp.</option><option value="5">Velocidade</option></select></div></div><div class="table-wrap" style="margin-top:13px;"><table class="dex-table"><thead><tr><th>Espécie</th><th>Tipo(s)</th><th>BST</th><th>HP</th><th>ATQ</th><th>DEF</th><th>ATQ.E</th><th>DEF.E</th><th>VEL</th></tr></thead><tbody id="dexRows"></tbody></table></div></div>
       </section>
+          </section>
+        </div>
+      </div>
     </main>
     <footer><span class="footer-note">Os resultados incluem raridade, selo, Laço, estrelas, IV, EV e Nature. Talentos e itens ficam fora desta versão.</span></footer>
   </div>
@@ -290,6 +313,20 @@
     $('#dexCount').textContent=`${window.PKHuntDataMeta.count} espécies · Wiki v${window.PKHuntDataMeta.wikiVersion}`;
     const editor=$('#editor'), bEditor=$('#bEditor');
     statNames.forEach((name,i)=>{ const row=document.createElement('template'); row.innerHTML=`<span class="stat-name">${name}</span><input aria-label="IV ${name}" class="iv" data-i="${i}" type="number" min="0" max="31" placeholder="0–31"><input aria-label="EV ${name}" class="ev" data-i="${i}" type="number" min="0" max="252" placeholder="0–252">`; editor.append(...row.content.children); const bRow=document.createElement('template'); bRow.innerHTML=`<span class="stat-name">${name}</span><input aria-label="IV Build B ${name}" class="biv" data-i="${i}" type="number" min="0" max="31" placeholder="0–31"><input aria-label="EV Build B ${name}" class="bev" data-i="${i}" type="number" min="0" max="252" placeholder="0–252">`; bEditor.append(...bRow.content.children); });
+    function initializeMinimumPreview(){
+      const shuckle=Object.entries(pokemonData).find(([, entry])=>entry.name.toLowerCase()==='shuckle');
+      if(shuckle){
+        selectedPokemon=shuckle[0];
+        pokemon.value=shuckle[1].name;
+        pokemonStatus.textContent=`Selecionado: ${shuckle[1].name}.`;
+      }
+      $('#level').value=1;
+      $('#rarity').value='1';
+      $('#special').value='1';
+      $('#nature').value='hardy';
+      $$('.iv,.ev').forEach(input=>input.value=0);
+    }
+    initializeMinimumPreview();
     function num(el,min,max){ let v=Number(el.value); if(!Number.isFinite(v)) v=0; return Math.max(min,Math.min(max,Math.floor(v))); }
     const fmt=v=>Number(v).toFixed(2).replace('.',',');
     const currentRarityName=()=>$('#rarity').selectedOptions[0].textContent.split(' ×')[0];
@@ -299,7 +336,7 @@
     function getInputs(){ return {level:num($('#level'),1,500), rarity:Number($('#rarity').value), special:Number($('#special').value), iv:$$('.iv').map(e=>num(e,0,31)), ev:$$('.ev').map(e=>num(e,0,252)), nature:natures[$('#nature').value]?.mods}; }
     function getBInputs(){ return {level:num($('#bLevel'),1,500), rarity:Number($('#bRarity').value), special:Number($('#bSpecial').value), iv:$$('.biv').map(e=>num(e,0,31)), ev:$$('.bev').map(e=>num(e,0,252)), nature:natures[$('#bNature').value]?.mods}; }
     const activeReady=()=>Boolean(selectedPokemon&&$('#level').value&&$('#rarity').value&&$('#special').value&&$('#nature').value&&$$('.iv,.ev').every(input=>input.value!==''));
-    const bReady=()=>Boolean(selectedPokemonB&&$('#bLevel').value&&$('#bRarity').value&&$('#bSpecial').value&&$('#bNature').value&&$$('.biv,.bev').every(input=>input.value!==''));
+    const bReady=()=>Boolean(selectedPokemonB&&$('#bLevel').value&&$('#bRarity').value&&$('#bSpecial').value&&$('#bStars').value!==''&&$('#bNature').value&&$$('.biv,.bev').every(input=>input.value!==''));
     function baseStat(base,iv,ev,level,index,nature,multi){ const scaledBase=base*multi; return index===0 ? Math.floor(((2*scaledBase+iv+Math.floor(ev/4))*level)/100)+level+10 : Math.floor((Math.floor(((2*scaledBase+iv+Math.floor(ev/4))*level)/100)+5)*nature[index]); }
     function calc(forStars=stars, overrides={}){ const input=getInputs(), p=pokemonData[selectedPokemon]; const bondValue=overrides.bond ?? bond, rarity=overrides.rarity ?? input.rarity, special=overrides.special ?? input.special, activeStars=overrides.stars ?? forStars, bondMulti=bondMultiplier(bondValue), multi=rarity*special*bondMulti*starMultiplier[activeStars]; return {stats:p.base.map((base,i)=>baseStat(base,input.iv[i],input.ev[i],input.level,i,input.nature,multi)),multi,input,bondValue,bondMulti,rarity,special,stars:activeStars}; }
     function calcB(){ const input=getBInputs(), bBond=Number($('#bBond').value), bStars=Number($('#bStars').value), p=pokemonData[selectedPokemonB], bondMulti=bondMultiplier(bBond), multi=input.rarity*input.special*bondMulti*starMultiplier[bStars]; return {stats:p.base.map((base,i)=>baseStat(base,input.iv[i],input.ev[i],input.level,i,input.nature,multi)),multi,input,bondValue:bBond,bondMulti,rarity:input.rarity,special:input.special,stars:bStars}; }
@@ -327,6 +364,28 @@
     ['bLevel','bRarity','bSpecial','bStars','bBond','bNature'].forEach(id=>['input','change'].forEach(event=>$('#'+id).addEventListener(event,update)));
     ['dexSearch','dexType','dexSort'].forEach(id=>['input','change'].forEach(event=>$('#'+id).addEventListener(event,renderDex)));
     $('#radarDetails').addEventListener('toggle',()=>{ if(activeReady()) drawRadar(calc().stats); });
+    const tabs=$$('.side-tab');
+    function activateTab(nextTab){
+      tabs.forEach(tab=>{
+        const active=tab===nextTab;
+        tab.setAttribute('aria-selected',String(active));
+        tab.tabIndex=active?0:-1;
+        $('#'+tab.dataset.tabTarget).hidden=!active;
+      });
+      if(nextTab.id==='tab-pokedex') renderDex();
+    }
+    tabs.forEach((tab,index)=>{
+      tab.addEventListener('click',()=>activateTab(tab));
+      tab.addEventListener('keydown',event=>{
+        const isPrevious=event.key==='ArrowUp'||event.key==='ArrowLeft';
+        const isNext=event.key==='ArrowDown'||event.key==='ArrowRight';
+        if(!isPrevious&&!isNext&&event.key!=='Home'&&event.key!=='End') return;
+        event.preventDefault();
+        const nextIndex=event.key==='Home'?0:event.key==='End'?tabs.length-1:(index+(isNext?1:-1)+tabs.length)%tabs.length;
+        tabs[nextIndex].focus();
+        activateTab(tabs[nextIndex]);
+      });
+    });
     renderDex();
     update();
   </script>
