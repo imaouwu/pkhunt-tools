@@ -190,32 +190,72 @@
     .type-tag { color:#AEEAE5; border:1px solid rgba(73,217,209,.29); padding:2px 4px; font-size:9px; }
     .dex-detail { position:relative; margin-top:15px; border:1px solid var(--cyan); background:#07111F; box-shadow:inset 4px 0 0 rgba(73,217,209,.21),0 12px 30px rgba(0,0,0,.3); }
     .dex-detail[hidden] { display:none; }
-    .dex-detail-head { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:14px 15px 12px; border-bottom:1px solid rgba(73,217,209,.3); }
+    .dex-detail-head { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; padding:15px; border-bottom:1px solid rgba(73,217,209,.3); }
     .dex-detail-kicker { margin:0 0 5px; color:#78F0EA; font:800 9px ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.13em; text-transform:uppercase; }
-    .dex-detail h4 { margin:0; color:#F0FBFF; font-size:18px; line-height:1.1; }
+    .dex-detail h4 { margin:0; color:#F0FBFF; font-size:19px; line-height:1.1; }
     .dex-detail-meta { display:flex; flex-wrap:wrap; gap:5px; align-items:center; margin-top:8px; }
     .dex-bst { color:#DCCFFF; font:800 10px ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.06em; }
+    .dex-detail-counts { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+    .dex-detail-counts span { color:#BDEDEA; border:1px solid rgba(73,217,209,.31); background:rgba(73,217,209,.055); padding:4px 6px; font:800 9px ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.04em; }
+    .dex-detail-counts b { color:var(--cyan); font-size:11px; }
     .dex-close { flex:0 0 auto; color:#CBE8E9; border:1px solid #315069; background:#0B1928; padding:7px 9px; cursor:pointer; font:800 10px ui-monospace,SFMono-Regular,Consolas,monospace; }
     .dex-close:hover,.dex-close:focus-visible { color:#07111F; border-color:var(--cyan); background:var(--cyan); outline:0; }
-    .matrix-note { margin:0; padding:10px 15px; color:#A9BDC8; border-bottom:1px solid rgba(49,80,105,.58); background:rgba(73,217,209,.035); font-size:10px; line-height:1.5; }
-    .matrix-note strong { color:#D9F7F5; }
-    .matrix-grid { display:grid; grid-template-columns:minmax(260px,.85fr) minmax(0,1.15fr); gap:0; }
-    .matrix-section { min-width:0; padding:14px 15px 16px; }
-    .matrix-section + .matrix-section { border-left:1px solid rgba(49,80,105,.62); }
-    .matrix-section h5 { margin:0 0 8px; color:#AEEAE5; font-size:10px; letter-spacing:.11em; text-transform:uppercase; }
-    .matrix-section h5 span { color:#92A9B6; font-weight:400; letter-spacing:0; text-transform:none; }
-    .learnset-list { display:grid; gap:5px; max-height:420px; overflow:auto; padding-right:3px; }
-    .learnset-row { display:grid; grid-template-columns:34px minmax(0,1fr) auto; gap:8px; align-items:center; padding:7px 8px; border-left:2px solid #315069; background:#091625; font-size:10px; }
+    .matrix-note { margin:0; border-bottom:1px solid rgba(49,80,105,.58); background:rgba(73,217,209,.03); }
+    .matrix-note summary { padding:9px 15px; color:#B7CDD6; cursor:pointer; font-size:10px; font-weight:700; }
+    .matrix-note summary::marker { color:var(--cyan); }
+    .matrix-note p { max-width:820px; margin:0; padding:0 15px 11px; color:#91A7B7; font-size:10px; line-height:1.5; }
+    .dex-view-tabs { display:flex; gap:4px; padding:10px 15px 0; border-bottom:1px solid rgba(49,80,105,.58); background:#081524; overflow-x:auto; }
+    .dex-view-tab { flex:0 0 auto; color:#9DB4C1; border:1px solid transparent; border-bottom:0; background:transparent; padding:8px 10px; font-size:10px; font-weight:800; letter-spacing:.04em; transition:color .16s,background .16s,border-color .16s; }
+    .dex-view-tab:hover,.dex-view-tab:focus-visible { color:#E5FAF9; background:rgba(73,217,209,.065); border-color:rgba(73,217,209,.28); outline:0; }
+    .dex-view-tab[aria-selected=true] { position:relative; color:#07111F; border-color:var(--cyan); background:var(--cyan); }
+    .dex-view-panel { padding:16px 15px 18px; animation:dex-view-in .18s ease-out both; }
+    .dex-view-panel[hidden] { display:none; }
+    @keyframes dex-view-in { from { opacity:.35; transform:translateY(3px); } to { opacity:1; transform:translateY(0); } }
+    .moves-overview { display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:13px; }
+    .overview-block { min-width:0; padding:12px; border:1px solid rgba(49,80,105,.72); background:#091625; }
+    .overview-block h5,.level-view-head h5,.tm-results-head h5 { display:flex; align-items:baseline; justify-content:space-between; gap:9px; margin:0 0 9px; color:#AEEAE5; font-size:10px; letter-spacing:.11em; text-transform:uppercase; }
+    .overview-block h5 span,.level-view-head h5 span,.tm-results-head h5 span { color:#8FA7B7; font-size:9px; font-weight:400; letter-spacing:0; text-transform:none; }
+    .overview-list { display:grid; gap:4px; }
+    .overview-row { display:grid; grid-template-columns:34px minmax(0,1fr) auto; align-items:center; gap:7px; min-height:32px; padding:5px 0; border-bottom:1px solid rgba(49,80,105,.42); font-size:10px; }
+    .overview-row:last-child { border-bottom:0; }
+    .overview-row .level { color:#78F0EA; font:800 9px ui-monospace,SFMono-Regular,Consolas,monospace; }
+    .overview-row strong { overflow:hidden; color:#E7F3F7; text-overflow:ellipsis; white-space:nowrap; font-size:10px; }
+    .overview-row small { color:#B7A5FF; font-size:9px; }
+    .overview-action { width:100%; margin-top:10px; color:#BFF5F1; border:1px solid rgba(73,217,209,.41); background:rgba(73,217,209,.04); padding:7px 8px; text-align:left; font-size:10px; font-weight:800; transition:color .16s,border-color .16s,background .16s; }
+    .overview-action:hover,.overview-action:focus-visible { color:#07111F; border-color:var(--cyan); background:var(--cyan); outline:0; }
+    .tm-origin-summary { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:5px; }
+    .origin-card { min-width:0; padding:8px; border:1px solid rgba(49,80,105,.62); border-top:2px solid #A786FF; background:#0B1928; }
+    .origin-card:nth-child(2) { border-top-color:var(--cyan); }
+    .origin-card:nth-child(3) { border-top-color:var(--gold); }
+    .origin-card b { display:block; color:#F0FBFF; font:700 18px/1 ui-monospace,SFMono-Regular,Consolas,monospace; }
+    .origin-card span { display:block; min-height:23px; margin-top:4px; color:#9FB7C2; font-size:9px; line-height:1.25; }
+    .tm-preview-list { display:flex; flex-wrap:wrap; gap:5px; margin-top:10px; }
+    .tm-preview { color:#CDE9E8; border:1px solid rgba(73,217,209,.22); background:rgba(73,217,209,.035); padding:4px 6px; font-size:9px; }
+    .level-view-head,.tm-results-head { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:9px; }
+    .learnset-list { display:grid; gap:6px; }
+    .learnset-row { display:grid; grid-template-columns:48px minmax(0,1fr) auto; gap:10px; align-items:center; padding:10px 11px; border-left:2px solid #315069; background:#091625; font-size:10px; transition:border-color .16s,background .16s; }
+    .learnset-row:hover { border-left-color:var(--cyan); background:#0B1928; }
     .learnset-row .level { color:#78F0EA; font:800 10px ui-monospace,SFMono-Regular,Consolas,monospace; }
     .learnset-row strong { color:#E7F3F7; font-size:11px; }
     .learnset-row small { display:block; margin-top:2px; color:#8FA7B7; font-size:9px; }
     .learnset-meta { color:#D6C9FF; font-size:9px; text-align:right; white-space:nowrap; }
-    .tm-chips { display:flex; flex-wrap:wrap; gap:6px; }
-    .tm-chip { min-width:120px; max-width:100%; padding:7px 8px; border:1px solid rgba(49,80,105,.78); border-left:2px solid var(--cyan); background:#091625; }
-    .tm-chip strong { display:block; color:#EAF7FA; font-size:10px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-    .tm-chip span { display:block; margin-top:3px; color:#9FB7C2; font-size:9px; }
-    .tm-chip .reason { color:#B8A4FF; }
-    .tm-status { margin:0 0 10px; padding:8px; color:#B5C7D0; border:1px solid rgba(244,201,107,.25); background:rgba(244,201,107,.045); font-size:10px; line-height:1.45; }
+    .tm-toolbar { display:grid; grid-template-columns:minmax(180px,1fr) auto; align-items:end; gap:9px; margin-bottom:13px; }
+    .tm-search label { margin-bottom:5px; }
+    .tm-search input { width:100%; min-height:37px; color:var(--ink); border:1px solid #315069; background:#091625; padding:8px 10px; outline:none; }
+    .tm-search input:focus { border-color:var(--cyan); box-shadow:0 0 0 3px rgba(73,217,209,.15); }
+    .tm-filter-set { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:5px; }
+    .tm-filter { color:#AFC1CD; border:1px solid rgba(49,80,105,.75); background:#0B1928; padding:7px 8px; font-size:9px; font-weight:800; transition:color .16s,border-color .16s,background .16s; }
+    .tm-filter:hover,.tm-filter:focus-visible { color:#E7F8F7; border-color:rgba(73,217,209,.55); outline:0; }
+    .tm-filter.active { color:#07111F; border-color:var(--cyan); background:var(--cyan); }
+    .tm-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(142px,1fr)); gap:6px; }
+    .tm-chip { min-width:0; min-height:57px; padding:8px; border:1px solid rgba(49,80,105,.78); border-left:2px solid var(--cyan); background:#091625; transition:border-color .16s,background .16s,transform .16s; }
+    .tm-chip:hover { border-color:rgba(73,217,209,.8); background:#0B1928; transform:translateY(-1px); }
+    .tm-chip strong { display:block; overflow:hidden; color:#EAF7FA; text-overflow:ellipsis; white-space:nowrap; font-size:10px; }
+    .tm-chip span { display:block; margin-top:4px; color:#9FB7C2; font-size:9px; line-height:1.25; }
+    .tm-chip .reason { display:block; margin-top:1px; color:#B8A4FF; font-weight:700; }
+    .tm-more { display:block; margin:12px auto 0; color:#CFF6F2; border:1px solid rgba(73,217,209,.46); background:rgba(73,217,209,.04); padding:8px 12px; font-size:10px; font-weight:800; transition:color .16s,border-color .16s,background .16s; }
+    .tm-more:hover,.tm-more:focus-visible { color:#07111F; border-color:var(--cyan); background:var(--cyan); outline:0; }
+    .tm-status { margin:0; padding:10px; color:#B5C7D0; border:1px solid rgba(244,201,107,.25); background:rgba(244,201,107,.045); font-size:10px; line-height:1.45; }
     .dex-select { color:#CFF6F2; border:1px solid rgba(73,217,209,.48); background:#0A1B29; padding:5px 7px; cursor:pointer; font:800 9px ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.04em; text-transform:uppercase; white-space:nowrap; }
     .dex-select:hover,.dex-select:focus-visible { color:#07111F; border-color:var(--cyan); background:var(--cyan); outline:0; }
     .moves { margin-top:18px; }
@@ -234,8 +274,9 @@
     .move-note { color:#9CB2C0; font-size:10px; }
     @media (max-width:900px) { .workspace, .lower-grid { grid-template-columns:1fr; } }
     @media (max-width:720px) { .tool-layout { grid-template-columns:1fr; gap:14px; } .side-tabs { position:static; grid-template-columns:repeat(3,minmax(112px,1fr)); overflow-x:auto; padding:5px; gap:5px; } .side-tabs::before { display:none; } .side-tab { justify-content:center; min-height:42px; padding:8px 7px; font-size:10px; white-space:nowrap; } }
-    @media (max-width:760px) { .matrix-grid { grid-template-columns:1fr; } .matrix-section + .matrix-section { border-top:1px solid rgba(49,80,105,.62); border-left:0; } .tm-chip { min-width:calc(50% - 3px); } }
-    @media (max-width:620px) { .comparison-inputs, .dex-controls, .moves-controls { grid-template-columns:1fr; } .comparison-inputs .wide { grid-column:auto; } .breakdown { position:relative; top:auto; margin-top:8px; } .stat-card:focus .breakdown { display:grid; } .moves-head { align-items:flex-start; flex-direction:column; gap:8px; } .dex-detail-head { padding:12px; } .matrix-section { padding:12px; } .matrix-note { padding:10px 12px; } .tm-chip { min-width:100%; } }
+    @media (max-width:760px) { .moves-overview { grid-template-columns:1fr; } .tm-toolbar { grid-template-columns:1fr; } .tm-filter-set { justify-content:flex-start; } }
+    @media (max-width:620px) { .comparison-inputs, .dex-controls, .moves-controls { grid-template-columns:1fr; } .comparison-inputs .wide { grid-column:auto; } .breakdown { position:relative; top:auto; margin-top:8px; } .stat-card:focus .breakdown { display:grid; } .moves-head { align-items:flex-start; flex-direction:column; gap:8px; } .dex-detail-head { padding:12px; } .dex-detail-counts { margin-top:8px; } .matrix-note summary { padding:9px 12px; } .matrix-note p { padding:0 12px 11px; } .dex-view-tabs { padding:8px 12px 0; } .dex-view-panel { padding:13px 12px 15px; } .tm-origin-summary { grid-template-columns:1fr; } .origin-card { display:grid; grid-template-columns:32px 1fr; align-items:center; column-gap:7px; } .origin-card b { grid-row:1 / span 2; } .origin-card span { min-height:0; margin-top:0; } .tm-grid { grid-template-columns:1fr; } .tm-chip { min-height:53px; } .learnset-row { grid-template-columns:43px minmax(0,1fr); gap:8px; } .learnset-meta { grid-column:2; text-align:left; } }
+    @media (prefers-reduced-motion:reduce) { .dex-view-panel { animation:none; } .tm-chip,.learnset-row,.dex-view-tab,.tm-filter,.overview-action,.tm-more { transition:none; } }
     @media (max-width:900px) { .workspace { grid-template-columns:1fr; } }
     @media (max-width:560px) { .shell { width:min(100% - 24px, 1440px); } header { display:grid; grid-template-columns:31px minmax(0,1fr) auto; grid-template-rows:auto auto; min-height:81px; column-gap:9px; row-gap:3px; padding:10px 0; } .mark { grid-row:1 / span 2; width:31px; height:31px; font-size:12px; } .brand { grid-column:2; margin:0; } .brand h1 { font-size:13px; } .brand p { font-size:9px; } .badge { grid-column:3; grid-row:1; font-size:9px; padding:4px 5px; } .unofficial { display:block; grid-column:2; grid-row:2; justify-self:start; padding:2px 5px; font-size:8px; } .creator-credit { grid-column:3; grid-row:1 / span 2; min-width:0; padding-right:5px; } .creator-credit em { display:none; } .creator-credit strong { display:none; } .pokemon-meta { align-items:flex-start; flex-direction:column; } footer { align-items:flex-start; flex-direction:column; } main { padding-top:20px; } .fields { grid-template-columns:1fr; } .stat-cards { grid-template-columns:repeat(2,1fr); } .panel-title, .config-content, .results-content { padding-left:13px; padding-right:13px; } .multiplier { padding:13px; gap:10px; } .multi-value { font-size:32px; } }
   </style>
@@ -422,6 +463,10 @@
     function renderComparison(active){ const bBond=Number($('#bBond').value); $('#bBondValue').textContent=`${bBond}% · ×${fmt(bondMultiplier(bBond))}`; if(!bReady()){ $('#bCompareMulti').textContent='×—'; $('#bCompareBst').textContent='—'; $('#comparisonRows').innerHTML='<tr><td colspan="4">Preencha a Build B para comparar.</td></tr>'; return; } const b=calcB(), bstA=active.stats.reduce((sum,v)=>sum+v,0),bstB=b.stats.reduce((sum,v)=>sum+v,0); $('#aCompareMulti').textContent=`×${fmt(active.multi)}`;$('#bCompareMulti').textContent=`×${fmt(b.multi)}`;$('#aCompareBst').textContent=bstA;$('#bCompareBst').textContent=bstB; $('#comparisonRows').innerHTML=active.stats.map((value,i)=>{const diff=value-b.stats[i], sign=diff>0?'+':''; return `<tr><td>${statNames[i]}</td><td>${value}</td><td>${b.stats[i]}</td><td class="${diff>0?'diff-plus':diff<0?'diff-minus':''}">${sign}${diff}</td></tr>`;}).join('')+`<tr><td><strong>BST final</strong></td><td><strong>${bstA}</strong></td><td><strong>${bstB}</strong></td><td><strong>${bstA-bstB>0?'+':''}${bstA-bstB}</strong></td></tr>`; }
     const movesByName=new Map(movesData.map(move=>[move.name.toLocaleLowerCase(),move]));
     let dexSelectedId=null;
+    let dexDetailView='summary';
+    let dexTmSearch='';
+    let dexTmReason='all';
+    let dexTmLimit=18;
     function moveExtra(move){
       const official=movesByName.get(move.name.toLocaleLowerCase());
       if(!official) return `${move.type} · ${move.power==='— (status)'?'Status':`Poder ${move.power}`} · ${move.cooldown}`;
@@ -451,11 +496,32 @@
         selected.forEach((move,key)=>compatible.set(key,move));
       }
       const tmMoves=[...compatible.values()].sort((a,b)=>a.name.localeCompare(b.name));
+      const originOrder=['Da espécie','Do tipo','Também aprende por nível'];
+      const originCounts=Object.fromEntries(originOrder.map(reason=>[reason,tmMoves.filter(move=>move.reason===reason).length]));
+      const levelRows=levelMoves.length?levelMoves.map(move=>`<div class="learnset-row"><span class="level">Nv ${move.level}</span><span><strong>${move.name}</strong><small>${moveExtra(move)}</small></span><span class="learnset-meta">${move.type}</span></div>`).join(''):'<p class="tm-status">Ainda não há golpes por nível publicados para esta espécie.</p>';
+      const levelPreview=levelMoves.slice(0,4).map(move=>`<div class="overview-row"><span class="level">Nv ${move.level}</span><strong>${move.name}</strong><small>${move.type}</small></div>`).join('')||'<p class="tm-status">Ainda não há golpes por nível publicados para esta espécie.</p>';
+      const searchedTmMoves=tmMoves.filter(move=>!dexTmSearch||move.name.toLocaleLowerCase().includes(dexTmSearch.toLocaleLowerCase())).filter(move=>dexTmReason==='all'||move.reason===dexTmReason);
+      const shownTmMoves=searchedTmMoves.slice(0,dexTmLimit);
+      const tmGrid=shownTmMoves.map(move=>`<article class="tm-chip"><strong title="${move.name}">${move.name}</strong><span>${move.type}<b class="reason">${move.reason}</b></span></article>`).join('')||'<p class="tm-status">Nenhum golpe encontrado com estes filtros.</p>';
+      const tab=(id,label)=>`<button id="dexView-${id}" class="dex-view-tab" type="button" role="tab" aria-selected="${dexDetailView===id}" aria-controls="dexViewPanel-${id}" data-dex-view="${id}">${label}</button>`;
+      const panel=(id,content)=>`<section id="dexViewPanel-${id}" class="dex-view-panel" role="tabpanel" aria-labelledby="dexView-${id}"${dexDetailView===id?'':' hidden'}>${content}</section>`;
+      const originCard=(reason)=>`<div class="origin-card"><b>${originCounts[reason]}</b><span>${reason}</span></div>`;
       detail.hidden=false;
-      detail.innerHTML=`<div class="dex-detail-head"><div><p class="dex-detail-kicker">Moveset // TM Matrix</p><h4 id="dexDetailTitle">${p.name}</h4><div class="dex-detail-meta">${types.map(type=>`<span class="type-tag">${type}</span>`).join('')}<span class="dex-bst">BST BASE ${baseBst}</span></div></div><button id="dexClose" class="dex-close" type="button" aria-label="Fechar detalhes de ${p.name}">Fechar ×</button></div><p class="matrix-note"><strong>Base de compatibilidade.</strong> Inclui os golpes da espécie, os golpes dos seus tipos e os golpes de nível presentes no PokéHunt. Mostra todas as compatibilidades possíveis, mesmo que um golpe já tenha sido ensinado. Atualizado com a Movedex v5.1.0.</p><div class="matrix-grid"><section class="matrix-section" aria-labelledby="levelMovesTitle"><h5 id="levelMovesTitle">Aprende por nível <span>· ${levelMoves.length} golpes</span></h5><div class="learnset-list">${levelMoves.length?levelMoves.map(move=>`<div class="learnset-row"><span class="level">Nv ${move.level}</span><span><strong>${move.name}</strong><small>${moveExtra(move)}</small></span><span class="learnset-meta">${move.type}</span></div>`).join(''):'<p class="tm-status">Ainda não há moveset publicado para esta espécie.</p>'}</div></section><section class="matrix-section" aria-labelledby="tmMovesTitle"><h5 id="tmMovesTitle">TMs compatíveis <span>· ${tmMoves.length} TMs</span></h5><div class="tm-chips">${tmMoves.map(move=>`<div class="tm-chip"><strong>${move.name}</strong><span>${move.type} <b class="reason">· ${move.reason}</b></span></div>`).join('')||'<p class="tm-status">Nenhum TM compatível na Movedex.</p>'}</div></section></div>`;
+      detail.innerHTML=`<div class="dex-detail-head"><div><p class="dex-detail-kicker">FICHA DE GOLPES</p><h4 id="dexDetailTitle">Golpes de ${p.name}</h4><div class="dex-detail-meta">${types.map(type=>`<span class="type-tag">${type}</span>`).join('')}<span class="dex-bst">BST BASE ${baseBst}</span></div><div class="dex-detail-counts"><span><b>${levelMoves.length}</b> por nível</span><span><b>${tmMoves.length}</b> TMs compatíveis</span></div></div><button id="dexClose" class="dex-close" type="button" aria-label="Fechar detalhes de ${p.name}">Fechar ×</button></div><details class="matrix-note"><summary>Como esta lista é montada?</summary><p>Junta os golpes próprios da espécie, os golpes dos seus tipos e os golpes aprendidos por nível no PokéHunt. A lista mostra todas as compatibilidades possíveis, mesmo que um golpe já esteja ensinado.</p></details><div class="dex-view-tabs" role="tablist" aria-label="Vistas dos golpes de ${p.name}">${tab('summary','Resumo')}${tab('level',`Por nível (${levelMoves.length})`)}${tab('tm',`TMs (${tmMoves.length})`)}</div>${panel('summary',`<div class="moves-overview"><section class="overview-block"><h5>Golpes por nível <span>${levelMoves.length} no total</span></h5><div class="overview-list">${levelPreview}</div><button class="overview-action" type="button" data-dex-view="level">Ver todos os golpes por nível →</button></section><section class="overview-block"><h5>TMs compatíveis <span>${tmMoves.length} no total</span></h5><div class="tm-origin-summary">${originOrder.map(originCard).join('')}</div><div class="tm-preview-list">${tmMoves.slice(0,8).map(move=>`<span class="tm-preview">${move.name}</span>`).join('')}</div><button class="overview-action" type="button" data-dex-view="tm">Pesquisar todas as TMs →</button></section></div>`)}${panel('level',`<div class="level-view-head"><h5>Aprende por nível <span>${levelMoves.length} golpes</span></h5><span class="sample-label">Lista completa</span></div><div class="learnset-list">${levelRows}</div>`)}${panel('tm',`<div class="tm-toolbar"><div class="tm-search"><label for="dexTmSearch">Pesquisar TM</label><input id="dexTmSearch" type="search" value="${dexTmSearch}" placeholder="Nome do golpe"></div><div class="tm-filter-set" aria-label="Filtrar TMs por origem">${['all',...originOrder].map(reason=>`<button class="tm-filter${dexTmReason===reason?' active':''}" type="button" aria-pressed="${dexTmReason===reason}" data-tm-reason="${reason}">${reason==='all'?'Todas':reason}</button>`).join('')}</div></div><div class="tm-results-head"><h5>TMs compatíveis <span>${searchedTmMoves.length===tmMoves.length?`${tmMoves.length} disponíveis`:`${searchedTmMoves.length} encontradas`}</span></h5></div><div class="tm-grid">${tmGrid}</div>${searchedTmMoves.length>shownTmMoves.length?`<button id="dexTmMore" class="tm-more" type="button">Mostrar mais (${Math.min(18,searchedTmMoves.length-shownTmMoves.length)})</button>`:''}`)}`;
       $('#dexClose').addEventListener('click',closeDexDetail);
+      $$('.dex-view-tab,[data-dex-view]',detail).forEach(button=>button.addEventListener('click',()=>{ dexDetailView=button.dataset.dexView; renderDexDetail(); $('#dexView-'+dexDetailView)?.focus(); }));
+      $$('.dex-view-tab',detail).forEach((button,index,tabs)=>button.addEventListener('keydown',event=>{
+        const direction=event.key==='ArrowRight'||event.key==='ArrowDown'?1:event.key==='ArrowLeft'||event.key==='ArrowUp'?-1:0;
+        if(!direction&&event.key!=='Home'&&event.key!=='End') return;
+        event.preventDefault();
+        const next=event.key==='Home'?tabs[0]:event.key==='End'?tabs[tabs.length-1]:tabs[(index+direction+tabs.length)%tabs.length];
+        next.click();
+      }));
+      $('#dexTmSearch')?.addEventListener('input',event=>{ dexTmSearch=event.target.value; dexTmLimit=18; renderDexDetail(); $('#dexTmSearch')?.focus(); });
+      $$('[data-tm-reason]',detail).forEach(button=>button.addEventListener('click',()=>{ dexTmReason=button.dataset.tmReason; dexTmLimit=18; renderDexDetail(); }));
+      $('#dexTmMore')?.addEventListener('click',()=>{ dexTmLimit+=18; renderDexDetail(); ($('#dexTmMore')||$('#dexTmSearch'))?.focus(); });
     }
-    function selectDexPokemon(id){ dexSelectedId=id; renderDexDetail(); $('#dexDetail').scrollIntoView({block:'nearest',behavior:'smooth'}); }
+    function selectDexPokemon(id){ dexSelectedId=id; dexDetailView='summary'; dexTmSearch=''; dexTmReason='all'; dexTmLimit=18; renderDexDetail(); $('#dexDetail').scrollIntoView({block:'nearest',behavior:'smooth'}); }
     function closeDexDetail(){ dexSelectedId=null; renderDexDetail(); const active=$('.dex-select[data-dex-id]'); active?.focus(); }
     function renderDex(){ const query=$('#dexSearch').value.toLowerCase().trim(), type=$('#dexType').value, sort=$('#dexSort').value; const rows=Object.entries(pokemonData).map(([id,p])=>({id,...p,bst:p.base.reduce((s,v)=>s+v,0)})).filter(p=>!query||`${p.name} ${p.type}`.toLowerCase().includes(query)).filter(p=>!type||p.type.split(' / ').includes(type)).sort((a,b)=>sort==='bst'?b.bst-a.bst:b.base[Number(sort)]-a.base[Number(sort)]); $('#dexRows').innerHTML=rows.map(p=>`<tr${p.id===dexSelectedId?' aria-selected="true"':''}><td><strong>${p.name}</strong></td><td>${p.type.split(' / ').map(t=>`<span class="type-tag">${t}</span>`).join(' ')}</td><td>${p.bst}</td>${p.base.map(value=>`<td>${value}</td>`).join('')}<td><button type="button" class="dex-select" data-dex-id="${p.id}" aria-label="Ver golpes de ${p.name}">Ver golpes</button></td></tr>`).join('')||'<tr><td colspan="10">Nenhum Pokémon encontrado.</td></tr>'; }
     function cooldownSeconds(move){ return Number.parseFloat(String(move.cooldown).replace(',', '.'))||0; }
