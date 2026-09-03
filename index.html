@@ -426,6 +426,71 @@
       .pokemon-visual-meta .type-tag.type-tag--calc { gap:4px; padding:3px 5px; font-size:10px; }
       .pokemon-visual-meta .type-tag.type-tag--calc .type-icon { width:17px; height:17px; }
     }
+    /* Itens & Loot: guia compacto de caçador, tabelas primeiro e cartões só para contexto. */
+    .items-hub { margin:0; }
+    .items-head { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:18px 19px 14px; border-bottom:1px solid var(--line); }
+    .items-kicker { margin:0 0 4px; color:var(--cyan); font:800 9px ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.13em; }
+    .items-head h3 { margin:0; font-size:14px; letter-spacing:.13em; text-transform:uppercase; }
+    .items-head p:not(.items-kicker) { max-width:700px; margin:7px 0 0; color:#AABFC9; font-size:12px; }
+    .items-content { padding:16px 18px 20px; }
+    .items-tabs { display:flex; gap:5px; overflow-x:auto; padding-bottom:10px; border-bottom:1px solid rgba(49,80,105,.6); }
+    .item-tab { flex:0 0 auto; color:#AFC2CD; border:1px solid rgba(49,80,105,.72); background:#0A1928; padding:8px 10px; font-size:11px; font-weight:800; letter-spacing:.03em; }
+    .item-tab:hover,.item-tab:focus-visible { color:#E9FFFF; border-color:rgba(73,217,209,.65); outline:0; }
+    .item-tab[aria-selected=true] { color:#06131E; border-color:var(--cyan); background:var(--cyan); }
+    .item-view { padding-top:16px; }
+    .loot-summary { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; }
+    .loot-summary p { margin:0; padding:11px 12px; color:#B9CED7; border-left:3px solid var(--cyan); background:rgba(73,217,209,.055); font-size:12px; line-height:1.48; }
+    .loot-summary p:last-child { border-left-color:var(--violet); background:rgba(167,134,255,.055); }
+    .items-split { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    .items-split--three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .items-split > section { min-width:0; }
+    .items-hub h4 { margin:0 0 8px; color:#BDF2EE; font-size:11px; letter-spacing:.09em; text-transform:uppercase; }
+    .items-table { min-width:0; font-size:12px; }
+    .items-table th { font-size:10px; }
+    .items-table td { padding:9px; }
+    .items-table td:not(:first-child),.items-table th:not(:first-child) { text-align:center; }
+    .items-table .rarity-common { color:#D1E0E7; }.items-table .rarity-rare { color:#7AD8FF; }.items-table .rarity-epic { color:#D0ADFF; }.items-table .rarity-legendary { color:#F7D274; }
+    .loot-note { margin:13px 0 0; color:#A8BDC8; font-size:11px; line-height:1.55; }
+    .themed-loot { display:grid; grid-template-columns:minmax(190px,.75fr) minmax(0,1.25fr); gap:14px; align-items:start; margin-top:18px; padding:14px; border:1px solid rgba(73,217,209,.33); background:linear-gradient(110deg,rgba(73,217,209,.06),rgba(167,134,255,.045)); }
+    .themed-loot h4 { margin-bottom:5px; }.themed-loot p { margin:0; color:#AFC4CE; font-size:11px; line-height:1.5; }
+    .chest-type-grid { display:flex; flex-wrap:wrap; gap:6px; }
+    .chest-type-button { --type-color:var(--cyan); display:inline-flex; align-items:center; gap:4px; color:#CBE4E9; border:1px solid rgba(73,217,209,.35); border-left:3px solid var(--type-color); background:#091725; padding:4px 6px; font-size:10px; font-weight:800; }
+    .chest-type-button:hover,.chest-type-button:focus-visible,.chest-type-button[aria-pressed=true] { color:#F4FFFF; border-color:var(--type-color); background:color-mix(in srgb,var(--type-color) 14%,#091725); outline:0; }
+    .chest-type-button .type-icon { width:15px; height:15px; image-rendering:pixelated; }
+    .chest-type-guide { grid-column:2; min-height:96px; padding:12px; border:1px solid rgba(49,80,105,.72); background:#081524; }
+    .chest-type-guide h5 { display:flex; align-items:center; gap:6px; margin:0 0 8px; color:#F1FCFF; font-size:13px; }
+    .chest-type-guide p { margin:5px 0 0; color:#B3C8D1; font-size:11px; }.chest-type-guide strong { color:#DDFBFA; }
+    .item-facts,.rare-list { display:grid; gap:6px; margin:0; }.item-facts div,.rare-list div { padding:9px 10px; border-left:2px solid #315069; background:#091625; }.item-facts dt,.rare-list dt { color:#E7F7FA; font-size:11px; font-weight:800; }.item-facts dd,.rare-list dd { margin:3px 0 0; color:#A6BDC8; font-size:11px; line-height:1.45; }
+    .held-guide { grid-template-columns:minmax(180px,.7fr) minmax(0,1.3fr); }.held-guide .chest-type-guide { grid-column:2; }
+    .vitamin-strip { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-top:14px; padding:12px 13px; border:1px solid rgba(244,201,107,.36); background:rgba(244,201,107,.05); }.vitamin-strip h4 { color:#F9DFA0; margin:0; }.vitamin-strip p { margin:0; color:#C5D4DA; font-size:11px; line-height:1.5; }.vitamin-strip > p { max-width:600px; }.vitamin-strip strong { color:#F3D277; }
+    .rare-list { grid-template-columns:repeat(2,minmax(0,1fr)); }.rare-list div { border-left-color:var(--violet); }
+    .inline-nav { color:var(--cyan); border:0; border-bottom:1px solid currentColor; background:transparent; padding:0; font:inherit; font-weight:800; }
+    .source-card { margin-top:15px; padding:13px; border:1px solid rgba(167,134,255,.42); background:rgba(167,134,255,.06); }.source-card h4 { color:#DCCEFF; }.source-card p { margin:0; color:#BBCBD3; font-size:11px; }.source-card div { display:flex; flex-wrap:wrap; gap:7px; margin-top:10px; }.source-card a { color:#DCD0FF; border-bottom:1px solid rgba(220,208,255,.45); font-size:11px; text-decoration:none; }.source-card a:hover,.source-card a:focus-visible { color:#fff; outline:0; }
+    @media (max-width:720px) { .side-tabs { grid-template-columns:repeat(4,minmax(0,1fr)); } .items-split--three { grid-template-columns:1fr; } .themed-loot,.held-guide { grid-template-columns:1fr; }.chest-type-guide,.held-guide .chest-type-guide { grid-column:auto; } }
+    @media (max-width:620px) { .items-head { padding:14px 13px 12px; }.items-content { padding:13px; }.items-head .sample-label { font-size:8px; }.loot-summary,.items-split,.rare-list { grid-template-columns:1fr; }.items-table,.items-table tbody { display:block; width:100%; min-width:0; }.items-table thead { display:none; }.items-table tbody { display:grid; gap:6px; }.items-table tr { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border:1px solid rgba(49,80,105,.72); background:#091625; }.items-table td { display:flex; align-items:center; justify-content:space-between; gap:6px; min-width:0; padding:8px; border:0; border-bottom:1px solid rgba(49,80,105,.4); text-align:left!important; white-space:normal; }.items-table td::before { content:attr(data-label); color:#89A4B4; font-size:9px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }.items-table td:first-child { grid-column:1 / -1; color:#E5F7F9; font-weight:800; }.items-table td:last-child { border-bottom:0; }.items-table td:first-child::before { display:none; }.rewards-table tr { grid-template-columns:repeat(2,minmax(0,1fr)); }.vitamin-strip { align-items:flex-start; flex-direction:column; gap:8px; } }
+    /* Perfil do espécime: o sprite ganha presença, mas a leitura dos seis stats fica disciplinada. */
+    .pokemon-meta { grid-template-columns:minmax(0,1fr) 168px; gap:14px; min-height:170px; padding:13px 15px; }
+    .pokemon-meta .calc-base-profile { gap:10px; }
+    .pokemon-meta .calc-stat-bars { gap:8px; }
+    .pokemon-meta .calc-stat-line { grid-template-columns:48px minmax(38px,1fr) 40px; gap:8px; font-size:12px; }
+    .pokemon-meta .calc-stat-line b { font-size:15px; }
+    .pokemon-meta .stat-meter { height:9px; border-radius:2px; background:#06121F; }
+    .pokemon-meta .stat-meter i { background:linear-gradient(90deg,color-mix(in srgb,var(--stat-color) 56%,#ffffff),var(--stat-color) 48%,color-mix(in srgb,var(--stat-color) 76%,#07111F)); box-shadow:0 0 10px color-mix(in srgb,var(--stat-color) 70%,transparent); }
+    .pokemon-meta .bst-badge { align-self:start; justify-self:start; margin-top:2px; color:#BFB4D5; border-color:rgba(167,134,255,.3); background:rgba(167,134,255,.06); font-size:8px; opacity:.8; }
+    .pokemon-meta .bst-badge strong { color:#CDBAFF; font-size:12px; }
+    .pokemon-visual-meta { grid-template-rows:auto 1fr; align-items:start; gap:4px; padding-left:10px; }
+    .pokemon-visual-meta .calc-type-line { flex-wrap:nowrap; justify-content:center; gap:4px; }
+    .pokemon-visual-meta .type-tag.type-tag--calc { gap:4px; border-left-width:2px; border-radius:7px; padding:3px 6px; font-size:10px; line-height:1.1; background:color-mix(in srgb,var(--type-color) 18%,#091725); }
+    .pokemon-visual-meta .type-tag.type-tag--calc .type-icon { width:16px; height:16px; }
+    .pokemon-visual-meta .calculator-sprite { width:150px; height:132px; overflow:visible; margin-top:-1px; }
+    .pokemon-visual-meta .calculator-sprite::before { inset:14px; }
+    .pokemon-visual-meta .calculator-sprite .sprite-image { width:172px; height:154px; max-width:none; max-height:none; transform:translate(7px,-6px); filter:drop-shadow(0 10px 12px rgba(0,0,0,.55)); }
+    @media (max-width:620px) {
+      .pokemon-meta { grid-template-columns:minmax(0,1fr) 112px; gap:8px; min-height:162px; padding:11px; }
+      .pokemon-meta .calc-stat-bars { gap:7px; }.pokemon-meta .calc-stat-line { grid-template-columns:42px minmax(28px,1fr) 34px; gap:5px; font-size:11px; }.pokemon-meta .calc-stat-line b { font-size:14px; }.pokemon-meta .stat-meter { height:8px; }
+      .pokemon-visual-meta { padding-left:7px; gap:5px; }.pokemon-visual-meta .calc-type-line { flex-wrap:wrap; }.pokemon-visual-meta .type-tag.type-tag--calc { padding:3px 4px; font-size:9px; }.pokemon-visual-meta .type-tag.type-tag--calc .type-icon { width:14px; height:14px; }
+      .pokemon-visual-meta .calculator-sprite { width:102px; height:94px; overflow:visible; }.pokemon-visual-meta .calculator-sprite .sprite-image { width:116px; height:108px; transform:translate(4px,-4px); }
+    }
   </style>
 </head>
 <body>
@@ -441,6 +506,7 @@
           <button class="side-tab" id="tab-calculator" type="button" role="tab" aria-selected="true" aria-controls="panel-calculator" data-tab-target="panel-calculator">Calculador de stats</button>
           <button class="side-tab" id="tab-pokedex" type="button" role="tab" aria-selected="false" aria-controls="panel-pokedex" data-tab-target="panel-pokedex" tabindex="-1">Pokédex</button>
           <button class="side-tab" id="tab-moves" type="button" role="tab" aria-selected="false" aria-controls="panel-moves" data-tab-target="panel-moves" tabindex="-1">Moves &amp; TMs</button>
+          <button class="side-tab" id="tab-items" type="button" role="tab" aria-selected="false" aria-controls="panel-items" data-tab-target="panel-items" tabindex="-1">Itens</button>
         </nav>
         <div class="tab-stage">
           <section id="panel-calculator" role="tabpanel" aria-labelledby="tab-calculator">
@@ -449,7 +515,7 @@
           <div class="panel-title"><h3 id="config-title">Configuração do espécime</h3><span class="step">01 / INPUT</span></div>
           <div class="config-content">
             <div class="fields">
-              <div class="field wide"><label for="pokemon">Pokémon</label><div class="combo-wrap"><input id="pokemon" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pokemonList" aria-activedescendant="" autocomplete="off" placeholder="Escolha um Pokémon"><div id="pokemonList" class="combo-list" role="listbox" aria-label="Resultados de Pokémon"></div></div><p id="pokemonSearchStatus" class="combo-status" aria-live="polite"></p><div id="pokemonMeta" class="pokemon-meta"><div id="baseStats">Escolha um Pokémon para ver os atributos base.</div><aside class="pokemon-visual-meta" aria-label="Resumo visual do Pokémon"><div id="calculatorTypes" class="calc-type-line"></div><span id="calculatorSpriteFrame" class="sprite-frame calculator-sprite" role="img" aria-label="Sprite do Pokémon selecionado" data-sprite-fallback="SEM SPRITE"><img id="calculatorSprite" class="sprite-image" alt="Sprite do Pokémon selecionado"><span class="sprite-caption">ESPÉCIME</span></span><span class="bst-badge"><span>BST BASE</span><strong id="bstValue">—</strong></span></aside></div></div>
+              <div class="field wide"><label for="pokemon">Pokémon</label><div class="combo-wrap"><input id="pokemon" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="pokemonList" aria-activedescendant="" autocomplete="off" placeholder="Escolha um Pokémon"><div id="pokemonList" class="combo-list" role="listbox" aria-label="Resultados de Pokémon"></div></div><p id="pokemonSearchStatus" class="combo-status" aria-live="polite"></p><div id="pokemonMeta" class="pokemon-meta"><div id="baseStats"><span class="bst-badge"><span>BST BASE</span><strong id="bstValue">—</strong></span></div><aside class="pokemon-visual-meta" aria-label="Resumo visual do Pokémon"><div id="calculatorTypes" class="calc-type-line"></div><span id="calculatorSpriteFrame" class="sprite-frame calculator-sprite" role="img" aria-label="Sprite do Pokémon selecionado" data-sprite-fallback="SEM SPRITE"><img id="calculatorSprite" class="sprite-image" alt="Sprite do Pokémon selecionado"><span class="sprite-caption">ESPÉCIME</span></span></aside></div></div>
               <div class="field"><label for="level">Nível <span style="color:#91A7B7;">1–500</span></label><input id="level" type="number" min="1" max="500" placeholder="1–500"></div>
               <div class="field"><label for="rarity">Raridade</label><select id="rarity"><option value="" selected>Selecione…</option><option value="1">Comum ×1,00</option><option value="1.03">Incomum ×1,03</option><option value="1.06">Raro ×1,06</option><option value="1.10">Épico ×1,10</option><option value="1.15">Prismático ×1,15</option><option value="1.21">Mítico ×1,21</option><option value="1.28">Astral ×1,28</option><option value="1.36">Divino ×1,36</option></select></div>
               <div class="field"><label for="special">Condição especial</label><select id="special"><option value="" selected>Selecione…</option><option value="1">Normal (sem selo) ×1,00</option><option value="1.45">Shiny ×1,45</option><option value="1.50">Founder ×1,50</option><option value="1.42">Genesis ×1,42</option></select></div>
@@ -519,6 +585,47 @@
                 </div>
                 <div class="move-summary"><span><strong>Poder</strong> é o valor do golpe de dano. <strong>Cooldown</strong> é o tempo para usar novamente.</span><strong id="moveResultCount">360 golpes</strong></div>
                 <div class="table-wrap"><table class="move-table"><thead><tr><th>Golpe</th><th>Tipo</th><th>Dano</th><th>Cooldown</th><th>Categoria</th><th>Alcance</th></tr></thead><tbody id="moveRows"></tbody></table></div>
+              </div>
+            </section>
+          </section>
+          <section id="panel-items" role="tabpanel" aria-labelledby="tab-items" hidden>
+            <section class="panel items-hub" aria-labelledby="items-title">
+              <div class="items-head"><div><p class="items-kicker">GUIA DE CAMPO</p><h3 id="items-title">Itens &amp; Loot</h3><p>Baús, recompensas e itens de progressão: só informações verificadas da Wiki v4.39.0.</p></div><span class="sample-label">WIKI v4.39.0</span></div>
+              <div class="items-content">
+                <div class="items-tabs" role="tablist" aria-label="Categorias de itens">
+                  <button class="item-tab" id="itemTab-chests" role="tab" aria-selected="true" aria-controls="itemView-chests" data-item-view="chests">Baús</button>
+                  <button class="item-tab" id="itemTab-rewards" role="tab" aria-selected="false" aria-controls="itemView-rewards" data-item-view="rewards" tabindex="-1">Recompensas</button>
+                  <button class="item-tab" id="itemTab-held" role="tab" aria-selected="false" aria-controls="itemView-held" data-item-view="held" tabindex="-1">Held &amp; Gems</button>
+                  <button class="item-tab" id="itemTab-healing" role="tab" aria-selected="false" aria-controls="itemView-healing" data-item-view="healing" tabindex="-1">Cura &amp; treino</button>
+                  <button class="item-tab" id="itemTab-rare" role="tab" aria-selected="false" aria-controls="itemView-rare" data-item-view="rare" tabindex="-1">Raros</button>
+                </div>
+
+                <section id="itemView-chests" class="item-view" role="tabpanel" aria-labelledby="itemTab-chests">
+                  <div class="loot-summary"><p><strong>Todo item vem selado em um baú.</strong> O elemento do baú segue o elemento do monstro derrotado; em monstro de dois tipos, o secundário é escolhido em 30% das vezes.</p><p>O elemento decide o loot temático. A raridade decide quais linhas de recompensa podem acontecer.</p></div>
+                  <div class="items-split"><section><h4>Frequência por nível do mapa</h4><div class="table-wrap"><table class="items-table"><thead><tr><th>Mapa</th><th>Baú aprox.</th><th>Lendário</th></tr></thead><tbody id="chestMapRows"></tbody></table></div></section><section><h4>Raridade do baú</h4><div class="table-wrap"><table class="items-table"><thead><tr><th>Raridade</th><th>Mapa 3</th><th>Mapa 50</th><th>Mapa 100</th><th>Qtd.</th></tr></thead><tbody id="chestRarityRows"></tbody></table></div></section></div>
+                  <p class="loot-note">Dentro do mesmo mapa, um monstro mais forte altera a frequência do baú em cerca de ×0,6 a ×1,4. Use o mapa do seu nível para recompensas que valem a pena. Inventários de baús são separados por raridade: se um estiver cheio, aquele baú é perdido.</p>
+                  <section class="themed-loot"><div><h4>Guia de loot por elemento</h4><p>Escolha o elemento do baú para ver as linhas temáticas verificadas.</p></div><div id="chestTypeGrid" class="chest-type-grid" aria-label="Escolher elemento do baú"></div><div id="chestTypeGuide" class="chest-type-guide" aria-live="polite"></div></section>
+                </section>
+
+                <section id="itemView-rewards" class="item-view" role="tabpanel" aria-labelledby="itemTab-rewards" hidden>
+                  <div class="loot-summary"><p><strong>Um prêmio por baú, sem baú vazio.</strong> Chances abaixo por raridade do baú.</p><p>Na linha de bolas Lendária, Master Ball pode substituir a recompensa (0,07% dos baús Lendários); a linha também pode incluir bônus de Astral Ball.</p></div>
+                  <div class="table-wrap"><table class="items-table rewards-table"><thead><tr><th>Recompensa</th><th>Comum</th><th>Raro</th><th>Épico</th><th>Lendário</th></tr></thead><tbody id="rewardRows"></tbody></table></div>
+                </section>
+
+                <section id="itemView-held" class="item-view" role="tabpanel" aria-labelledby="itemTab-held" hidden>
+                  <div class="items-split"><section><h4>Espaços de held</h4><div class="table-wrap"><table class="items-table"><thead><tr><th>Raridade</th><th>Espaços</th></tr></thead><tbody id="heldSlotRows"></tbody></table></div><p class="loot-note">Shiny e Founder têm 4 espaços. A raridade não muda ao evoluir.</p></section><section><h4>Helds nomeados</h4><dl class="item-facts"><div><dt>Choice Band · tier 3</dt><dd>+25% de dano, sem condição.</dd></div><div><dt>Leftovers · tier 2</dt><dd>Regenera 0,4% do HP máximo por segundo.</dd></div><div><dt>Lucky Egg · tier 3</dt><dd>+25% de EXP para quem segura.</dd></div></dl></section></div>
+                  <section class="themed-loot held-guide"><div><h4>Boosters e Gems por tipo</h4><p>Booster tier 2: +15% de dano do mesmo tipo enquanto equipado. Gem tier 1/Rare+: 30 min e +25% de dano do mesmo tipo.</p></div><div id="heldTypeGrid" class="chest-type-grid" aria-label="Escolher tipo de Booster e Gem"></div><div id="heldTypeGuide" class="chest-type-guide" aria-live="polite"></div><p class="loot-note">Gem e Booster do mesmo tipo não acumulam: vale o mais forte. Estender duração não aumenta o poder.</p></section>
+                </section>
+
+                <section id="itemView-healing" class="item-view" role="tabpanel" aria-labelledby="itemTab-healing" hidden>
+                  <div class="items-split items-split--three"><section><h4>Poções</h4><dl class="item-facts"><div><dt>Potion · tier 0</dt><dd>30% do HP máximo.</dd></div><div><dt>Super Potion · tier 1</dt><dd>50% do HP máximo.</dd></div><div><dt>Hyper Potion · tier 2</dt><dd>80% do HP máximo.</dd></div><div><dt>Full Restore · tier 3</dt><dd>100% do HP máximo e sustenta uma parede.</dd></div></dl></section><section><h4>Revives</h4><dl class="item-facts"><div><dt>Revive · tier 1</dt><dd>Volta com 50% de HP.</dd></div><div><dt>Max Revive · tier 3</dt><dd>Volta com 100% de HP e reduz a penalidade de desmaio.</dd></div></dl></section><section><h4>EXP Candies</h4><dl class="item-facts"><div><dt>S · tier 0</dt><dd>1% / mínimo 40 XP.</dd></div><div><dt>M · tier 1</dt><dd>5% / 200 XP.</dd></div><div><dt>Rare Candy · tier 2</dt><dd>10% / 400 XP.</dd></div><div><dt>L · tier 3</dt><dd>25% / 1000 XP.</dd></div></dl></section></div>
+                  <section class="vitamin-strip"><div><h4>Vitaminas · tier 2</h4><p>+10 EV cada; limite de 252 por atributo e 510 no total.</p></div><p><strong>HP Up</strong> HP · <strong>Protein</strong> Ataque · <strong>Iron</strong> Defesa · <strong>Calcium</strong> Atq. Esp. · <strong>Zinc</strong> Def. Esp. · <strong>Carbos</strong> Velocidade</p></section>
+                </section>
+
+                <section id="itemView-rare" class="item-view" role="tabpanel" aria-labelledby="itemTab-rare" hidden>
+                  <dl class="rare-list"><div><dt>Essence of Life · tier 3</dt><dd>Catalisador de breeding; só em baús Lendários, com chance baixa.</dd></div><div><dt>Fusion Core · tier 2</dt><dd>Catalisador para fundir 9 Pokémon idênticos; linha de recompensa de baú Épico+.</dd></div><div><dt>Fósseis</dt><dd>Helix/Dome Water tier 2 e Old Amber Flying tier 3; revivem espécie que não existe na natureza, com piso Raro.</dd></div><div><dt>Discos de TM</dt><dd>Drop de baú de uso único (Raro+); ranks reutilizam a raridade do baú. Consulte <button class="inline-nav" type="button" data-go-view="moves">Moves &amp; TMs</button> para compatibilidade por espécie.</dd></div></dl>
+                  <aside class="source-card"><h4>Fontes oficiais</h4><p>Consulte a Wiki oficial v4.39.0 para contexto e atualizações:</p><div><a href="https://pkhunt.online/wiki" target="_blank" rel="noopener noreferrer">Loot e drops</a><a href="https://pkhunt.online/wiki" target="_blank" rel="noopener noreferrer">Catálogo de itens</a><a href="https://pkhunt.online/wiki" target="_blank" rel="noopener noreferrer">Held, gems e cura</a></div></aside>
+                </section>
               </div>
             </section>
           </section>
@@ -596,6 +703,31 @@
     function typeBadge(type,variant=''){
       const visual=typeVisual(type), modifier=variant?` ${variant}`:'';
       return `<span class="type-tag${modifier}" style="--type-color:${visual.color}">${typeIconMarkup(type)}<span>${escapeAttr(type)}</span></span>`;
+    }
+    const chestMapData=[['3','~1 a cada 333 derrotas','0,6%'],['25','~1 a cada 140 derrotas','1,5%'],['50','~1 a cada 83 derrotas','3,3%'],['75','~1 a cada 61 derrotas','5,6%'],['100','~1 a cada 52 derrotas','8,6%'],['150+','~1 a cada 52 derrotas','15,6%']];
+    const chestRarityData=[['Comum','84%','69%','54%','×1','rarity-common'],['Raro','13%','20%','23%','×1,5','rarity-rare'],['Épico','2,8%','8,1%','14%','×2','rarity-epic'],['Lendário','0,6%','3,3%','8,6%','×3','rarity-legendary']];
+    const rewardData=[['EXP Candy','51%','25,2%','10,2%','2,5%'],['Lote de Poké Balls','20%','18%','14%','13%'],['Revives','9%','8%','4,5%','2,5%'],['Potions','5,5%','4,5%','1,5%','0,5%'],['Vitaminas','0%','0%','13%','14%'],['Pedra de evolução por tipo','0%','8%','11%','13%'],['Gem','6%','19%','13,2%','6,5%'],['Fusion Core','0%','2%','6%','8%'],['Held item','0%','3%','4%','7%'],['Fóssil','0%','2%','3,5%','5%'],['Seal','0%','0%','4%','6%'],['Rare Candy','0%','0%','3%','5,5%'],['Disco de TM, temático por tipo','2,5%','4,5%','5%','6%'],['Fragmento de Mega Stone','0%','0%','1%','3%'],['Essence of Life','0%','0%','0%','1,5%'],['Arena Ticket','0%','0,8%','1,8%','3%']];
+    const heldSlotData=[['Comum','0'],['Incomum','0'],['Raro','1'],['Épico','2'],['Prismático','2'],['Mítico','3'],['Astral','3'],['Divino','4']];
+    let selectedChestType='Fire', selectedHeldType='Fire';
+    function itemTypeButton(type,kind,selected){ const visual=typeVisual(type); return `<button class="chest-type-button" type="button" data-${kind}-type="${type}" aria-pressed="${type===selected}" style="--type-color:${visual.color}">${typeIconMarkup(type)}<span>${type}</span></button>`; }
+    function renderChestGuide(type){
+      selectedChestType=type;
+      $('#chestTypeGrid').innerHTML=Object.keys(typeVisuals).map(value=>itemTypeButton(value,'chest',selectedChestType)).join('');
+      $('#chestTypeGuide').innerHTML=`<h5>${typeBadge(type,'type-tag--calc')} Baú ${escapeAttr(type)}</h5><p><strong>Gema de ${escapeAttr(type)}</strong> · linha Raro+ · +25% de dano ${escapeAttr(type)} por 30 min.</p><p><strong>Booster de ${escapeAttr(type)}</strong> · linha Épico+ · held · +15% de dano ${escapeAttr(type)} enquanto equipado.</p><p><strong>Linha de pedra de evolução por tipo</strong> · só entra quando uma evolução consome a pedra; o elemento selecionado decide o tema, mas a Wiki não confirma uma pedra nomeada para este guia.</p><p><strong>Disco de TM temático</strong> · drop de uso único Raro+. A Wiki confirma a linha temática por elemento, mas não confirma qual TM específico este baú ${escapeAttr(type)} pode trazer. Consulte Moves &amp; TMs para o catálogo e compatibilidade.</p>`;
+      $$('[data-chest-type]').forEach(button=>button.addEventListener('click',()=>renderChestGuide(button.dataset.chestType)));
+    }
+    function renderHeldGuide(type){
+      selectedHeldType=type;
+      $('#heldTypeGrid').innerHTML=Object.keys(typeVisuals).map(value=>itemTypeButton(value,'held',selectedHeldType)).join('');
+      $('#heldTypeGuide').innerHTML=`<h5>${typeBadge(type,'type-tag--calc')} ${escapeAttr(type)}</h5><p><strong>Booster de ${escapeAttr(type)}</strong> · tier 2 · +15% de dano ${escapeAttr(type)} enquanto equipado.</p><p><strong>Gema de ${escapeAttr(type)}</strong> · tier 1 / Raro+ · 30 min · +25% de dano ${escapeAttr(type)}.</p><p>Booster e Gem do mesmo tipo não acumulam: o bônus mais forte é usado.</p>`;
+      $$('[data-held-type]').forEach(button=>button.addEventListener('click',()=>renderHeldGuide(button.dataset.heldType)));
+    }
+    function renderItems(){
+      $('#chestMapRows').innerHTML=chestMapData.map(row=>`<tr><td data-label="Mapa">${row[0]}</td><td data-label="Baú aprox.">${row[1]}</td><td data-label="Lendário">${row[2]}</td></tr>`).join('');
+      $('#chestRarityRows').innerHTML=chestRarityData.map(row=>`<tr class="${row[5]}"><td data-label="Raridade">${row[0]}</td><td data-label="Mapa 3">${row[1]}</td><td data-label="Mapa 50">${row[2]}</td><td data-label="Mapa 100">${row[3]}</td><td data-label="Quantidade">${row[4]}</td></tr>`).join('');
+      $('#rewardRows').innerHTML=rewardData.map(row=>`<tr>${row.map((value,index)=>`<td data-label="${['Recompensa','Comum','Raro','Épico','Lendário'][index]}">${value}</td>`).join('')}</tr>`).join('');
+      $('#heldSlotRows').innerHTML=heldSlotData.map(row=>`<tr><td data-label="Raridade">${row[0]}</td><td data-label="Espaços">${row[1]}</td></tr>`).join('');
+      renderChestGuide(selectedChestType); renderHeldGuide(selectedHeldType);
     }
     // O catálogo do jogo distingue dano apenas de status. Esta pequena tabela usa a
     // categoria canónica dos ataques especiais; todo o restante dano é físico.
@@ -906,7 +1038,7 @@
     function renderCalculatorBaseProfile(){
       const selected=selectedPokemon&&pokemonData[selectedPokemon], holder=$('#baseStats'), types=$('#calculatorTypes');
       if(!selected){ holder.textContent='Escolha um Pokémon para ver os atributos base.'; types.innerHTML=''; return; }
-      holder.innerHTML=`<div class="calc-base-profile"><div class="calc-stat-bars">${baseStatBars(selected.base,'calc')}</div></div>`;
+      holder.innerHTML=`<div class="calc-base-profile"><div class="calc-stat-bars">${baseStatBars(selected.base,'calc')}</div><span class="bst-badge"><span>BST BASE</span><strong id="bstValue">${selected.base.reduce((sum,value)=>sum+value,0)}</strong></span></div>`;
       types.innerHTML=selected.type.split(' / ').map(type=>typeBadge(type,'type-tag--calc')).join('');
     }
     update=function(){ updateCalculatorSprite(); const result=renderCalculator(); renderCalculatorBaseProfile(); renderBuildBProfile(); if(activeReady()) drawRadar(calc().stats,bReady()?calcB().stats:null); return result; };
@@ -930,7 +1062,8 @@
     document.addEventListener('keydown',event=>{ if(event.key==='Escape'&&!$('#dexDetail').hidden){ closeDexDetail(); } });
     ['moveSearch','moveType','moveCategory','moveRange','moveSort'].forEach(id=>['input','change'].forEach(event=>$('#'+id).addEventListener(event,renderMoves)));
     const tabs=$$('.side-tab');
-    function activateTab(nextTab){
+    const viewByTab={"tab-calculator":"calculator","tab-pokedex":"pokedex","tab-moves":"moves","tab-items":"items"};
+    function activateTab(nextTab,syncUrl=true){
       tabs.forEach(tab=>{
         const active=tab===nextTab;
         tab.setAttribute('aria-selected',String(active));
@@ -939,6 +1072,8 @@
       });
       if(nextTab.id==='tab-pokedex') renderDex();
       if(nextTab.id==='tab-moves') renderMoves();
+      if(nextTab.id==='tab-items') renderItems();
+      if(syncUrl&&window.history?.replaceState){ const view=viewByTab[nextTab.id]; const query=view==='calculator'?'':`?v=${view}`; window.history.replaceState(null,'',`${window.location.pathname}${query}`); }
     }
     tabs.forEach((tab,index)=>{
       tab.addEventListener('click',()=>activateTab(tab));
@@ -954,7 +1089,23 @@
     });
     renderDex();
     renderMoves();
+    renderItems();
     update();
+    const requestedView=new URLSearchParams(window.location.search).get('v');
+    const initialTab={calculator:'tab-calculator',pokedex:'tab-pokedex',moves:'tab-moves',items:'tab-items'}[requestedView];
+    if(initialTab) activateTab($('#'+initialTab),false);
+    $$('.item-tab').forEach((tab,index,itemTabs)=>{
+      tab.addEventListener('click',()=>activateItemTab(tab));
+      tab.addEventListener('keydown',event=>{
+        const direction=event.key==='ArrowRight'||event.key==='ArrowDown'?1:event.key==='ArrowLeft'||event.key==='ArrowUp'?-1:0;
+        if(!direction&&event.key!=='Home'&&event.key!=='End') return;
+        event.preventDefault(); const next=event.key==='Home'?itemTabs[0]:event.key==='End'?itemTabs[itemTabs.length-1]:itemTabs[(index+direction+itemTabs.length)%itemTabs.length]; next.focus(); activateItemTab(next);
+      });
+    });
+    function activateItemTab(tab){
+      $$('.item-tab').forEach(candidate=>{const active=candidate===tab;candidate.setAttribute('aria-selected',String(active));candidate.tabIndex=active?0:-1;$('#itemView-'+candidate.dataset.itemView).hidden=!active;});
+    }
+    $$('[data-go-view]').forEach(button=>button.addEventListener('click',()=>activateTab($('#tab-'+button.dataset.goView))));
   </script>
 </body>
 </html>
