@@ -55,21 +55,23 @@
     label, .label { display:block; margin-bottom:6px; color:#AFC1CD; font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
     select, input[type=number] { width:100%; min-height:38px; color:var(--ink); border:1px solid #315069; background:#091625; padding:8px 10px; border-radius:2px; outline:none; transition:border-color .18s, box-shadow .18s; }
     select:focus, input:focus, button:focus-visible { border-color:var(--cyan); outline:none; box-shadow:0 0 0 3px rgba(73,217,209,.15); }
-    .pokemon-meta { display:grid; grid-template-columns:minmax(0,1fr) 132px auto; align-items:center; gap:10px; min-height:122px; margin-top:8px; padding:8px 10px; border-left:2px solid var(--violet); color:var(--muted); background:linear-gradient(90deg,rgba(167,134,255,.06),rgba(73,217,209,.025)); font:11px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; min-width:0; }
+    .pokemon-meta { display:grid; grid-template-columns:minmax(0,1fr) 154px auto; align-items:center; gap:17px; min-height:174px; margin-top:8px; padding:16px; border-left:3px solid var(--violet); color:var(--muted); background:linear-gradient(90deg,rgba(167,134,255,.09),rgba(73,217,209,.035)); font:11px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; min-width:0; }
     #baseStats { min-width:0; overflow-wrap:anywhere; }
-    .calc-base-profile { display:grid; gap:7px; min-width:0; }
-    .calc-type-line { display:flex; flex-wrap:wrap; gap:4px; }
-    .calc-stat-bars { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px 8px; }
-    .calc-stat-line { display:grid; grid-template-columns:30px minmax(0,1fr) 24px; align-items:center; gap:4px; min-width:0; color:#AAC2CD; font-size:8px; }
-    .calc-stat-line b { color:#DCEAF1; font:800 9px ui-monospace,SFMono-Regular,Consolas,monospace; text-align:right; }
-    .stat-meter { display:block; height:4px; overflow:hidden; background:#07111F; box-shadow:inset 0 0 0 1px rgba(80,133,158,.25); }
+    .calc-base-profile { display:grid; gap:11px; min-width:0; }
+    .calc-type-line { display:flex; flex-wrap:wrap; gap:6px; }
+    .calc-stat-bars { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 14px; }
+    .calc-stat-line { display:grid; grid-template-columns:36px minmax(0,1fr) 30px; align-items:center; gap:6px; min-width:0; color:#C2D7E0; font-size:10px; font-weight:800; letter-spacing:.03em; }
+    .calc-stat-line b { color:#F0FBFF; font:800 12px ui-monospace,SFMono-Regular,Consolas,monospace; text-align:right; }
+    .stat-meter { display:block; height:6px; overflow:hidden; background:#07111F; box-shadow:inset 0 0 0 1px rgba(80,133,158,.25); }
     .stat-meter i { display:block; width:var(--stat-width); height:100%; background:var(--stat-color,var(--cyan)); box-shadow:0 0 7px color-mix(in srgb,var(--stat-color,var(--cyan)) 60%,transparent); }
-    .pokemon-meta .calc-stat-bars { gap:7px 10px; }
-    .pokemon-meta .calc-stat-line { grid-template-columns:34px minmax(0,1fr) 27px; font-size:9px; }
-    .pokemon-meta .calc-stat-line b { font-size:10px; }
-    .pokemon-meta .stat-meter { height:6px; }
-    .bst-badge { display:inline-flex; align-items:center; gap:7px; flex:0 0 auto; color:#E8DEFF; border:1px solid rgba(167,134,255,.55); padding:4px 6px; background:rgba(167,134,255,.11); font-size:9px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; white-space:nowrap; }
-    .bst-badge strong { color:var(--violet); font-size:14px; letter-spacing:0; }
+    .pokemon-meta .calc-stat-bars { gap:12px 19px; }
+    .pokemon-meta .calc-stat-line { grid-template-columns:43px minmax(0,1fr) 38px; font-size:12px; }
+    .pokemon-meta .calc-stat-line b { font-size:16px; }
+    .pokemon-meta .stat-meter { height:10px; }
+    .type-tag.type-tag--calc { gap:7px; border-left-width:3px; padding:5px 9px 5px 6px; font-size:12px; background:color-mix(in srgb,var(--type-color) 12%,transparent); }
+    .type-tag.type-tag--calc .type-icon { width:22px; height:22px; }
+    .bst-badge { display:inline-flex; align-items:center; gap:6px; flex:0 0 auto; color:#C9BBE4; border:1px solid rgba(167,134,255,.32); padding:4px 5px; background:rgba(167,134,255,.055); font-size:8px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; white-space:nowrap; opacity:.78; }
+    .bst-badge strong { color:#BFA7FA; font-size:12px; letter-spacing:0; }
     .sprite-frame { position:relative; display:grid; place-items:center; overflow:hidden; flex:0 0 auto; color:#80B8BE; background:radial-gradient(circle,rgba(73,217,209,.15),rgba(73,217,209,.025) 64%,transparent 65%); }
     .sprite-frame::before { content:''; position:absolute; inset:9%; border:1px solid rgba(73,217,209,.24); transform:rotate(45deg); pointer-events:none; }
     .sprite-frame::after { content:attr(data-sprite-fallback); display:none; position:relative; color:#6F98A5; font:800 10px ui-monospace,SFMono-Regular,Consolas,monospace; letter-spacing:.08em; }
@@ -342,13 +344,27 @@
     .move-group:first-child { margin-top:0; }
     .move-group h6 { display:flex; align-items:baseline; gap:6px; margin:0 0 7px; color:#BFD5DF; font-size:9px; letter-spacing:.1em; text-transform:uppercase; }
     .move-group h6 span { color:#819CAB; font-weight:400; }
-    .primary-move-lists { display:grid; gap:18px; padding:16px 15px 19px; border-top:1px solid rgba(49,80,105,.58); }
+    .primary-move-lists { display:grid; gap:22px; padding:17px 15px 20px; border-top:1px solid rgba(49,80,105,.58); }
     .primary-move-section { min-width:0; }
     .primary-move-heading { display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin:0 0 10px; padding-bottom:8px; border-bottom:1px solid rgba(73,217,209,.18); }
     .primary-move-heading h5 { margin:0; color:#BDF4EF; font-size:10px; letter-spacing:.12em; text-transform:uppercase; }
     .primary-move-heading span { color:#91A7B7; font:700 9px ui-monospace,SFMono-Regular,Consolas,monospace; }
     .primary-tm-toolbar { display:flex; align-items:end; justify-content:space-between; gap:12px; margin-bottom:12px; }
     .primary-tm-toolbar .tm-search { width:min(100%,310px); }
+    .move-group { margin-top:16px; }
+    .move-group h6 { margin-bottom:0; padding:8px 10px; border-left:3px solid var(--cyan); background:rgba(73,217,209,.065); font-size:11px; }
+    .profile-move-wrap { overflow:auto; border:1px solid rgba(49,80,105,.75); border-top:0; }
+    .profile-move-table { min-width:680px; margin:0; font-size:11px; }
+    .profile-move-table th { padding:8px 10px; font-size:9px; }
+    .profile-move-table td { padding:9px 10px; vertical-align:middle; }
+    .profile-move-table td:nth-child(1),.profile-move-table td:nth-child(4),.profile-move-table td:nth-child(5),.profile-move-table td:nth-child(6) { text-align:center; }
+    .profile-move-table .learn-level { color:#79F2EA; font:800 11px ui-monospace,SFMono-Regular,Consolas,monospace; }
+    .profile-move-table .move-title { color:#F0FBFF; font-size:12px; }
+    .profile-move-table .move-power,.profile-move-table .move-cooldown { color:#F7FBFE; font:800 12px ui-monospace,SFMono-Regular,Consolas,monospace; }
+    .profile-move-table .move-cooldown { color:#C3D9E4; }
+    .profile-move-table .move-range { color:#AFC4CD; white-space:normal; }
+    .category-cell { display:inline-flex; align-items:center; justify-content:center; gap:5px; color:#C7DCE6; font-size:10px; font-weight:800; white-space:nowrap; }
+    .category-cell .move-category-icon { width:25px; height:25px; opacity:1; }
     .tm-rich-list { display:block; }
     .tm-more { display:block; margin:12px auto 0; color:#CFF6F2; border:1px solid rgba(73,217,209,.46); background:rgba(73,217,209,.04); padding:8px 12px; font-size:10px; font-weight:800; transition:color .16s,border-color .16s,background .16s; }
     .tm-more:hover,.tm-more:focus-visible { color:#07111F; border-color:var(--cyan); background:var(--cyan); outline:0; }
@@ -376,7 +392,8 @@
     @media (max-width:900px) { .workspace, .lower-grid { grid-template-columns:1fr; } }
     @media (max-width:720px) { .tool-layout { grid-template-columns:1fr; gap:14px; } .side-tabs { position:static; grid-template-columns:repeat(3,minmax(0,1fr)); overflow:hidden; padding:5px; gap:5px; } .side-tabs::before { display:none; } .side-tab { justify-content:center; min-height:42px; min-width:0; padding:8px 5px; font-size:9px; line-height:1.18; white-space:normal; } }
     @media (max-width:760px) { .moves-overview { grid-template-columns:1fr; } .tm-toolbar { grid-template-columns:1fr; } .tm-filter-set { justify-content:flex-start; } .primary-tm-toolbar { align-items:stretch; flex-direction:column; } .primary-tm-toolbar .tm-search { width:100%; } }
-    @media (max-width:620px) { .comparison-inputs, .dex-controls, .moves-controls { grid-template-columns:1fr; } .comparison-inputs .wide { grid-column:auto; } .pokemon-meta { grid-template-columns:minmax(0,1fr) 92px; min-height:104px; gap:6px; } .pokemon-meta .bst-badge { grid-column:1 / -1; justify-self:start; } .calculator-sprite { width:88px; height:82px; grid-column:2; grid-row:1; } .calculator-sprite .sprite-image { max-width:94px; max-height:82px; } .breakdown { position:relative; top:auto; margin-top:8px; } .stat-card:focus .breakdown { display:grid; } .moves-head { align-items:flex-start; flex-direction:column; gap:8px; } .moves .table-wrap { overflow:visible; border:0; } .move-table,.move-table tbody { display:block; min-width:0; width:100%; } .move-table thead { display:none; } .move-table tbody { display:grid; gap:8px; } .move-table .move-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); overflow:hidden; border:1px solid rgba(49,80,105,.78); border-left:3px solid var(--move-color,var(--cyan)); background:#091625; } .move-table .move-row td { display:flex; align-items:center; justify-content:space-between; gap:7px; min-width:0; padding:7px 8px; color:#D7E7ED; border:0; border-bottom:1px solid rgba(49,80,105,.4); text-align:left!important; white-space:normal; } .move-table .move-row td::before { content:attr(data-label); flex:0 0 auto; color:#7F9DAC; font-size:8px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; } .move-table .move-row td:first-child { grid-column:1 / -1; min-height:35px; padding:8px; border-left:0; } .move-table .move-row td:first-child::before { display:none; } .move-table .move-row td:last-child { grid-column:1 / -1; border-bottom:0; } .move-table .move-row .move-name { justify-content:flex-start; } .move-table .move-row .move-category-icon { margin-left:auto; } .move-table .move-row .type-tag { margin-left:auto; } .move-table .move-row .move-note { color:#AFC5D0; } .dex-detail-head { padding:12px; } .dex-detail-counts { margin-top:8px; } .tm-grid { grid-template-columns:1fr; } .tm-chip { min-height:53px; } .learnset-row { grid-template-columns:43px minmax(0,1fr); gap:8px; } .learnset-meta { grid-column:2; text-align:left; } .primary-move-lists { padding:13px 12px 15px; } .move-detail-grid { grid-template-columns:1fr; } }
+    @media (max-width:620px) { .comparison-inputs, .dex-controls, .moves-controls { grid-template-columns:1fr; } .comparison-inputs .wide { grid-column:auto; } .pokemon-meta { grid-template-columns:minmax(0,1fr) 92px; min-height:104px; gap:6px; } .pokemon-meta .bst-badge { grid-column:1 / -1; justify-self:start; } .calculator-sprite { width:88px; height:82px; grid-column:2; grid-row:1; } .calculator-sprite .sprite-image { max-width:94px; max-height:82px; } .breakdown { position:relative; top:auto; margin-top:8px; } .stat-card:focus .breakdown { display:grid; } .moves-head { align-items:flex-start; flex-direction:column; gap:8px; } .moves .table-wrap { overflow:visible; border:0; } .move-table,.move-table tbody { display:block; min-width:0; width:100%; } .move-table thead { display:none; } .move-table tbody { display:grid; gap:8px; } .move-table .move-row { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); overflow:hidden; border:1px solid rgba(49,80,105,.78); border-left:3px solid var(--move-color,var(--cyan)); background:#091625; } .move-table .move-row td { display:flex; align-items:center; justify-content:space-between; gap:7px; min-width:0; padding:7px 8px; color:#D7E7ED; border:0; border-bottom:1px solid rgba(49,80,105,.4); text-align:left!important; white-space:normal; } .move-table .move-row td::before { content:attr(data-label); flex:0 0 auto; color:#7F9DAC; font-size:8px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; } .move-table .move-row td:first-child { grid-column:1 / -1; min-height:35px; padding:8px; border-left:0; } .move-table .move-row td:first-child::before { display:none; } .move-table .move-row td:last-child { grid-column:1 / -1; border-bottom:0; } .move-table .move-row .move-name { justify-content:flex-start; } .move-table .move-row .move-category-icon { margin-left:auto; } .move-table .move-row .type-tag { margin-left:auto; } .move-table .move-row .move-note { color:#AFC5D0; } .dex-detail-head { padding:12px; } .dex-detail-counts { margin-top:8px; } .tm-grid { grid-template-columns:1fr; } .tm-chip { min-height:53px; } .learnset-row { grid-template-columns:43px minmax(0,1fr); gap:8px; } .learnset-meta { grid-column:2; text-align:left; } .primary-move-lists { padding:13px 12px 15px; } .profile-move-wrap { overflow:visible; border:0; } .profile-move-table,.profile-move-table tbody { display:block; min-width:0; width:100%; } .profile-move-table thead { display:none; } .profile-move-table tbody { display:grid; gap:7px; } .profile-move-table tr { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); overflow:hidden; border:1px solid rgba(49,80,105,.78); border-left:3px solid var(--move-color,var(--cyan)); background:#091625; } .profile-move-table td { display:flex; align-items:center; justify-content:space-between; gap:7px; min-width:0; padding:8px 9px; border:0; border-bottom:1px solid rgba(49,80,105,.42); text-align:left!important; white-space:normal; font-size:11px; } .profile-move-table td::before { content:attr(data-label); flex:0 0 auto; color:#8EAAB8; font-size:9px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; } .profile-move-table td:nth-child(2) { grid-column:1 / -1; min-height:38px; } .profile-move-table td:nth-child(2)::before { display:none; } .profile-move-table td:last-child { grid-column:1 / -1; border-bottom:0; } .profile-move-table .category-cell { margin-left:auto; } .profile-move-table .move-title { font-size:12px; } }
+    @media (max-width:620px) { .pokemon-meta { min-height:160px; padding:12px; } .pokemon-meta .calc-stat-bars { grid-template-columns:1fr; gap:7px; } .move-table .move-row .category-cell .move-category-icon { margin-left:0; } }
     @media (prefers-reduced-motion:reduce) { .dex-view-panel,.calculator-sprite .sprite-image { animation:none; } .tm-chip,.learnset-row,.dex-view-tab,.tm-filter,.overview-action,.tm-more { transition:none; } }
     @media (max-width:900px) { .workspace { grid-template-columns:1fr; } }
     @media (max-width:620px) { .dex-content { padding:13px; } #dexListWrap { overflow:visible; border:0; } .dex-table,.dex-table tbody { display:block; width:100%; min-width:0; } .dex-table thead { display:none; } .dex-table tbody { display:grid; gap:7px; } .dex-profile-row { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; column-gap:7px; padding:7px 8px; border:1px solid rgba(49,80,105,.75); background:#091625; } .dex-profile-row td { min-width:0; padding:0; border:0; text-align:left!important; white-space:normal; } .dex-profile-row td:nth-child(1) { grid-column:1 / -1; } .dex-profile-row td:nth-child(2) { grid-column:1; } .dex-profile-row td:nth-child(3),.dex-profile-row td:nth-child(4) { grid-column:2; } .dex-profile-row td:nth-child(4) { display:none; } .dex-profile-row .dex-species { min-width:0; } .dex-profile-row td:nth-child(3)::before { content:'BST '; color:#91A7B7; font-size:8px; letter-spacing:.08em; } .dex-detail-row { display:block; } .dex-detail-row td { display:block; padding:0; border:0; white-space:normal; } .dex-detail { margin:0 0 7px; } .dex-detail-head { gap:8px; } .dex-detail-sprite { width:80px; height:80px; } .dex-detail-sprite .sprite-image { width:80px; height:80px; } .dex-stat-bars { grid-template-columns:1fr; gap:6px; } .dex-stat-line { grid-template-columns:48px minmax(0,1fr) 28px; } .radar-static-head { align-items:flex-start; flex-direction:column; gap:3px; } }
@@ -474,7 +491,7 @@
                   <div class="field"><label for="moveSort">Ordenar por</label><select id="moveSort"><option value="name">Nome (A–Z)</option><option value="power">Poder (maior)</option><option value="cooldown">Cooldown (menor)</option></select></div>
                 </div>
                 <div class="move-summary"><span><strong>Poder</strong> é o valor do golpe de dano. <strong>Cooldown</strong> é o tempo para usar novamente.</span><strong id="moveResultCount">360 golpes</strong></div>
-                <div class="table-wrap"><table class="move-table"><thead><tr><th>Golpe</th><th>Tipo</th><th>Poder</th><th>Cooldown</th><th>Categoria</th><th>Alcance</th><th>Informação</th></tr></thead><tbody id="moveRows"></tbody></table></div>
+                <div class="table-wrap"><table class="move-table"><thead><tr><th>Golpe</th><th>Tipo</th><th>Dano</th><th>Cooldown</th><th>Categoria</th><th>Alcance</th></tr></thead><tbody id="moveRows"></tbody></table></div>
               </div>
             </section>
           </section>
@@ -573,6 +590,15 @@
       const range=move.range?`<span>Alcance: ${escapeAttr(move.range)}</span>`:'';
       return `<article class="move-detail-card" style="--move-color:${visual.color}"><div class="move-detail-top"><div class="move-detail-title">${typeIconMarkup(move.type)}${moveCategoryIcon(move)}<div><strong>${escapeAttr(move.name)}</strong><small>${category}</small></div></div><div class="move-detail-values">${power}${cooldown}</div></div><div class="move-detail-foot">${typeBadge(move.type,'type-tag--mini')}${range}</div></article>`;
     }
+    const moveCategoryLabel=move=>({Special:'Especial',Physical:'Físico',Status:'Status'})[moveCombatCategory(move)];
+    function compactMoveTable(moves,{levels=false}={}){
+      const rows=moves.map(move=>{
+        const visual=typeVisual(move.type), level=levels&&Number.isFinite(move.learnLevel)?`Nv. ${move.learnLevel}`:'—';
+        const damage=move.power!==undefined&&move.power!==null&&move.power!=='— (status)'?move.power:'—';
+        return `<tr style="--move-color:${visual.color}"><td class="learn-level" data-label="Nível">${level}</td><td data-label="Golpe"><strong class="move-title">${escapeAttr(move.name)}</strong></td><td data-label="Tipo">${typeBadge(move.type,'type-tag--mini')}</td><td class="move-power" data-label="Dano">${damage}</td><td class="move-cooldown" data-label="Cooldown">${escapeAttr(move.cooldown||'—')}</td><td data-label="Categoria"><span class="category-cell">${moveCategoryIcon(move)}<span>${moveCategoryLabel(move)}</span></span></td><td class="move-range" data-label="Alcance">${escapeAttr(move.range||'—')}</td></tr>`;
+      }).join('');
+      return `<div class="profile-move-wrap"><table class="profile-move-table"><thead><tr><th>Nível</th><th>Golpe</th><th>Tipo</th><th>Dano</th><th>Cooldown</th><th>Categoria</th><th>Alcance</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+    }
     function compatibilityMovesFor(p){
       const types=p.type.split(' / '), levelMoves=(learnsetsData[p.name]||[]).slice(), compatible=new Map();
       movesData.filter(move=>types.includes(move.type)).forEach(move=>compatible.set(move.name.toLocaleLowerCase(),move));
@@ -622,7 +648,7 @@
         $('#bBstValue').textContent='—'; bSprite.hidden=true; bSprite.removeAttribute('src');
         return;
       }
-      holder.innerHTML=`<div class="calc-base-profile"><div class="calc-type-line">${selected.type.split(' / ').map(type=>typeBadge(type,'type-tag--mini')).join('')}</div><div class="calc-stat-bars">${baseStatBars(selected.base,'calc')}</div></div>`;
+      holder.innerHTML=`<div class="calc-base-profile"><div class="calc-type-line">${selected.type.split(' / ').map(type=>typeBadge(type,'type-tag--calc')).join('')}</div><div class="calc-stat-bars">${baseStatBars(selected.base,'calc')}</div></div>`;
       $('#bBstValue').textContent=selected.base.reduce((sum,value)=>sum+value,0);
       bSprite.hidden=false; bSprite.alt=''; bSpriteFrame.setAttribute('aria-label',`Sprite de ${selected.name}, Build B`); bSprite.src=spriteUrl(selected.name);
     }
@@ -630,7 +656,7 @@
     function renderPokemonOptions(query=pokemon.value){ const normalized=query.trim().toLowerCase(); comboMatches=Object.entries(pokemonData).filter(([,p])=>!normalized||p.name.toLowerCase().includes(normalized)||p.type.toLowerCase().includes(normalized)); comboIndex=-1; if(!comboMatches.length){ pokemonList.innerHTML='<div class="combo-empty">Nenhum Pokémon encontrado.</div>'; pokemonStatus.textContent='Nenhum Pokémon encontrado.'; } else { pokemonList.innerHTML=comboMatches.map(([key,p],i)=>`<button id="pokemon-option-${key}" class="combo-option" type="button" role="option" aria-selected="${key===selectedPokemon}" data-key="${key}"><span>${p.name}</span><small>${p.type}</small></button>`).join(''); pokemonStatus.textContent=`${comboMatches.length} resultado${comboMatches.length===1?'':'s'}.`; } pokemonList.classList.add('open'); pokemon.setAttribute('aria-expanded','true'); }
     function closePokemonOptions(){ pokemonList.classList.remove('open'); pokemon.setAttribute('aria-expanded','false'); pokemon.removeAttribute('aria-activedescendant'); comboIndex=-1; }
     function setComboActive(index){ if(!comboMatches.length) return; comboIndex=(index+comboMatches.length)%comboMatches.length; $$('.combo-option').forEach((option,i)=>option.classList.toggle('active',i===comboIndex)); const active=comboMatches[comboIndex][0]; pokemon.setAttribute('aria-activedescendant',`pokemon-option-${active}`); document.getElementById(`pokemon-option-${active}`)?.scrollIntoView({block:'nearest'}); }
-    function selectPokemon(key){ selectedPokemon=key; pokemon.value=pokemonData[key].name; pokemonStatus.textContent=`Selecionado: ${pokemonData[key].name}.`; closePokemonOptions(); update(); }
+    function selectPokemon(key){ selectedPokemon=key; pokemon.value=pokemonData[key].name; pokemonStatus.textContent=''; closePokemonOptions(); update(); }
     pokemon.addEventListener('focus',()=>renderPokemonOptions(''));
     pokemon.addEventListener('input',()=>renderPokemonOptions());
     pokemon.addEventListener('keydown',event=>{ if(event.key==='ArrowDown'){ event.preventDefault(); if(!pokemonList.classList.contains('open')) renderPokemonOptions(); setComboActive(comboIndex+1); } else if(event.key==='ArrowUp'){ event.preventDefault(); if(!pokemonList.classList.contains('open')) renderPokemonOptions(); setComboActive(comboIndex-1); } else if(event.key==='Enter'){ const exact=comboMatches.find(([,p])=>p.name.toLowerCase()===pokemon.value.trim().toLowerCase()); if(comboIndex>=0||exact){ event.preventDefault(); selectPokemon(comboIndex>=0?comboMatches[comboIndex][0]:exact[0]); } } else if(event.key==='Escape'){ closePokemonOptions(); } });
@@ -638,7 +664,7 @@
     pokemonList.addEventListener('mousedown',event=>{ const option=event.target.closest('[data-key]'); if(option){ event.preventDefault(); selectPokemon(option.dataset.key); } });
     const bPokemon=$('#bPokemon'), bPokemonList=$('#bPokemonList'), bPokemonStatus=$('#bPokemonStatus');
     function renderBOptions(query=bPokemon.value){ const q=query.trim().toLowerCase(); bComboMatches=Object.entries(pokemonData).filter(([,p])=>!q||p.name.toLowerCase().includes(q)||p.type.toLowerCase().includes(q)); bComboIndex=-1; bPokemonList.innerHTML=bComboMatches.length?bComboMatches.map(([key,p])=>`<button class="combo-option" type="button" role="option" data-b-key="${key}"><span>${p.name}</span><small>${p.type}</small></button>`).join(''):'<div class="combo-empty">Nenhum Pokémon encontrado.</div>'; bPokemonStatus.textContent=bComboMatches.length?`${bComboMatches.length} resultado${bComboMatches.length===1?'':'s'}.`:'Nenhum Pokémon encontrado.'; bPokemonList.classList.add('open'); bPokemon.setAttribute('aria-expanded','true'); }
-    function selectBPokemon(key){ selectedPokemonB=key; bPokemon.value=pokemonData[key].name; bPokemonStatus.textContent=`Selecionado: ${pokemonData[key].name}.`; bPokemonList.classList.remove('open'); bPokemon.setAttribute('aria-expanded','false'); update(); }
+    function selectBPokemon(key){ selectedPokemonB=key; bPokemon.value=pokemonData[key].name; bPokemonStatus.textContent=''; bPokemonList.classList.remove('open'); bPokemon.setAttribute('aria-expanded','false'); update(); }
     bPokemon.addEventListener('focus',()=>renderBOptions('')); bPokemon.addEventListener('input',()=>renderBOptions()); bPokemon.addEventListener('blur',()=>setTimeout(()=>bPokemonList.classList.remove('open'),140)); bPokemon.addEventListener('keydown',event=>{if(event.key==='ArrowDown'){event.preventDefault(); if(!bPokemonList.classList.contains('open'))renderBOptions(); bComboIndex=(bComboIndex+1+bComboMatches.length)%bComboMatches.length;}else if(event.key==='Enter'&&bComboMatches.length){event.preventDefault(); selectBPokemon(bComboMatches[Math.max(0,bComboIndex)][0]);}else if(event.key==='Escape')bPokemonList.classList.remove('open');}); bPokemonList.addEventListener('mousedown',event=>{const option=event.target.closest('[data-b-key]');if(option){event.preventDefault();selectBPokemon(option.dataset.bKey);}});
     $('#nature').add(new Option('Selecione…','',true,true));
     Object.entries(natures).forEach(([key,n])=>{ $('#nature').add(new Option(n.label,key)); $('#bNature').add(new Option(n.label,key)); });
@@ -653,7 +679,7 @@
       if(shuckle){
         selectedPokemon=shuckle[0];
         pokemon.value=shuckle[1].name;
-        pokemonStatus.textContent=`Selecionado: ${shuckle[1].name}.`;
+        pokemonStatus.textContent='';
       }
       $('#level').value=1;
       $('#rarity').value='1';
@@ -793,11 +819,14 @@
         const group=value=>({Special:0,Physical:1,Status:2})[moveCombatCategory(value)];
         return group(a)-group(b)||a.type.localeCompare(b.type)||a.name.localeCompare(b.name);
       });
-      const groupedCards=list=>{
+      const groupedMoveTables=(list,options={})=>{
         const sorted=orderMoves(list), groups=[['Especial',sorted.filter(move=>moveCombatCategory(move)==='Special')],['Físico',sorted.filter(move=>moveCombatCategory(move)==='Physical')],['Status',sorted.filter(move=>moveCombatCategory(move)==='Status')]];
-        return groups.filter(([,moves])=>moves.length).map(([label,moves])=>`<section class="move-group"><h6>${label} <span>${moves.length}</span></h6><div class="move-detail-grid">${moves.map(richMoveCard).join('')}</div></section>`).join('');
+        return groups.filter(([,moves])=>moves.length).map(([label,moves])=>`<section class="move-group"><h6>${label} <span>${moves.length}</span></h6>${compactMoveTable(moves,options)}</section>`).join('');
       };
-      const levelMoveCards=available.levelMoves.map(entry=>movesByName.get(entry.name.toLocaleLowerCase())).filter(Boolean);
+      const levelMoveRows=available.levelMoves.map(entry=>{
+        const move=movesByName.get(entry.name.toLocaleLowerCase());
+        return move?{...move,learnLevel:entry.level}:null;
+      }).filter(Boolean);
       // As listas completas são a ficha: sem abas, resumos, origem administrativa ou paginação.
       detail.querySelector('.matrix-note')?.remove();
       detail.querySelector('.dex-view-tabs')?.remove();
@@ -807,12 +836,12 @@
       movesPanel.className='primary-move-lists';
       movesPanel.innerHTML=`
         <section class="primary-move-section">
-          <div class="primary-move-heading"><h5>Aprende por nível</h5><span>${levelMoveCards.length} golpes</span></div>
-          ${groupedCards(levelMoveCards)||'<p class="tm-status">Ainda não há golpes por nível publicados para esta espécie.</p>'}
+          <div class="primary-move-heading"><h5>Aprende por nível</h5><span>${levelMoveRows.length} golpes</span></div>
+          ${groupedMoveTables(levelMoveRows,{levels:true})||'<p class="tm-status">Ainda não há golpes por nível publicados para esta espécie.</p>'}
         </section>
         <section class="primary-move-section">
           <div class="primary-tm-toolbar"><div class="primary-move-heading"><h5>TMs compatíveis</h5><span>${filteredTms.length} de ${available.tmMoves.length}</span></div><div class="tm-search"><label for="primaryTmSearch">Pesquisar TM</label><input id="primaryTmSearch" type="search" value="${escapeAttr(dexTmSearch)}" placeholder="Nome do golpe"></div></div>
-          ${groupedCards(filteredTms)||'<p class="tm-status">Nenhum golpe encontrado.</p>'}
+          ${groupedMoveTables(filteredTms)||'<p class="tm-status">Nenhum golpe encontrado.</p>'}
         </section>`;
       const baseProfile=detail.querySelector('.dex-base-stats');
       if(baseProfile) baseProfile.after(movesPanel); else detail.append(movesPanel);
@@ -841,37 +870,16 @@
       });
       $('#moveResultCount').textContent=`${rows.length} golpe${rows.length===1?'':'s'}`;
       $('#moveRows').innerHTML=rows.map(move=>{
-        const utility=move.category!=='Dano';
-        return `<tr><td><strong>${move.name}</strong></td><td><span class="move-type">${move.type}</span></td><td>${move.power??'—'}</td><td>${move.cooldown}</td><td><span class="move-category ${utility?'utility':''}">${utility?'Utilitário / Status':'Dano'}</span></td><td>${move.range}</td><td class="move-note">${utility?'Utilitário / status':'Dano direto'}</td></tr>`;
-      }).join('')||'<tr><td colspan="7">Nenhum golpe encontrado.</td></tr>';
+        const visual=typeVisual(move.type);
+        return `<tr class="move-row" style="--move-color:${visual.color}"><td data-label="Golpe"><strong class="move-title">${escapeAttr(move.name)}</strong></td><td data-label="Tipo">${typeBadge(move.type,'type-tag--mini')}</td><td class="move-power" data-label="Dano">${move.power??'—'}</td><td class="move-cooldown" data-label="Cooldown">${escapeAttr(move.cooldown||'—')}</td><td data-label="Categoria"><span class="category-cell">${moveCategoryIcon(move)}<span>${moveCategoryLabel(move)}</span></span></td><td class="move-range" data-label="Alcance">${escapeAttr(move.range||'—')}</td></tr>`;
+      }).join('')||'<tr><td colspan="6">Nenhum golpe encontrado.</td></tr>';
     }
-    const renderMoveTable=renderMoves;
-    renderMoves=function(){
-      renderMoveTable();
-      $$('#moveRows tr').forEach(row=>{
-        const typeElement=row.querySelector('.move-type'), title=row.querySelector('td:first-child strong');
-        if(!typeElement||!title) return;
-        const type=typeElement.textContent.trim(), move=movesByName.get(title.textContent.trim().toLocaleLowerCase());
-        row.classList.add('move-row');
-        row.style.setProperty('--move-color',typeVisual(type).color);
-        typeElement.replaceWith(Object.assign(document.createElement('span'),{className:'move-type'}));
-        const typeSlot=row.querySelector('.move-type');
-        typeSlot.outerHTML=typeBadge(type);
-        const name=title.parentElement;
-        name.classList.add('move-name');
-        if(moveCategoryIcon(move)) name.insertAdjacentHTML('beforeend',moveCategoryIcon(move));
-        ['Golpe','Tipo','Poder','Cooldown','Categoria','Alcance','Efeito'].forEach((label,index)=>{
-          const cell=row.children[index];
-          if(cell) cell.dataset.label=label;
-        });
-      });
-    };
     function update(){ $('#bondOutput').textContent=`${bond}% · ×${fmt(bondMultiplier(bond))}`; if(!activeReady()){ $('#emptyState').classList.add('show'); $('#resultsArea').style.display='none'; $('#multiplierCard').style.display='none'; $('#unavailable').classList.remove('show'); $('#baseStats').textContent=selectedPokemon?`BASE — ${pokemonData[selectedPokemon].base.join(' · ')}`:'Escolha um Pokémon para ver os atributos base.'; $('#bstValue').textContent=selectedPokemon?pokemonData[selectedPokemon].base.reduce((a,b)=>a+b,0):'—'; $('#evTotal').textContent=$$('.ev').some(input=>input.value==='')?'EV total: —':`EV total: ${$$('.ev').reduce((s,input)=>s+num(input,0,252),0)} / 510`; $('#comparisonRows').innerHTML='<tr><td colspan="4">Preencha a Build A para comparar.</td></tr>'; return; } $('#emptyState').classList.remove('show'); $('#resultsArea').style.display='block'; $('#multiplierCard').style.display='grid'; const p=pokemonData[selectedPokemon], c=calc(), total=c.input.ev.reduce((a,b)=>a+b,0), invalid=total>510, rarityName=currentRarityName(), specialName=currentSpecialName(), info=itemSlotInfo(rarityName,c.input.special,bond), finalBst=c.stats.reduce((sum,v)=>sum+v,0); $('#baseStats').textContent=`BASE — HP ${p.base[0]} · ATQ ${p.base[1]} · DEF ${p.base[2]} · ATQ.E ${p.base[3]} · DEF.E ${p.base[4]} · VEL ${p.base[5]}  /  ${p.type.toUpperCase()}`; $('#bstValue').textContent=p.base.reduce((a,b)=>a+b,0); $('#itemInfo').innerHTML=`<h4>Espaços de item</h4><span class="slots-value">${info.slots} / 6</span><p>Piso ${c.input.special>1?'condição especial':rarityName}: ${info.floor}</p><p>${info.outcomes.join(' · ')}</p>`; $('#evTotal').textContent=`EV total: ${total} / 510`; $('#unavailable').classList.toggle('show',invalid); const part=[`Raridade ${rarityName} ×${fmt(c.input.rarity)}`,`${specialName} ×${fmt(c.input.special)}`,`${bondLabel(bond)} ×${fmt(c.bondMulti)}`,`${stars}★ ×${fmt(starMultiplier[stars])}`]; $('#multiValue').textContent=`×${fmt(c.multi)}`; $('#components').innerHTML=part.map(x=>`<span class="component">${x}</span>`).join(''); $('#statCards').innerHTML=c.stats.map((value,i)=>`<article class="stat-card" tabindex="0"><span class="name">${statNames[i]}</span><span class="num">${invalid?'—':value}${natureEffect(i,c.input.nature)}</span>${breakdownCard(value,i,c,p)}</article>`).join(''); $('#finalBst').textContent=invalid?'—':finalBst; $('#starRows').innerHTML=starMultiplier.map((_,s)=>{const r=calc(s).stats;return `<tr class="${s===stars?'active-star':''} ${s===5?'star-five':''}"><td>${s}★</td>${r.map(v=>`<td>${invalid?'—':v}</td>`).join('')}</tr>`}).join(''); renderComparison(c); drawRadar(c.stats); }
     const renderCalculator=update;
     function renderCalculatorBaseProfile(){
       const selected=selectedPokemon&&pokemonData[selectedPokemon], holder=$('#baseStats');
       if(!selected){ holder.textContent='Escolha um Pokémon para ver os atributos base.'; return; }
-      holder.innerHTML=`<div class="calc-base-profile"><div class="calc-type-line">${selected.type.split(' / ').map(type=>typeBadge(type,'type-tag--mini')).join('')}</div><div class="calc-stat-bars">${baseStatBars(selected.base,'calc')}</div></div>`;
+      holder.innerHTML=`<div class="calc-base-profile"><div class="calc-type-line">${selected.type.split(' / ').map(type=>typeBadge(type,'type-tag--calc')).join('')}</div><div class="calc-stat-bars">${baseStatBars(selected.base,'calc')}</div></div>`;
     }
     update=function(){ updateCalculatorSprite(); const result=renderCalculator(); renderCalculatorBaseProfile(); renderBuildBProfile(); if(activeReady()) drawRadar(calc().stats,bReady()?calcB().stats:null); return result; };
     function normalizeNumberField(field, onBlur=false){
